@@ -55,7 +55,7 @@ export default {
     },
     methods: {
         onClickLeft (){
-          this.$router.go(-1)
+          this.$router.go(-2)
         },
         showDesc(item){
             return item.skuAttrText.map(ele=>{return ele.name}).join('/')+'   '+item.messages.message_0

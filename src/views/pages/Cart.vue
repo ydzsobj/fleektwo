@@ -214,6 +214,7 @@
                this.errName=''
                this.errTelephone=''
                this.errAddress=''
+               let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
                if(this.name === ''){
                    this.errName = '姓名不能为空！';return
                }else if (this.telephone===''){
@@ -222,6 +223,8 @@
                    this.errShort_address = '省市区不能为空！';return
                }else if(this.address===''){
                    this.errAddress = '详细地址不能为空！';return
+               }else if (this.email!='' && !reg.test(this.email)){
+                  Toast("邮箱格式不正确");return
                }
                 console.log(this.malldata,this.countPrice)
                 let data = {}
@@ -232,10 +235,7 @@
                 data.receiver_email = this.email
                 data.address = this.address
                 data.short_address = this.short_address
-                let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-                if (!reg.test(data.receiver_email)) {
-			        this.$toast("邮箱格式不正确");
-                }else{
+                
                     axios({
                         url:url.sendOrderInfo,
                         method:'post',
@@ -259,7 +259,6 @@
                             Toast('服务器错误，数据提交失败')
                         }
                     })
-                }
                 
 
             },

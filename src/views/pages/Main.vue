@@ -28,6 +28,9 @@
        updated(){
            this.changeTabBarActive()
        },
+       mounted() {
+            this.watchRoute(this.$route.name)
+       },
        methods: {
            changeTabBarActive(){
                this.nowPath = this.$route.path
@@ -53,6 +56,27 @@
 
                 
                }
+           },
+           watchRoute(name) {
+                switch(name){
+                   case 'ShoppingMall':
+                        this.active=0
+                        break;
+                   case 'CategoryList':
+                        this.active=1
+                        break;
+                   case 'Cart':
+                        this.active=2
+                        break;
+                    case 'Member':
+                        this.active=3
+                        break;
+               }
+           }
+       },
+       watch: {
+           '$route' (newRouter) {
+               this.watchRoute(newRouter.name)
            }
        },
     }
