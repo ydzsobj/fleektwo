@@ -111,12 +111,22 @@
         },
         methods: {
             onLoad() {      //上拉加载
-                // if(this.isstate){
-                    setTimeout(() => {
-                    this.categorySubId = this.categorySubId?this.categorySubId:this.categorySub[0].category_id
-                    this.getGoodList()
-                }, 1100);
-                // }
+                let that = this;
+                var timer = setInterval(function(){
+                        if(that.isstate){
+                             clearInterval(timer);
+                            setTimeout(() => {
+                            that.categorySubId = that.categorySubId?that.categorySubId:that.categorySub[0].category_id
+                            that.getGoodList()
+                            }, 500);
+                        }
+                    },500);
+                //  if(this.isstate){
+                //     setTimeout(() => {
+                //     this.categorySubId = this.categorySubId?this.categorySubId:this.categorySub[0].category_id
+                //     this.getGoodList()
+                // }, 1100);
+                //  }
             },
             onRefresh() {       //下拉刷新
                 setTimeout(() => {
@@ -137,7 +147,7 @@
                     if(response.data.success && response.data.data ){
                       this.category = response.data.data
                       this.categorySub = response.data.data
-                    //   this.isstate = true
+                      this.isstate = true
                     }else{
                         Toast('服务器错误，数据取得失败')
                     }
