@@ -1,6 +1,6 @@
 export function toMoney(money = 0){
    
-    return money.toFixed(2)
+    return Number(money).toFixed(2)
 
 }
 export function toDivide(money = 0){

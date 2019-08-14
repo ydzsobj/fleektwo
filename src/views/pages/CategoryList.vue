@@ -9,8 +9,8 @@
               <van-col span="6">
                   <div id="leftNav">
                        <ul>
-                           <li @click="clickCategory(index,item.ID)" :class="{categoryActice:categoryIndex==index}" v-for="(item , index) in category" :key="index">
-                               {{item.MALL_CATEGORY_NAME}}
+                           <li @click="clickCategory(index,item.category_id)" :class="{categoryActice:categoryIndex==index}" v-for="(item , index) in category" :key="index">
+                               {{item.name}}
                            </li>
                        </ul>
                   </div>
@@ -18,32 +18,37 @@
               </van-col>
               <van-col span="18">
 
-                  <div class="tabCategorySub">
+                  <!-- <div class="tabCategorySub">
                       <van-tabs v-model="active" @click="onClickCategorySub">
                           <van-tab v-for="(item,index) in categorySub" :key="index" :title="item.MALL_SUB_NAME">
 
                           </van-tab>
                       </van-tabs>
-                  </div>
+                  </div> -->
                   
                 <div id="list-div">
-                    <van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
-                        <van-list v-model="loading" :finished="finished" @load="onLoad">
-                            <div class="list-item" @click="goGoodsInfo(item.ID)" v-for="(item,index) in goodList" :key="index">
+                    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+                        <van-list
+                            v-model="loading"
+                            :finished="finished"
+                            @load="onLoad"
+                            :offset="10"
+                            finished-text="我也是有底线的"
+                        >
+                            <!-- :immediate-check="false" -->
+                            <div class="list-item" @click="goGoodsInfo(item.goodsId)" v-for="(item,index) in goodList" :key="index">
                                 <div class="list-item-img">
-                                    <img :src="item.IMAGE1" 
+                                    <img :src="item.image" 
                                     width="100%"
                                     :onerror="errorImg"                                    
-                                     />
-                                    
-                                    
-                                   
+                                     /> 
                                 </div>
                                 <div class="list-item-text">
-                                    <div>{{item.NAME}}</div>                                    
-                                    <div>￥{{item.ORI_PRICE | moneyFilter}}</div>                                    
+                                    <div>{{item.name}}</div>                                    
+                                    <div>￥{{item.price | moneyFilter}}</div>                                    
                                  </div>
                             </div>
+        
                         </van-list>
                     </van-pull-refresh>
                 </div>
@@ -61,17 +66,18 @@
     export default {
         data() {
             return {
+                loading: false,   //是否处于加载状态
+                finished: false,  //是否已加载完所有数据
+                isLoading: false,   //是否处于下拉刷新状态
                 category: [],
                 categoryIndex:0,
                 categorySub:[],  //小类类别
                 active:0,    //激活标签的值
-                loading:false,
-                finished:false, //上拉加载是否有数据
-                page:1,        //商品列表的页数
+                page:0,        //商品列表的页数
                 goodList:[],   //商品列表信息
                 categorySubId:'', //商品子类ID
-                isRefresh:false, //下拉刷新
                 errorImg:'this.src="'+require('@/assets/images/errorimg.png')+'"',
+                isstate:false
             }
         },
         filters:{
@@ -80,25 +86,58 @@
             }
         },
         created(){
+            
             this.getCategory();
            
+        },
+        watch: {
+            '$route' () {
+                if(this.$route.query.categorySubId){
+                    this.page=0
+                    this.categoryIndex=this.$route.query.index
+                    this.categorySubId=this.$route.query.categorySubId ?this.$route.query.categorySubId : this.$route.params.categorySubId
+                    this.finished = false
+                    this.isLoading= false
+                    this.goodList= [] 
+                    // this.categorySubId = this.categorySubId
+                    this.onLoad()
+                }
+            }
         },
         mounted(){
             let winHeight = document.documentElement.clientHeight
             document.getElementById("leftNav").style.height=winHeight -46-50 +'px'
-            document.getElementById("list-div").style.height=winHeight -90-50 +'px'
+            document.getElementById("list-div").style.height=winHeight -90 +'px'
         },
         methods: {
+            onLoad() {      //上拉加载
+                // if(this.isstate){
+                    setTimeout(() => {
+                    this.categorySubId = this.categorySubId?this.categorySubId:this.categorySub[0].category_id
+                    this.getGoodList()
+                }, 1100);
+                // }
+            },
+            onRefresh() {       //下拉刷新
+                setTimeout(() => {
+                    this.finished = false;
+                    this.isLoading = false;
+                    this.goodList = []
+                    this.page = 0
+                    this.onLoad()
+                }, 500);
+            },
+            
             getCategory() {
                 axios({
                     url:url.getCateGoryList,
                     method:'get',
                 })
                 .then(response=>{
-                    console.log(response)
-                    if(response.data.code == 200 && response.data.message ){
-                      this.category = response.data.message
-                      this.getCategorySubByCategoryID(this.category[0].ID)
+                    if(response.data.success && response.data.data ){
+                      this.category = response.data.data
+                      this.categorySub = response.data.data
+                    //   this.isstate = true
                     }else{
                         Toast('服务器错误，数据取得失败')
                     }
@@ -109,65 +148,30 @@
                 
             },
             clickCategory(index,categoryId){
-                 
+                 this.goodList= [] 
                 this.categoryIndex=index
-                this.page=1
+                this.page=0
                 this.finished = false
-                this.goodList= [] 
-                this.getCategorySubByCategoryID(categoryId)
-            },
-            //根据大类ID读取小类类别列表
-            getCategorySubByCategoryID(categoryId){
-                axios({
-                    url:url.getCateGorySubList,
-                    method:'post',
-                    data:{categoryId:categoryId}
-                })
-                .then(response=>{
-                    console.log(response)
-                    if(response.data.code==200 && response.data.message){
-                        this.categorySub=response.data.message
-                        this.active=0
-                        this.categorySubId = this.categorySub[0].ID
-                        this.onLoad()
-                    }
-                })
-                .catch(error=>{
-                    console.log(error)
-                })
-            },
-            //上拉加载方法
-            onLoad(){
-                setTimeout(()=>{
-                   this.categorySubId = this.categorySubId?this.categorySubId:this.categorySub[0].ID
-                   this.getGoodList()
-                },1000)
-            },
-            //下拉刷新方法
-            onRefresh(){
-                setTimeout(()=>{
-                    this.isRefresh=false;
-                    this.finished = false;
-                    this.goodList=[]
-                    this.page=1
-                    this.onLoad()
-
-                },500)
+                this.isLoading = false;
+                // console.log(categoryId)
+                this.categorySubId = categoryId
+                
+                this.onLoad()
             },
             getGoodList(){
+                    this.page++
                 axios({
                     url:url.getGoodsListByCategorySubID,
-                    method:'post',
-                    data:{
-                        categorySubId:this.categorySubId,
+                    method:'get',
+                    params:{
+                        category_id:this.categorySubId,
                         page:this.page
                     }
                 })
                 .then(response=>{
-                    console.log(response)
-                    if(response.data.code == 200  && response.data.message.length){
-                        this.page++
-                        this.goodList=this.goodList.concat(response.data.message)
+                    if(response.data.success  && response.data.data.data.length){
+                        
+                        this.goodList=this.goodList.concat(response.data.data.data)
                     }else{
                         this.finished = true
                     }
@@ -178,24 +182,15 @@
                     console.log(error)
                 })
             },
-            onClickCategorySub(index,title){
-                this.categorySubId = this.categorySub[index].ID
-                console.log('categorySubId:'+this.categorySubId)
-                this.goodList=[]
-                this.finished = false
-                this.page = 1
-                this.onLoad()
-
-            },
             //跳转到商品详细页
             goGoodsInfo(id){
-                this.$router.push({name:'Goods',params:{goodsId:id}})
+                this.$router.push({name:'Goods',query:{goodsId:id}})
             }
 
           
 
            
-        },
+        }
     }
 </script>
 

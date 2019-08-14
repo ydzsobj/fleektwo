@@ -23,7 +23,7 @@
         </div>  
         <!--type bar-->
         <div class="type-bar">
-            <div v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId)">
+            <div v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)">
                 <img v-lazy="nav_img" width="90%">
                 <span>{{cate.mallCategoryName}}</span>
             </div>
@@ -99,8 +99,7 @@
                 floor3:[],
                 floorName:{},
                 hotGoods:[],  //热卖商品
-                nav_img:"//m.360buyimg.com/mobilecms/s120x120_jfs/t1/39401/17/2391/5859/5cc06fcfE2ad40668/28cda0a571b4a576.png",
-                nav_img1:"https://images.baixingliangfan.cn/firstCategoryPicture/20180408/20180408113048_1276.png"
+                nav_img:"//m.360buyimg.com/mobilecms/s120x120_jfs/t1/39401/17/2391/5859/5cc06fcfE2ad40668/28cda0a571b4a576.png"
               
             }
         },
@@ -132,9 +131,8 @@
             })
         },
         methods:{
-            golistPage(id) {
-                console.log(id)
-                // this.$router.push({name:'CategoryList',query:{goodsId:id}})
+            golistPage(id,index) {
+                this.$router.push({name:'CategoryList',query:{categorySubId:id,index:index}})
             }
         }
        
