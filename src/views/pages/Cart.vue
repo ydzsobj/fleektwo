@@ -106,6 +106,7 @@
         </van-cell-group>
         <van-submit-bar
         class="left50"
+         :currency="moneySign"
           :price="totalMoney"
           :disabled="!checkedGoods.length"
           :button-text="$t('account')"
