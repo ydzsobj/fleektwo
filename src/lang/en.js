@@ -1,9 +1,43 @@
 
 export default { 
-    music: 'Music',//网易云音乐
-    findMusic: 'FIND MUSIC',//发现音乐
-    myMusic: 'MY MUSIC',//我的音乐
-    friend: 'FRIEND',//朋友
-    musician: 'MUSICIAN',//音乐人
-    download: 'DOWNLOAD'//下载客户端
-  }
+    carriage: 'Shipping fee',  //运费
+    inventory: 'Stock quantity', //库存
+    select: 'Select', //选择
+    goodsDetails: 'Product detail',
+    comment: 'Comment',
+    nomore: 'No more',
+    shopCart: 'Shopping cart',
+    store: 'Store', //店铺
+    addCart: 'Add to shopping cart',
+    buy: 'Buy',//立即购买
+    ok: 'CONFIRM',
+    buyNum: 'Quantity', //购买数量
+    message: 'Leave word ', //留言
+    messagePlaceholder: 'Please enter your text',
+    serveError: 'Server error, data retrieval failed',
+    successAdd: 'Successfully added',
+    account: 'Check out',
+    back: 'Back',
+    clearCart: 'Clear cart',
+    clear: 'Clear',
+    payOnDelivery: 'Pay on delivery', //货到付款
+    name: 'Name',
+    nameholder: 'Please input your name',
+    phoneNumber: 'Phone Number',
+    phoneNumberholder: ' Please input your phone number',
+    email: 'Email',
+    emailholder: 'Please input your email',
+    province: 'Province',
+    provinceholder: 'Please input your Province, city and district',
+    address: 'Detailed Address',
+    addressholder: 'Please input your Detailed Address',
+    message: 'Message',
+    messageholder: 'Please input your message',
+    nameerr: 'Name can’t be blank!',
+    errTelephone: 'Phone number can’t be blank!',
+    errShort_address: 'Province, city and district can’t be blank!',
+    errAddress: 'Full address can’t be blank',
+    errEmail: 'Email format can’t be blank!',
+    orderNumber: 'Order No.:',
+    orderTime: 'Order Time:'
+    }

@@ -16,15 +16,15 @@
             <div class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price}}</s></div>
           </van-cell>
           <van-cell class="goods-express">
-            <van-col class="huicolor" span="4">运费：</van-col>
-            <van-col class="huicolor" span="8">0</van-col>
-            <van-col class="huicolor" span="4">剩余：</van-col>
-            <van-col class="huicolor" span="8">{{goodsInfo.stock_num}}</van-col>
+            <van-col class="huicolor" span="6">{{ $t('carriage') }}</van-col>
+            <van-col class="huicolor" span="6">0</van-col>
+            <van-col class="huicolor" span="6">{{ $t('inventory') }}</van-col>
+            <van-col class="huicolor" span="6">{{goodsInfo.stock_num}}</van-col>
           </van-cell>
         </van-cell-group>
         <van-cell-group @click.native= showSkuAttr>
           <van-cell class="goods-express">
-            <van-col class="huicolor" span="4">选择</van-col>
+            <van-col class="huicolor" span="4">{{ $t('select') }}</van-col>
             <van-col span="19">{{ attrText }}</van-col>
             <van-col span="1"><van-icon name="arrow" /></van-col>
             <van-col span="4"></van-col>
@@ -38,17 +38,17 @@
 
         <div>
             <van-tabs class="mallFlexd" swipeable sticky>
-                <van-tab title="商品详情">
+                <van-tab :title="$t('goodsDetails')">
                    <div class="detail" v-html="goodsInfo.detail_desc">
                       
 
                    </div>
                 </van-tab>
-                <van-tab class="comment" title="评论">
+                <van-tab class="comment" :title="$t('comment')">
                     <van-list
                       v-model="loading"
                       :finished="true"
-                      finished-text="没有更多了"
+                      :finished-text="$t('nomore')"
                      >
                       <van-cell
                         v-for="item in commentList"
@@ -64,22 +64,22 @@
           <van-goods-action-icon
             :info="cartNumCount"
             icon="cart-o"
-            text="购物车"
+            :text="$t('shopCart')"
             @click.native="tocart"
           />
           <van-goods-action-icon
             icon="shop-o"
-            text="店铺"
+            :text="$t('store')"
             @click.native="tohome"
           />
           <van-goods-action-button
             type="warning"
-            text="加入购物车"
+            :text="$t('addCart')"
             @click.native="showSkuCart"
           />
           <van-goods-action-button
             type="danger"
-            text="立即购买"
+            :text="$t('buy')"
             @click.native="showSkuBuy"
           />
         </van-goods-action>
@@ -98,6 +98,8 @@
           :message-config="messageConfig"
           :show-add-cart-btn="showAddCartBtn"
           :buy-text ="buyText"
+          :add-cart-text="$t('addCart')"
+          :stepper-title="$t('buyNum')"
           @buy-clicked="onBuyClicked"
           @add-cart="onAddCartClicked"
           @sku-selected="skuSelected"
@@ -214,7 +216,7 @@
                          {
                            // 商品留言
                            datetime: '0', // 留言类型为 time 时，是否含日期。'1' 表示包含
-                           multiple: '0', // 留言类型为 text 时，是否多行文本。'1' 表示多行
+                           multiple: '1', // 留言类型为 text 时，是否多行文本。'1' 表示多行
                            name: '留言', // 留言名称
                            type: 'text', // 留言类型，可选: id_no（身份证）, text, tel, date, time, email
                            required: '', // 是否必填 '1' 表示必填
@@ -249,6 +251,8 @@
             console.log(this.goodsId)
             this.getInfo()
             this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
+            this.sku.messages[0].name = this.$t('message') //sku留言 语言包
+            this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
         },
         methods: {
             getInfo() {
@@ -273,7 +277,7 @@
 
                         this.attrTextFun()                                  //显示属性名
                     }else{
-                        Toast('服务器错误，数据获取失败')
+                        Toast(this.$t('serveError'))
                     }
                      console.log(this.goodsInfo)
                 })
@@ -307,7 +311,7 @@
                  }
                 localStorage.cartInfo = JSON.stringify(cartInfo)
                 // this.$store.state.cartNum = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo).length : ''
-                Toast.success('添加成功')
+                Toast.success(this.$t('successAdd'))
 
                 this.$router.push({name:'Cart'})
             },
@@ -332,9 +336,9 @@
                 }
               }, 500);
             },
-            showSkuBuy() {this.show = true ; this.isBuyCartAttr = 'buy';this.showAddCartBtn=false;this.buyText="确定"},
-            showSkuCart() {this.show = true ; this.isBuyCartAttr = 'cart';this.showAddCartBtn=false;this.buyText="确定"},
-            showSkuAttr() {this.show = true ; this.isBuyCartAttr = 'attr';this.showAddCartBtn=true;this.buyText="立即购买"},
+            showSkuBuy() {this.show = true ; this.isBuyCartAttr = 'buy';this.showAddCartBtn=false;this.buyText= this.$t('ok')},
+            showSkuCart() {this.show = true ; this.isBuyCartAttr = 'cart';this.showAddCartBtn=false;this.buyText= this.$t('ok')},
+            showSkuAttr() {this.show = true ; this.isBuyCartAttr = 'attr';this.showAddCartBtn=true;this.buyText= this.$t('buy')},
             onBuyClicked(skuData){
               console.log('onBuyClicked',skuData)
               if(this.isBuyCartAttr==="buy" || this.isBuyCartAttr==="attr"){

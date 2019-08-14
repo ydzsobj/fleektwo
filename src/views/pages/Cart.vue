@@ -1,10 +1,10 @@
 <template>
     <div>
         <div class="navbar-div">
-            <van-nav-bar :title="isBuy ? '结算': '购物车'" left-text="返回" left-arrow @click-left="onClickLeft">
+            <van-nav-bar :title="isBuy ? $t('account'): $t('shopCart')" :left-text="$t('back')" left-arrow @click-left="onClickLeft">
               <!-- <van-icon name="search" slot="right" /> -->
               <van-button size="small" round  slot="right"  type="danger" @click="clearCart" v-if="!isBuy">
-                  清空购物车
+                 {{ this.$t('clearCart') }}
               </van-button>
             </van-nav-bar>
         </div>
@@ -27,7 +27,7 @@
                    <span>{{moneySign}}{{item.selectedSkuComb.price | toDivide}}</span>
                </div>
                <div v-if="!isBuy" slot="footer">
-                 <van-button size="mini" plain hairline type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)">清除</van-button>
+                 <van-button size="mini" plain hairline type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)">{{ $t('clear') }}</van-button>
                </div>
            </van-card>
           </van-checkbox>
@@ -36,7 +36,7 @@
              <van-col>
                  <van-radio-group v-model="radio">
                    <van-radio name="1">
-                     <span style="font-size: 14px">货到付款</span> <img src="/src/assets/images/cash.jpg" alt="">
+                     <span style="font-size: 14px">{{ $t('payOnDelivery') }}</span> <img src="/src/assets/images/cash.jpg" alt="">
                    </van-radio>
                    <!-- <van-radio name="2">
                      单选框 2
@@ -54,61 +54,61 @@
             v-model="name"
             required
             clearable
-            label="姓名"
-            placeholder="请输入姓名"
+            :label="$t('name')"
+            :placeholder="$t('nameholder')"
             :error-message="errName"
           />
         
           <van-field
             v-model="telephone"
-            label="电话号码"
+            :label="$t('phoneNumber')"
             clearable
             clickable
-            placeholder="请输入电话号码"
+            :placeholder="$t('phoneNumberholder')"
             type="number"
             required
             :error-message="errTelephone"
           />
           <van-field
             v-model="email"
-            label="邮箱"
+            :label="$t('email')"
             type="email"
 
             clearable
             clickable
-            placeholder="请输入邮箱"
+            :placeholder="$t('emailholder')"
           />
           <van-field
             v-model="short_address"
-            label="省市区"
+            :label="$t('province')"
             clearable
             clickable
-            placeholder="请输入省市区"
+            :placeholder="$t('provinceholder')"
             required
             :error-message="errShort_address"
           />
             <van-field
             v-model="address"
-            label="详细地址"
+            :label="$t('address')"
             clearable
             clickable
-            placeholder="请输入详细地址"
+            :placeholder="$t('addressholder')"
             required
             :error-message="errAddress"
           />
             <van-field
             v-model="message"
-            label="留言"
+            :label="$t('message')"
             clearable
             clickable
-            placeholder="请输入留言"
+            :placeholder="$t('messageholder')"
           />
         </van-cell-group>
         <van-submit-bar
         class="left50"
           :price="totalMoney"
           :disabled="!checkedGoods.length"
-          button-text="结算"
+          :button-text="$t('account')"
           @submit="onSubmit"
         />
     </div>
@@ -214,17 +214,18 @@
                this.errName=''
                this.errTelephone=''
                this.errAddress=''
+               this.errShort_address=''
                let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
                if(this.name === ''){
-                   this.errName = '姓名不能为空！';return
+                   this.errName = this.$t('nameerr');return
                }else if (this.telephone===''){
-                   this.errTelephone = '电话不能为空！';return
+                   this.errTelephone = this.$t('errTelephone');return
                }else if (this.short_address===''){
-                   this.errShort_address = '省市区不能为空！';return
+                   this.errShort_address = this.$t('errShort_address');return
                }else if(this.address===''){
-                   this.errAddress = '详细地址不能为空！';return
+                   this.errAddress = this.$t('errAddress');return
                }else if (this.email!='' && !reg.test(this.email)){
-                  Toast("邮箱格式不正确");return
+                  Toast(this.$t('errEmail'));return
                }
                 console.log(this.malldata,this.countPrice)
                 let data = {}
@@ -235,6 +236,7 @@
                 data.receiver_email = this.email
                 data.address = this.address
                 data.short_address = this.short_address
+                data.leave_word = this.message
                 
                     axios({
                         url:url.sendOrderInfo,
@@ -256,7 +258,7 @@
                         this.$router.push({name:'order',params:{orderData: this.malldataOrder,orderResponse: response.data.data}})
                         
                         }else{
-                            Toast('服务器错误，数据提交失败')
+                            Toast(this.$t('serveError'))
                         }
                     })
                 

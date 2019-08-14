@@ -1,11 +1,11 @@
 <template>
     <div>
        <div class="nav">
-           <span @click="onClickLeft"> <van-icon name="arrow-left" />返回</span>
+           <span @click="onClickLeft"> <van-icon name="arrow-left" />{{ $t('back') }}</span>
        </div>
        <div class="tu">
          <div class="tuleft">
-             <span>交易成功</span>
+             <span>{{ $t('Order successful') }}</span>
          </div>
           <div class="turight">
           </div>
@@ -33,8 +33,8 @@
         <van-row style="background-color: #fafafa;">
          <van-col span="1"></van-col>
          <van-col span="23" style="font-size: 14px;line-height: 6px;">
-             <p>订单号码：{{orderResponse.sn}} </p>
-             <p>时间：{{orderResponse.created_at}} </p>
+             <p>{{ $t('orderNumber') }} {{orderResponse.sn}} </p>
+             <p>{{ $t('orderTime') }} {{orderResponse.created_at}} </p>
           </van-col>
        </van-row>
     </div>
