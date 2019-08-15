@@ -251,9 +251,31 @@
             this.goodsId=this.$route.query.goodsId ?this.$route.query.goodsId : this.$route.params.goodsId
             console.log(this.goodsId)
             this.getInfo()
+            this.getlang()
             this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
         },
         methods: {
+              getlang() {
+                axios({
+                    url:url.getLang,
+                    method:'get',
+                    params:{}
+                })
+                .then(response=>{
+                    if(response.status== 200 && response.data.data){
+                      this.$i18n.locale= response.data.data.config.lang
+                      checkoutLang('en-US')
+
+                      this.sku.messages[0].name = this.$t('message') //sku留言 语言包
+                      this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
+                    }else{
+                        Toast(this.$t('serveError'))
+                    }
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+            },
             getInfo() {
                 axios({
                     url:url.getDetailGoodsInfo+'/'+this.goodsId,
@@ -262,13 +284,6 @@
                 })
                 .then(response=>{
                     if(response.status== 200 && response.data.good){
-                      
-                      this.$i18n.locale='ind-BA'
-                      // checkoutLang('en-US')
-
-                      this.sku.messages[0].name = this.$t('message') //sku留言 语言包
-                      this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
-
                         this.goodsInfo = response.data.good
                         // 商品属性基本信息赋值
                         this.goods.title = this.goodsInfo.title             //默认名
