@@ -3,6 +3,7 @@ export default {
     carriage: 'Shipping fee',  //运费
     inventory: 'Stock quantity', //库存
     select: 'Select', //选择
+    selected: 'The selected',
     goodsDetails: 'Product detail',
     comment: 'Comment',
     nomore: 'No more',
@@ -17,6 +18,7 @@ export default {
     serveError: 'Server error, data retrieval failed',
     successAdd: 'Successfully added',
     account: 'Check out',
+    total: 'Total',
     back: 'Back',
     clearCart: 'Clear cart',
     clear: 'Clear',
@@ -40,5 +42,7 @@ export default {
     errEmail: 'Email format can’t be blank!',
     orderNumber: 'Order No.:',
     orderTime: 'Order Time:',
-    ordersuccessful: 'Order successful'
+    ordersuccessful: 'Order successful',
+    atLeastOne: 'Choose at least one',
+    selectGoodsFirst: 'Please select the product specification first'
     }

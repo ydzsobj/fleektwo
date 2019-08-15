@@ -3,6 +3,7 @@ export default {
     carriage: 'biaya ongkir',  //运费
     inventory: 'sisa stok', //库存
     select: 'pilih', //选择
+    selected: 'Telah dipilih', //已选
     goodsDetails: 'parameter produk',
     comment: 'komentar',
     nomore: 'tidak ada lagi',
@@ -17,6 +18,7 @@ export default {
     serveError: 'Galat server, pengiriman data gagal',
     successAdd: 'Berhasil ditambahkan',
     account: 'Penyelesaian',
+    total: 'jumlah',
     back: 'Kembali',
     clearCart: 'hapuskan daftar',
     clear: 'hapuskan',
@@ -40,5 +42,7 @@ export default {
     errEmail: 'Format alamat email salah',
     orderNumber: 'Nomor pesanan:',
     orderTime: 'Waktu pemesanan:',
-    ordersuccessful: '交易成功'
+    ordersuccessful: 'Transaksi  berhasil',
+    atLeastOne: '至少选择一件yinni',
+    selectGoodsFirst: '请先选择商品规格yini'
     }

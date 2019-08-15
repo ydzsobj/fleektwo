@@ -110,6 +110,7 @@
           :price="totalMoney"
           :disabled="!checkedGoods.length"
           :button-text="$t('account')"
+          :label="$t('total')"
           @submit="onSubmit"
         />
     </div>

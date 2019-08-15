@@ -2,6 +2,7 @@ export default {
     carriage:'运费：',
     inventory: '库存：',
     select: '选择',
+    selected: '已选',
     goodsDetails: '商品详情',
     comment: '评论',
     nomore: '没有更多了',
@@ -16,6 +17,7 @@ export default {
     serveError: '服务器错误，数据提交失败',
     successAdd: '添加成功',
     account: '结算',
+    total: '合计',
     back: '返回',
     clearCart: '清除购物车',
     clear: '清除',
@@ -39,7 +41,9 @@ export default {
     errEmail: '邮箱格式不能为空',
     orderNumber: '订单号码：',
     orderTime: '订单时间：',
-    ordersuccessful: '交易成功'
+    ordersuccessful: '交易成功',
+    atLeastOne: '至少选择一件',
+    selectGoodsFirst: '请先选择商品规格'
     
   }
   
