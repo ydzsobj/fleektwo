@@ -39,5 +39,6 @@ export default {
     errAddress: 'Full address can’t be blank',
     errEmail: 'Email format can’t be blank!',
     orderNumber: 'Order No.:',
-    orderTime: 'Order Time:'
+    orderTime: 'Order Time:',
+    ordersuccessful: 'Order successful'
     }

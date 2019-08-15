@@ -5,7 +5,7 @@
        </div>
        <div class="tu">
          <div class="tuleft">
-             <span>{{ $t('Order successful') }}</span>
+             <span>{{ $t('ordersuccessful') }}</span>
          </div>
           <div class="turight">
           </div>

@@ -119,6 +119,7 @@
     import url from '@/serviceAPI.config.js'
     import {Toast} from 'vant'
     import {toMoney} from '@/filter/moneyFilter.js'
+    import checkoutLang from '@/lang.js'
     export default {
         data() {
             return {
@@ -251,8 +252,6 @@
             console.log(this.goodsId)
             this.getInfo()
             this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
-            this.sku.messages[0].name = this.$t('message') //sku留言 语言包
-            this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
         },
         methods: {
             getInfo() {
@@ -263,6 +262,13 @@
                 })
                 .then(response=>{
                     if(response.status== 200 && response.data.good){
+                      
+                      this.$i18n.locale='ind-BA'
+                      // checkoutLang('en-US')
+
+                      this.sku.messages[0].name = this.$t('message') //sku留言 语言包
+                      this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
+
                         this.goodsInfo = response.data.good
                         // 商品属性基本信息赋值
                         this.goods.title = this.goodsInfo.title             //默认名

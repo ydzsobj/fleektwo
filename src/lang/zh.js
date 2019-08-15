@@ -38,7 +38,8 @@ export default {
     errAddress: '详细地址不能为空',
     errEmail: '邮箱格式不能为空',
     orderNumber: '订单号码：',
-    orderTime: '订单时间：'
+    orderTime: '订单时间：',
+    ordersuccessful: '交易成功'
     
   }
   
