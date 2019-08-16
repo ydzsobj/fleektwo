@@ -181,6 +181,9 @@
         text-align: center;
         flex:1;
     }
+    .type-bar div span{
+        display: inline-block
+    }
     .recommend-area{
         background-color: #fff;
         margin-top:.3rem;
