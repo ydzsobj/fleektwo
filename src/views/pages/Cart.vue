@@ -10,7 +10,7 @@
         </div>
         <div v-if="cartInfo.length===0" style="height: 200px;display: flex;justify-content: center;flex-direction: column;align-items: center; background-color: #fff">
             <van-row>
-                 <img src="//gw.alicdn.com/tfs/TB1U0RydwoQMeJjy1XaXXcSsFXa-220-220.png_230x230q90_.webp" alt="" style="width:100px;height:100px">
+                 <img src="../../assets/images/cartempty.png" alt="" style="width:100px;height:100px">
             </van-row>
             <van-row>
                 {{$t('cartnull')}}
