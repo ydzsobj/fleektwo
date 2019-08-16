@@ -43,6 +43,7 @@ export default {
     orderNumber: 'Nomor pesanan:',
     orderTime: 'Waktu pemesanan:',
     ordersuccessful: 'Transaksi  berhasil',
-    atLeastOne: '至少选择一件yinni',
-    selectGoodsFirst: '请先选择商品规格yini'
+    atLeastOne: 'Pilih setidaknya satu',
+    selectGoodsFirst: 'Silakan pilih spesifikasi produk',
+    cartnull: 'Daftar belanja Anda kosong!'
     }

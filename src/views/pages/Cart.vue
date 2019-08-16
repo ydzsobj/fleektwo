@@ -8,6 +8,17 @@
               </van-button>
             </van-nav-bar>
         </div>
+        <div v-if="cartInfo.length===0" style="height: 200px;display: flex;justify-content: center;flex-direction: column;align-items: center; background-color: #fff">
+            <van-row>
+                 <img src="//gw.alicdn.com/tfs/TB1U0RydwoQMeJjy1XaXXcSsFXa-220-220.png_230x230q90_.webp" alt="" style="width:100px;height:100px">
+            </van-row>
+            <van-row>
+                {{$t('cartnull')}}
+            </van-row>
+            <van-row>
+                    <van-button size="small" type="default" icon="arrow-left" @click.native="onClickLeft">{{$t('back')}}</van-button>
+            </van-row>
+        </div>
 
         <van-checkbox-group class="card-goods" v-model="checkedGoods">
           <van-checkbox
@@ -27,7 +38,7 @@
                    <span>{{moneySign}}{{item.selectedSkuComb.price | toDivide}}</span>
                </div>
                <div v-if="!isBuy" slot="footer">
-                 <van-button size="mini" plain hairline type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)">{{ $t('clear') }}</van-button>
+                 <van-button size="mini" style="padding:0 2px" plain hairline type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)">{{ $t('clear') }}</van-button>
                </div>
            </van-card>
           </van-checkbox>
@@ -105,7 +116,8 @@
           />
         </van-cell-group>
         <van-submit-bar
-        class="left50"
+          class="left50"
+         :loading="submitloading"
          :currency="moneySign"
           :price="totalMoney"
           :disabled="!checkedGoods.length"
@@ -125,6 +137,7 @@
     export default {
        data() {
            return {
+               submitloading: false,
                radio: '1',
                cartInfo: [] ,
                isEmpty: false ,
@@ -239,13 +252,14 @@
                 data.address = this.address
                 data.short_address = this.short_address
                 data.leave_word = this.message
-                
+                this.submitloading=true
                     axios({
                         url:url.sendOrderInfo,
                         method:'post',
                         data: data
                     })
                     .then(response=>{
+                        this.submitloading=false
                         console.log(response)
                         if(response.status== 200 && response.data.success){
                             //如果不是直接购买，下单成功后删除对应购物车商品

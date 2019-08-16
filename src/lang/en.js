@@ -44,5 +44,6 @@ export default {
     orderTime: 'Order Time:',
     ordersuccessful: 'Order successful',
     atLeastOne: 'Choose at least one',
-    selectGoodsFirst: 'Please select the product specification first'
+    selectGoodsFirst: 'Please select the product specification first',
+    cartnull: 'Your shopping cart is empty!'
     }

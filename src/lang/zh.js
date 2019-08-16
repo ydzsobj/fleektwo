@@ -43,7 +43,8 @@ export default {
     orderTime: '订单时间：',
     ordersuccessful: '交易成功',
     atLeastOne: '至少选择一件',
-    selectGoodsFirst: '请先选择商品规格'
+    selectGoodsFirst: '请先选择商品规格',
+    cartnull: '您的购物车竟然是空的！'
     
   }
   
