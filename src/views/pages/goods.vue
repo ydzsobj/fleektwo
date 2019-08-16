@@ -319,7 +319,8 @@
                 let  flag = false; //判断购物车同一商品选择同一属性时购物车+1
                     for(let i=0;i<cartInfo.length;i++){
                         if (cartInfo[i].goodsId === skuData.goodsId && cartInfo[i].selectedSkuComb.id === skuData.selectedSkuComb.id ){
-                            cartInfo[i].selectedNum += skuData.selectedNum
+                            cartInfo[i].selectedNum += skuData.selectedNum 
+                            cartInfo[i].messages.message_0 = skuData.messages.message_0
                             flag=true 
                         }
                     }
