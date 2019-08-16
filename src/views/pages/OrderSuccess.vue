@@ -99,7 +99,7 @@ export default {
     height: 100%
 }
 .tu .turight{
-    background-image: url(//img.alicdn.com/tps/TB1ww24PVXXXXc6XXXXXXXXXXXX-420-300.png_400x400q85s150.jpg_.webp);
+    background-image: url('../../assets/images/taobao.webp');
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;
