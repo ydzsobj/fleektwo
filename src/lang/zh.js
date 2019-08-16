@@ -1,4 +1,9 @@
 export default {
+    home: '首页',
+    list: '列表',
+    classlist:'类别列表',
+    outfloor: '我也是有底线的',
+    hotgoods: '热卖商品',
     carriage:'运费：',
     inventory: '库存：',
     select: '选择',

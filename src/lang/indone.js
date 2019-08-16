@@ -1,5 +1,10 @@
 
 export default { 
+    home: 'halaman utama',
+    list: 'Klasifikasi',
+    classlist:'Daftar kategori',
+    outfloor: 'tidak ada lagi',
+    hotgoods: 'Baru saja dikirimkan barang',
     carriage: 'biaya ongkir',  //运费
     inventory: 'sisa stok', //库存
     select: 'pilih', //选择

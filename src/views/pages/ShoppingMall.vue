@@ -51,7 +51,7 @@
         </div> -->
         <floor-component v-for="(item, index) in floorData" :floorData="item.floor " :floorTitle="item.name" :key="index"></floor-component>
         <div class="hot-area">
-            <div class="hot-title">热卖商品</div>
+            <div class="hot-title">{{ $t('hotgoods') }}</div>
             <div class="hot-goods">
             <!--这里需要一个list组件-->
                 <van-list>

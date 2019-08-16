@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="navbar-div">
-            <van-nav-bar title="类别列表" />
+            <van-nav-bar :title="$t('classlist')"/>
         </div>
 
         <div>
@@ -33,7 +33,7 @@
                             :finished="finished"
                             @load="onLoad"
                             :offset="10"
-                            finished-text="我也是有底线的"
+                            :finished-text="$t('outfloor')"
                         >
                             <!-- :immediate-check="false" -->
                             <div class="list-item" @click="goGoodsInfo(item.goodsId)" v-for="(item,index) in goodList" :key="index">
@@ -149,7 +149,7 @@
                       this.categorySub = response.data.data
                       this.isstate = true
                     }else{
-                        Toast('服务器错误，数据取得失败')
+                        Toast($t('serveError'))
                     }
                 })
                 .catch(error=>{

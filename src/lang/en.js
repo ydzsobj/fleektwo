@@ -1,5 +1,10 @@
 
 export default { 
+    home: 'Home',
+    list: 'Category',
+    classlist:'Category list',
+    outfloor: 'No more',
+    hotgoods: 'Selling goods',
     carriage: 'Shipping fee',  //运费
     inventory: 'Stock quantity', //库存
     select: 'Select', //选择

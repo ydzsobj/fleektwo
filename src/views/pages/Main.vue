@@ -6,15 +6,19 @@
             </keep-alive>
         </div>
         <van-tabbar class="left50" v-model="active" @change="changeTabbar(active)">
-            <van-tabbar-item icon="shop">首页</van-tabbar-item>
-            <van-tabbar-item icon="records">列表</van-tabbar-item>
-            <van-tabbar-item icon="cart">购物车</van-tabbar-item>
+            <van-tabbar-item icon="shop">{{ $t('home') }}</van-tabbar-item>
+            <van-tabbar-item icon="records">{{ $t('list') }}</van-tabbar-item>
+            <van-tabbar-item icon="cart">{{ $t('shopCart') }}</van-tabbar-item>
             <!-- <van-tabbar-item icon="contact">会员中心</van-tabbar-item> -->
         </van-tabbar>
     </div>
 </template>
 
 <script>
+    import axios from 'axios'
+    import checkoutLang from '@/lang.js'
+    import url from '@/serviceAPI.config.js'
+    import {Toast} from 'vant'
     export default {
        data() {
            return {
@@ -24,18 +28,40 @@
        }, 
        created(){
            this.changeTabBarActive()
+           this.getlang()
        },
        updated(){
            this.changeTabBarActive()
        },
-       mounted() {
-            this.watchRoute(this.$route.name)
-       },
        methods: {
+            getlang() {
+                axios({
+                    url:url.getLang,
+                    method:'get',
+                    params:{}
+                })
+                .then(response=>{
+                    if(response.status== 200 && response.data.data){
+                      this.$i18n.locale= response.data.data.config.lang
+                      checkoutLang('en-US')
+                    }else{
+                        Toast(this.$t('serveError'))
+                    }
+                })
+                .catch(error=>{
+                    console.log(error)
+                })
+            },
            changeTabBarActive(){
-               this.nowPath = this.$route.path
-               if(this.nowPath=='/Cart'){
+               this.nowPath = this.$route.name
+               if(this.nowPath=='Cart'){
                    this.active=2
+               }else if(this.nowPath=='ShoppingMall'){
+                   this.active=0
+               }else if(this.nowPath=='CategoryList'){
+                   this.active=1
+               }else if(this.nowPath=='Member'){
+                   this.active=3
                }
            },
            changeTabbar(active) {
@@ -56,29 +82,8 @@
 
                 
                }
-           },
-           watchRoute(name) {
-                switch(name){
-                   case 'ShoppingMall':
-                        this.active=0
-                        break;
-                   case 'CategoryList':
-                        this.active=1
-                        break;
-                   case 'Cart':
-                        this.active=2
-                        break;
-                    case 'Member':
-                        this.active=3
-                        break;
-               }
            }
-       },
-       watch: {
-           '$route' (newRouter) {
-               this.watchRoute(newRouter.name)
-           }
-       },
+       }
     }
 </script>
 
