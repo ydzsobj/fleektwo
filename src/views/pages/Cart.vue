@@ -60,7 +60,7 @@
                  </van-radio-group>
              </van-col>
         </van-row>
-        <van-cell-group>
+        <van-cell-group style="margin-bottom: 50px">
           <van-field
             v-model="name"
             required
