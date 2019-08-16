@@ -35,13 +35,10 @@
             </van-col>
           </van-cell>
         </van-cell-group>
-
         <div>
             <van-tabs class="mallFlexd" swipeable sticky>
                 <van-tab :title="$t('goodsDetails')">
-                   <div class="detail" v-html="goodsInfo.detail_desc">
-                      
-
+                   <div class="detail" v-html="goodsInfo.detail_desc">            
                    </div>
                 </van-tab>
                 <van-tab class="comment" :title="$t('comment')">
@@ -59,8 +56,7 @@
             </van-tabs>
 <!-- @load="onLoad" -->
         </div>
-
-        <van-goods-action class="marginauto">
+        <van-goods-action style="z-index: 2;" class="marginauto">
           <van-goods-action-icon
             :info="cartNumCount"
             icon="cart-o"
@@ -83,8 +79,6 @@
             @click.native="showSkuBuy"
           />
         </van-goods-action>
-
-
         <van-sku
         class="left50"
           v-model="show"
@@ -314,7 +308,6 @@
             addGoodsToCart(skuData){
                 //取出本地购物车中的商品
                 //localStorage.removeItem('cartInfo')
-
                 let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) : []
                 let  flag = false; //判断购物车同一商品选择同一属性时购物车+1
                     for(let i=0;i<cartInfo.length;i++){
@@ -326,24 +319,19 @@
                     }
                 
                  if (!flag) {
-     
                      let newGoodsInfo = {
                          name:this.goodsInfo.name,
                          title:this.goodsInfo.title,
                          skuAttrText: this.skuAttrTextFun(skuData)
                      }
-                     
-                     cartInfo.push(Object.assign(newGoodsInfo , skuData))  
-                    
+                     cartInfo.push(Object.assign(newGoodsInfo , skuData))     
                  }
                 localStorage.cartInfo = JSON.stringify(cartInfo)
                 // this.$store.state.cartNum = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo).length : ''
                 Toast.success(this.$t('successAdd'))
-
                 this.$router.push({name:'Cart'})
             },
             tohome(){
-              Toast('Not opened');return
                 this.$router.push({name:"ShoppingMall"})
             },
             tocart(){
@@ -356,7 +344,7 @@
                 }
                 // 加载状态结束
                 this.loading = false;
-        
+
                 // 数据全部加载完成
                 if (this.commentList.length >= 40) {
                   this.finished = true;
@@ -370,13 +358,11 @@
               console.log('onBuyClicked',skuData)
               if(this.isBuyCartAttr==="buy" || this.isBuyCartAttr==="attr"){
                   console.log(this.isBuyCartAttr,'buy买')
-
                   let newGoodsInfo = {
                        name:this.goodsInfo.name,
                        title: this.goodsInfo.title,
                        skuAttrText: this.skuAttrTextFun(skuData)
-                   }
-                     
+                   } 
                   this.$router.push({name:'Cart',params:{skuData: Object.assign(newGoodsInfo , skuData)}}) 
 
               }else if (this.isBuyCartAttr==="cart"){
@@ -397,7 +383,6 @@
                 arr.push(element.k)
               })
               this.attrText = arr.join('-')
-
             },
             skuAttrTextFun(skuData) {
                 let skuAttrText = []
@@ -416,8 +401,6 @@
                 }
                 return skuAttrText
             }
-
-        
         },
     }
 </script>

@@ -184,7 +184,6 @@
                    });
                });
                console.log(this.malldata,this.countPrice)
-
                return this.countPrice
            },
            moneySign(){
@@ -277,8 +276,6 @@
                             Toast(this.$t('serveError'))
                         }
                     })
-                
-
             },
             showImage(skuAttrText) {
                 let img=''
@@ -286,7 +283,6 @@
                     if(element.imgUrl){img= element.imgUrl }
                 })
                 return img
-
             },
             showDesc(item){
                 return item.skuAttrText.map(ele=>{return ele.name}).join('/')+'   '+item.messages.message_0
