@@ -117,9 +117,14 @@
     import axios from 'axios'
     import url from '@/serviceAPI.config.js'
     import {Toast} from 'vant'
+    import {Sku} from '../../vant' //sku组件有改动所以用自定义的vant
+    import '../../vant/lib/index.css';
     import {toMoney} from '@/filter/moneyFilter.js'
     import checkoutLang from '@/lang.js'
     export default {
+      components: {
+        [Sku.name]: Sku
+      },
         data() {
             return {
                 attrText: '',
