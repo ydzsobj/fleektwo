@@ -252,7 +252,7 @@
             }
         },
         created(){
-            this.goodsId=this.$route.query.goodsId ?this.$route.query.goodsId : this.$route.params.goodsId
+            this.goodsId=this.$route.query.goodsId ?this.$route.query.goodsId-0: this.$route.params.goodsId-0
             console.log(this.goodsId)
             this.getInfo()
             this.getlang()

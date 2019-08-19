@@ -8,7 +8,7 @@
         <van-tabbar class="left50" v-model="active" @change="changeTabbar(active)">
             <van-tabbar-item icon="shop">{{ $t('home') }}</van-tabbar-item>
             <van-tabbar-item icon="records">{{ $t('list') }}</van-tabbar-item>
-            <van-tabbar-item icon="cart">{{ $t('shopCart') }}</van-tabbar-item>
+            <van-tabbar-item icon="cart" :info="cartNum">{{ $t('shopCart') }}</van-tabbar-item>
             <!-- <van-tabbar-item icon="contact">会员中心</van-tabbar-item> -->
         </van-tabbar>
     </div>
@@ -24,11 +24,18 @@
            return {
                active: 0,
                nowPath:'',  //当前路径
+               cartNum: ''
            }
        }, 
+        watch: {
+            '$route' () {
+               this.cartNumFun()
+            }
+        },
        created(){
            this.changeTabBarActive()
            this.getlang()
+            this.cartNumFun()
        },
        updated(){
            this.changeTabBarActive()
@@ -82,6 +89,9 @@
 
                 
                }
+           },
+           cartNumFun() {
+                this.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
            }
        }
     }
