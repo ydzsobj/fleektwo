@@ -6,7 +6,7 @@
                 <video :src="goodsInfo.main_video_url" controls="controls" width="100%"/>
               </van-swipe-item>
               <van-swipe-item v-for="(image, index) in goodsInfo.list_images" :key="index">
-                <img v-lazy="image" width="100%"/>
+                <img :src="image" width="100%"/>
               </van-swipe-item>
             </van-swipe>
         </div>
