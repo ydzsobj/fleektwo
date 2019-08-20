@@ -38,7 +38,15 @@
         <div>
             <van-tabs class="mallFlexd" swipeable sticky>
                 <van-tab :title="$t('goodsDetails')">
-                   <div class="detail" v-html="goodsInfo.detail_desc">            
+                   <div class="detail">
+                      <div v-for="(image, index) in goodsInfo.detail_list_images" :key="index">
+                        <video v-if="ifvido(image)" :src="image" controls="controls" width="100%" style="display: block"/>
+                        <van-image v-else lazy-load show-error :src="image">
+                          <template v-slot:loading>
+                            <van-loading type="spinner" size="20" />
+                          </template>
+                        </van-image>   
+                      </div>         
                    </div>
                 </van-tab>
                 <van-tab class="comment" :title="$t('comment')">
@@ -405,6 +413,10 @@
                   skuAttrText.push(obj)
                 }
                 return skuAttrText
+            },
+            ifvido (image) {
+              let rex = new RegExp(/\.(mp4|avi)$/i)
+                  return  rex.test(image)
             }
         },
     }
@@ -450,5 +462,8 @@
     .mallFlexd >>> .van-sticky.van-sticky--fixed {
       max-width: 600px;
       margin: 0 auto;
+    }
+    .detail >>> .van-image {
+      display: block
     }
 </style>
