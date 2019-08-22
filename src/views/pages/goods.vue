@@ -307,7 +307,7 @@
                         this.sku.none_sku = this.goodsInfo.none_sku         // 是否无规格商品
                         this.sku.stock_num = this.goodsInfo.stock_num       //总库存
                         this.sku.collection_id = this.goodsInfo.collection_id          // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
-
+                        this.goodsInfo.fb_pix && this.fbInit(this.goodsInfo.fb_pix)    // 如有像素 就初始化 fbinit
                         this.attrTextFun()                                  //显示属性名
                     }else{
                         Toast(this.$t('serveError'))
@@ -342,6 +342,7 @@
                 localStorage.cartInfo = JSON.stringify(cartInfo)
                 // this.$store.state.cartNum = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo).length : ''
                 Toast.success(this.$t('successAdd'))
+                try{fbq('track', 'AddToCart');}catch(e){} 
                 this.$router.push({name:'Cart'})
             },
             tohome(){
@@ -417,6 +418,12 @@
             ifvido (image) {
               let rex = new RegExp(/\.(mp4|avi)$/i)
                   return  rex.test(image)
+            },
+            fbInit(fix){
+              try {
+                fbq('init', fix); 
+                fbq('track', 'PageView');
+              } catch (error) {}
             }
         },
     }

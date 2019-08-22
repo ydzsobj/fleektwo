@@ -68,6 +68,7 @@
             :label="$t('name')"
             :placeholder="$t('nameholder')"
             :error-message="errName"
+            @input="fbinput"
           />
         
           <van-field
@@ -79,15 +80,16 @@
             type="number"
             required
             :error-message="errTelephone"
+            @input="fbinput"
           />
           <van-field
             v-model="email"
             :label="$t('email')"
             type="email"
-
             clearable
             clickable
             :placeholder="$t('emailholder')"
+            @input="fbinput"
           />
           <van-field
             v-model="short_address"
@@ -97,6 +99,7 @@
             :placeholder="$t('provinceholder')"
             required
             :error-message="errShort_address"
+            @input="fbinput"
           />
             <van-field
             v-model="address"
@@ -106,6 +109,7 @@
             :placeholder="$t('addressholder')"
             required
             :error-message="errAddress"
+            @input="fbinput"
           />
             <van-field
             v-model="message"
@@ -113,6 +117,7 @@
             clearable
             clickable
             :placeholder="$t('messageholder')"
+            @input="fbinput"
           />
         </van-cell-group>
         <van-submit-bar
@@ -137,6 +142,7 @@
     export default {
        data() {
            return {
+               fbinputFalg: true,
                submitloading: false,
                radio: '1',
                cartInfo: [] ,
@@ -270,7 +276,9 @@
                                 })
                             localStorage.cartInfo =  JSON.stringify(newCart)       
                             }
-                        this.$router.push({name:'order',params:{orderData: this.malldataOrder,orderResponse: response.data.data}})
+                            try{fbq('track', 'InitiateCheckout')}catch(e){};
+                            try{ fbq('track', 'Purchase', {value: toDivide(this.countPrice), currency:'USD'}) }catch(e){}
+                            this.$router.push({name:'order',params:{orderData: this.malldataOrder,orderResponse: response.data.data}})
                         
                         }else{
                             Toast(this.$t('serveError'))
@@ -300,6 +308,14 @@
                     }
                 }
                 localStorage.cartInfo = JSON.stringify(cartIn)
+            },
+            fbinput(e) {
+                if(this.fbinputFalg){
+                    this.fbinputFalg = false
+                    try{fbq('track', "AddPaymentInfo");} catch(e){}
+                }else{
+                    return false
+                }
             }
         },
     }
