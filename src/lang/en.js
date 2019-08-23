@@ -50,5 +50,9 @@ export default {
     ordersuccessful: 'Order successful',
     atLeastOne: 'Choose at least one',
     selectGoodsFirst: 'Please select the product specification first',
-    cartnull: 'Your shopping cart is empty!'
+    cartnull: 'Your shopping cart is empty!',
+    pullingText: 'Pull down to refresh...',
+    lossText: 'Loosen to refresh...',
+    loading: 'loading...',
+    loadSuccess: 'Refresh the success'
     }

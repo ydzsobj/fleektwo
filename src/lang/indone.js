@@ -50,5 +50,9 @@ export default {
     ordersuccessful: 'Transaksi  berhasil',
     atLeastOne: 'Pilih setidaknya satu',
     selectGoodsFirst: 'Silakan pilih spesifikasi produk',
-    cartnull: 'Daftar belanja Anda kosong!'
+    cartnull: 'Daftar belanja Anda kosong!',
+    pullingText: 'Tarik ke bawah untuk menyegarkan...',
+    lossText: 'Lepaskan untuk menyegarkan...',
+    loading: 'Loading...',
+    loadSuccess: 'segarkan dengan sukses'
     }

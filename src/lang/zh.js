@@ -49,7 +49,11 @@ export default {
     ordersuccessful: '交易成功',
     atLeastOne: '至少选择一件',
     selectGoodsFirst: '请先选择商品规格',
-    cartnull: '您的购物车竟然是空的！'
+    cartnull: '您的购物车竟然是空的！',
+    pullingText: '下拉即可刷新...',
+    lossText: '释放即可刷新...',
+    loading: '加载中...',
+    loadSuccess: '刷新成功'
     
   }
   

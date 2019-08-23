@@ -1,5 +1,6 @@
 <template>
     <div>
+      <van-pull-refresh v-model="pullLoading" @refresh="onRefresh" :pulling-text="$t('pullingText')" :loosing-text="$t('lossText')" :loading-text="$t('loading')">
         <div class="swiper-area">
             <van-swipe :autoplay="3000">
               <van-swipe-item v-if="goodsInfo.main_video_url">
@@ -35,6 +36,7 @@
             </van-col>
           </van-cell>
         </van-cell-group>
+      </van-pull-refresh>
         <div>
             <van-tabs class="mallFlexd" swipeable sticky>
                 <van-tab :title="$t('goodsDetails')">
@@ -146,6 +148,7 @@
                     
                 ],
                 loading: false,
+                pullLoading:false,
                 finished: false,
                 show: false,
                 isBuyCartAttr:'',
@@ -276,7 +279,7 @@
                 .then(response=>{
                     if(response.status== 200 && response.data.data){
                       this.$i18n.locale= response.data.data.config.lang
-                      checkoutLang('en-US')
+                      checkoutLang(response.data.data.config.lang)
 
                       this.sku.messages[0].name = this.$t('message') //sku留言 语言包
                       this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
@@ -289,34 +292,39 @@
                 })
             },
             getInfo() {
-                axios({
-                    url:url.getDetailGoodsInfo+'/'+this.goodsId,
-                    method:'get',
-                    params:{}
-                })
-                .then(response=>{
-                    if(response.status== 200 && response.data.good){
-                        this.goodsInfo = response.data.good
-                        // 商品属性基本信息赋值
-                        this.goods.title = this.goodsInfo.title             //默认名
-                        this.goods.picture = this.goodsInfo.main_image_url  //无属性规格，默认图片
-                        this.$store.money_sign = this.goodsInfo.money_sign  //货币
-                        this.sku.list = this.goodsInfo.list                 // sku
-                        this.sku.tree = this.goodsInfo.tree || []                 // 所有属性 
-                        this.sku.price = this.goodsInfo.price               // 默认价格（单位元）
-                        this.sku.none_sku = this.goodsInfo.none_sku         // 是否无规格商品
-                        this.sku.stock_num = this.goodsInfo.stock_num       //总库存
-                        this.sku.collection_id = this.goodsInfo.collection_id          // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
-                        this.goodsInfo.fb_pix && this.fbInit(this.goodsInfo.fb_pix)    // 如有像素 就初始化 fbinit
-                        this.attrTextFun()                                  //显示属性名
-                    }else{
-                        Toast(this.$t('serveError'))
-                    }
-                     console.log(this.goodsInfo)
-                })
-                .catch(error=>{
-                    console.log(error)
-                })
+             return new Promise ((reslove,reject)=>{   
+                      axios({
+                          url:url.getDetailGoodsInfo+'/'+this.goodsId,
+                          method:'get',
+                          params:{}
+                      })
+                      .then(response=>{
+                          if(response.status== 200 && response.data.good){
+                              this.goodsInfo = response.data.good
+                              // 商品属性基本信息赋值
+                              this.goods.title = this.goodsInfo.title             //默认名
+                              this.goods.picture = this.goodsInfo.main_image_url  //无属性规格，默认图片
+                              this.$store.money_sign = this.goodsInfo.money_sign  //货币
+                              this.sku.list = this.goodsInfo.list                 // sku
+                              this.sku.tree = this.goodsInfo.tree || []                 // 所有属性 
+                              this.sku.price = this.goodsInfo.price               // 默认价格（单位元）
+                              this.sku.none_sku = this.goodsInfo.none_sku         // 是否无规格商品
+                              this.sku.stock_num = this.goodsInfo.stock_num       //总库存
+                              this.sku.collection_id = this.goodsInfo.collection_id          // 无规格商品 skuId 取 collection_id，否则取所选 sku 组合对应的 id
+                              this.goodsInfo.fb_pix && this.fbInit(this.goodsInfo.fb_pix)    // 如有像素 就初始化 fbinit
+                              this.attrTextFun()                                  //显示属性名
+                              reslove()
+                          }else{
+                              Toast(this.$t('serveError'))
+                              reject()
+                          }
+                           console.log(this.goodsInfo)
+                      })
+                      .catch(error=>{
+                          console.log(error)
+                          reject()
+                      })
+                    })
             },
             addGoodsToCart(skuData){
                 //取出本地购物车中的商品
@@ -424,6 +432,12 @@
                 fbq('init', fix); 
                 fbq('track', 'PageView');
               } catch (error) {}
+            },
+            onRefresh() {
+              this.getInfo().then(()=>{
+                Toast(this.$t('loadSuccess'))
+                this.pullLoading = false
+              })
             }
         },
     }
