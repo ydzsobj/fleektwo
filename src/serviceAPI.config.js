@@ -3,7 +3,7 @@
 if(process.env.NODE_ENV === 'development'){
     var LOCALURL =  "http://192.168.1.132:8081/"
 }else if(process.env.NODE_ENV === 'test'){
-    var LOCALURL =  "http://www.website-shop.cc/"
+    var LOCALURL =  "http://www.website.cc/"
 }else{
     var LOCALURL =  "http://shop.fleekfly.xyz/"
 }
