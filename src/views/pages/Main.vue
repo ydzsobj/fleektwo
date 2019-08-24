@@ -5,7 +5,7 @@
                 <router-view />
             </keep-alive>
         </div>
-        <van-tabbar class="left50" v-model="active" @change="changeTabbar(active)">
+        <van-tabbar class="left50" v-model="active" @change="changeTabbar(active)" v-show="this.$route.name==='ShoppingMall' || this.$route.name==='CategoryList'">
             <van-tabbar-item icon="shop">{{ $t('home') }}</van-tabbar-item>
             <van-tabbar-item icon="records">{{ $t('list') }}</van-tabbar-item>
             <van-tabbar-item icon="cart" :info="cartNum">{{ $t('shopCart') }}</van-tabbar-item>
@@ -50,7 +50,7 @@
                 .then(response=>{
                     if(response.status== 200 && response.data.data){
                       this.$i18n.locale= response.data.data.config.lang
-                      checkoutLang('en-US')
+                      checkoutLang(response.data.data.config.lang)
                     }else{
                         Toast(this.$t('serveError'))
                     }

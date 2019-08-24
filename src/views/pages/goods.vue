@@ -266,31 +266,19 @@
             this.goodsId=this.$route.query.goodsId ?this.$route.query.goodsId-0: this.$route.params.goodsId-0
             console.log(this.goodsId)
             this.getInfo()
-            this.getlang()
+            this.sku.messages[0].name = this.$t('message') //sku留言 语言包
+            this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
+            // this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
+        },
+        activated(){
             this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
+            let goodsId=this.$route.query.goodsId ?this.$route.query.goodsId-0: this.$route.params.goodsId-0
+            if(this.goodsId != goodsId){
+              this.goodsId = goodsId
+              this.getInfo()
+            }
         },
         methods: {
-              getlang() {
-                axios({
-                    url:url.getLang,
-                    method:'get',
-                    params:{}
-                })
-                .then(response=>{
-                    if(response.status== 200 && response.data.data){
-                      this.$i18n.locale= response.data.data.config.lang
-                      checkoutLang(response.data.data.config.lang)
-
-                      this.sku.messages[0].name = this.$t('message') //sku留言 语言包
-                      this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
-                    }else{
-                        Toast(this.$t('serveError'))
-                    }
-                })
-                .catch(error=>{
-                    console.log(error)
-                })
-            },
             getInfo() {
              return new Promise ((reslove,reject)=>{   
                       axios({
@@ -316,13 +304,13 @@
                               reslove()
                           }else{
                               Toast(this.$t('serveError'))
-                              reject()
+                              reject(err)
                           }
                            console.log(this.goodsInfo)
                       })
                       .catch(error=>{
                           console.log(error)
-                          reject()
+                          reject(error)
                       })
                     })
             },

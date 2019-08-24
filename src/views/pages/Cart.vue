@@ -165,8 +165,8 @@
            }
           
        }, 
-       created(){
-           this.getCartInfo()
+       activated(){
+           this.getCartInfo()   
        },
        mounted() {console.log(this.cartInfo)},
        computed:{

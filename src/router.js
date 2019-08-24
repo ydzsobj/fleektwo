@@ -14,13 +14,14 @@ export default new Router({
       {path:'/', name:'ShoppingMall', component: () => import('@/views/pages/ShoppingMall')},
       {path:'CategoryList',name:'CategoryList',component: () => import('@/views/pages/CategoryList')},
       {path:'Cart',name:'Cart',component: () => import('@/views/pages/Cart')},
+      {path:'goods',name:'Goods',component: () => import('@/views/pages/goods')},
       // {path:'/Member',name:'Member',component:Member},
     ]
     },
     {path:'/register',name:'Register',component:Register},
     {path:'/login',name:'login',component:Login},
-    {path:'/goods',name:'Goods',component: () => import('@/views/pages/goods')},
-    {path:'/order',name:'order',component: () => import('@/views/pages/OrderSuccess')}
+    {path:'/order',name:'order',component: () => import('@/views/pages/OrderSuccess')},
+    {path:'*',redirect: '/'}
 
   ]
 })
