@@ -6,17 +6,20 @@
 
         <div>
           <van-row>
-              <van-col span="6">
-                  <div id="leftNav">
+              <van-col span="5">
+                  <!-- <div id="leftNav">
                        <ul>
                            <li @click="clickCategory(index,item.category_id)" :class="{categoryActice:categoryIndex==index}" v-for="(item , index) in category" :key="index">
                                {{item.name}}
                            </li>
                        </ul>
-                  </div>
+                  </div> -->
+                  <van-sidebar v-model="categoryIndex" id="leftNav">
+                    <van-sidebar-item :title="item.name" v-for="(item , index) in category" :key="index" @click="clickCategory(index,item.category_id)"/>
+                  </van-sidebar>
                  
               </van-col>
-              <van-col span="18">
+              <van-col span="19">
 
                   <!-- <div class="tabCategorySub">
                       <van-tabs v-model="active" @click="onClickCategorySub">
@@ -205,16 +208,16 @@
 </script>
 
 <style scoped>
-    #leftNav{
+    /* #leftNav{
         background-color: aliceblue;
-    }
-    #leftNav ul li {
+    } */
+    /* #leftNav ul li {
         line-height: 2rem;
         border-bottom: 1px solid #E4E7ED;
         padding:3px;
         font-size:0.8rem;
         text-align: center;
-    }
+    } */
     .categoryActice{
         background-color: #fff;
     }
