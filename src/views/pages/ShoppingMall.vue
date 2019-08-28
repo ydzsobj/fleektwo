@@ -93,7 +93,7 @@
                 category:[],
                 adBanner:'',
                 recommendGoods:[],
-                floorData:[{'floor':[],'name':''},{'floor':[],'name':''},{'floor':[],'name':''}],
+                floorData:[],
                 floor1:[],
                 floor2:[],
                 floor3:[],
