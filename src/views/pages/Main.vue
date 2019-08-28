@@ -51,6 +51,7 @@
                     if(response.status== 200 && response.data.data){
                       this.$i18n.locale= response.data.data.config.lang
                       checkoutLang(response.data.data.config.lang)
+                       this.$store.money_sign = response.data.data.config.money_sign
                     }else{
                         Toast(this.$t('serveError'))
                     }
