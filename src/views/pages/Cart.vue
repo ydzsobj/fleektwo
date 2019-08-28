@@ -35,7 +35,7 @@
               :thumb="showImage(item.skuAttrText)"
             >
                <div slot="tags" class="redcolor">
-                   <span>{{moneySign}}{{item.selectedSkuComb.price | toDivide}}</span>
+                   <span>{{$store.money_sign}}{{item.selectedSkuComb.price | toDivide}}</span>
                </div>
                <div v-if="!isBuy" slot="footer">
                  <van-button size="mini" style="padding:0 2px" plain hairline type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)">{{ $t('clear') }}</van-button>
@@ -123,7 +123,7 @@
         <van-submit-bar
           class="left50"
          :loading="submitloading"
-         :currency="moneySign"
+         :currency="$store.money_sign"
           :price="totalMoney"
           :disabled="!checkedGoods.length"
           :button-text="$t('account')"
@@ -191,9 +191,6 @@
                });
                console.log(this.malldata,this.countPrice)
                return this.countPrice
-           },
-           moneySign(){
-               return this.$store.money_sign
            }
        },
        filters:{
