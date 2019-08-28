@@ -48,7 +48,7 @@
                                 </div>
                                 <div class="list-item-text">
                                     <div>{{item.name}}</div>                                    
-                                    <div>￥{{item.price | moneyFilter}}</div>                                    
+                                    <div>{{$store.money_sign}}{{item.price | moneyFilter}}</div>                                    
                                  </div>
                             </div>
         
