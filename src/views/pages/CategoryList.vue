@@ -15,7 +15,7 @@
                        </ul>
                   </div> -->
                   <van-sidebar v-model="categoryIndex" id="leftNav">
-                    <van-sidebar-item :title="item.name" v-for="(item , index) in category" :key="index" @click="clickCategory(index,item.category_id)"/>
+                    <van-sidebar-item :title="item.name" v-for="(item , index) in category" :key="index" @click.native="clickCategory(index,item.category_id)"/>
                   </van-sidebar>
                  
               </van-col>
@@ -184,7 +184,7 @@
                 })
                 .then(response=>{
                     if(response.data.success  && response.data.data.data.length > 0){
-                        
+                        if(index){this.goodList = []}
                         this.goodList=this.goodList.concat(response.data.data.data)
                         this.categoryIndex=index
                         console.log( this.categoryIndex)
