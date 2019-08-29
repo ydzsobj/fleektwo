@@ -74,13 +74,11 @@
                 isLoading: false,   //是否处于下拉刷新状态
                 category: [],
                 categoryIndex:0,
-                categorySub:[],  //小类类别
                 active:0,    //激活标签的值
                 page:0,        //商品列表的页数
                 goodList:[],   //商品列表信息
-                categorySubId:'', //商品子类ID
+                categorySubId:null, //商品子类ID
                 errorImg:'this.src="'+require('@/assets/images/errorimg.png')+'"',
-                isstate:false
             }
         },
         filters:{
@@ -93,20 +91,34 @@
             this.getCategory();
            
         },
-        watch: {
-            '$route' () {
-                if(this.$route.query.categorySubId){
+        activated(){
+            let categorySubId =  this.$route.params.categorySubId
+            if(!categorySubId || this.categorySubId === categorySubId) {
+               return false
+            }else {
                     this.page=0
-                    this.categoryIndex=this.$route.query.index
-                    this.categorySubId=this.$route.query.categorySubId ?this.$route.query.categorySubId : this.$route.params.categorySubId
+                    this.categoryIndex=this.$route.params.index
+                    this.categorySubId=categorySubId
                     this.finished = false
                     this.isLoading= false
                     this.goodList= [] 
-                    // this.categorySubId = this.categorySubId
                     this.onLoad()
-                }
             }
         },
+        // watch: {
+        //     '$route' () {
+        //         if(this.$route.query.categorySubId){
+        //             this.page=0
+        //             this.categoryIndex=this.$route.query.index
+        //             this.categorySubId=this.$route.query.categorySubId ?this.$route.query.categorySubId : this.$route.params.categorySubId
+        //             this.finished = false
+        //             this.isLoading= false
+        //             this.goodList= [] 
+        //             // this.categorySubId = this.categorySubId
+        //             this.onLoad()
+        //         }
+        //     }
+        // },
         mounted(){
             let winHeight = document.documentElement.clientHeight
             document.getElementById("leftNav").style.height=winHeight -46-50 +'px'
@@ -114,31 +126,14 @@
         },
         methods: {
             onLoad() {      //上拉加载
-                let that = this;
-                var timer = setInterval(function(){
-                        if(that.isstate){
-                             clearInterval(timer);
-                            setTimeout(() => {
-                            that.categorySubId = that.categorySubId?that.categorySubId:that.categorySub[0].category_id
-                            that.getGoodList()
-                            }, 500);
-                        }
-                    },500);
-                //  if(this.isstate){
-                //     setTimeout(() => {
-                //     this.categorySubId = this.categorySubId?this.categorySubId:this.categorySub[0].category_id
-                //     this.getGoodList()
-                // }, 1100);
-                //  }
+                    this.getGoodList()
             },
             onRefresh() {       //下拉刷新
-                setTimeout(() => {
                     this.finished = false;
                     this.isLoading = false;
                     this.goodList = []
                     this.page = 0
                     this.onLoad()
-                }, 500);
             },
             
             getCategory() {
@@ -149,8 +144,8 @@
                 .then(response=>{
                     if(response.data.success && response.data.data ){
                       this.category = response.data.data
-                      this.categorySub = response.data.data
-                      this.isstate = true
+                      this.categorySubId = this.categorySubId?this.categorySubId:this.category[0].category_id
+                      this.onLoad()
                     }else{
                         Toast($t('serveError'))
                     }
@@ -166,13 +161,12 @@
                 this.page=0
                 this.finished = false
                 this.isLoading = false;
-                // console.log(categoryId)
                 this.categorySubId = categoryId
-                
                 this.onLoad()
             },
             getGoodList(){
-                    this.page++
+              if(this.categorySubId){
+                 this.page++
                 axios({
                     url:url.getGoodsListByCategorySubID,
                     method:'get',
@@ -189,11 +183,11 @@
                         this.finished = true
                     }
                     this.loading = false;
-                    
                 })
                 .catch(error=>{
                     console.log(error)
                 })
+              }
             },
             //跳转到商品详细页
             goGoodsInfo(id){
@@ -208,9 +202,9 @@
 </script>
 
 <style scoped>
-    /* #leftNav{
-        background-color: aliceblue;
-    } */
+    #leftNav{
+        background-color: #f8f8f8;
+    }
     /* #leftNav ul li {
         line-height: 2rem;
         border-bottom: 1px solid #E4E7ED;
