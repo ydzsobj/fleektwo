@@ -132,7 +132,7 @@
         },
         methods:{
             golistPage(id,index) {
-                this.$router.push({name:'CategoryList',query:{categorySubId:id,index:index}})
+                this.$router.push({name:'CategoryList',params:{categorySubId:id,index:index}})
             }
         }
        
