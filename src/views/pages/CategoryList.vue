@@ -6,7 +6,7 @@
 
         <div>
           <van-row>
-              <van-col span="5">
+              <van-col>
                   <!-- <div id="leftNav">
                        <ul>
                            <li @click="clickCategory(index,item.category_id)" :class="{categoryActice:categoryIndex==index}" v-for="(item , index) in category" :key="index">
@@ -19,7 +19,7 @@
                   </van-sidebar>
                  
               </van-col>
-              <van-col span="19">
+              <van-col style="width: calc( 100% - 85px )">
 
                   <!-- <div class="tabCategorySub">
                       <van-tabs v-model="active" @click="onClickCategorySub">
@@ -79,6 +79,7 @@
                 goodList:[],   //商品列表信息
                 categorySubId:null, //商品子类ID
                 errorImg:'this.src="'+require('@/assets/images/errorimg.png')+'"',
+                thrott: true
             }
         },
         filters:{
@@ -100,7 +101,8 @@
                     this.categoryIndex=this.$route.params.index
                     this.categorySubId=categorySubId
                     this.finished = false
-                    this.isLoading= false
+                    this.isLoading= true
+                    this.loading = true
                     this.goodList= [] 
                     this.onLoad()
             }
@@ -125,13 +127,14 @@
             document.getElementById("list-div").style.height=winHeight -90 +'px'
         },
         methods: {
-            onLoad() {      //上拉加载
-                    this.getGoodList()
+            onLoad(index) {      //上拉加载
+                    this.getGoodList(index)
             },
             onRefresh() {       //下拉刷新
-                    this.finished = false;
-                    this.isLoading = false;
                     this.goodList = []
+                    this.finished = false;
+                    this.isLoading = true;
+                    this.loading = true
                     this.page = 0
                     this.onLoad()
             },
@@ -156,15 +159,19 @@
                 
             },
             clickCategory(index,categoryId){
-                 this.goodList= [] 
-                this.categoryIndex=index
-                this.page=0
-                this.finished = false
-                this.isLoading = false;
-                this.categorySubId = categoryId
-                this.onLoad()
+                if(this.thrott){
+                    this.thrott= false
+                    this.goodList= [] 
+                   this.categoryIndex=index
+                   this.page=0
+                   this.finished = false
+                   this.isLoading = true
+                   this.loading = true
+                   this.categorySubId = categoryId
+                   this.onLoad(index)
+                }
             },
-            getGoodList(){
+            getGoodList(index){
               if(this.categorySubId){
                  this.page++
                 axios({
@@ -176,15 +183,20 @@
                     }
                 })
                 .then(response=>{
-                    if(response.data.success  && response.data.data.data.length){
+                    if(response.data.success  && response.data.data.data.length > 0){
                         
                         this.goodList=this.goodList.concat(response.data.data.data)
+                        this.categoryIndex=index
+                        console.log( this.categoryIndex)
                     }else{
                         this.finished = true
                     }
-                    this.loading = false;
+                    this.loading = false
+                    this.isLoading = false
+                    this.thrott= true
                 })
                 .catch(error=>{
+                    this.thrott= true
                     console.log(error)
                 })
               }
