@@ -54,5 +54,6 @@ export default {
     pullingText: 'Tarik ke bawah untuk menyegarkan...',
     lossText: 'Lepaskan untuk menyegarkan...',
     loading: 'Loading...',
-    loadSuccess: 'segarkan dengan sukses'
+    loadSuccess: 'segarkan dengan sukses',
+    errorText:'Permintaan gagal, klik reload'
     }
