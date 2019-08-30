@@ -184,9 +184,8 @@
                 })
                 .then(response=>{
                     if(response.data.success  && response.data.data.data.length > 0){
-                        if(index){this.goodList = []}
+                        if(index){this.goodList = [];this.categoryIndex=index}
                         this.goodList=this.goodList.concat(response.data.data.data)
-                        this.categoryIndex=index
                         console.log( this.categoryIndex)
                     }else{
                         this.finished = true
