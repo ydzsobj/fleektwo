@@ -54,5 +54,6 @@ export default {
     pullingText: 'Pull down to refresh...',
     lossText: 'Loosen to refresh...',
     loading: 'loading...',
-    loadSuccess: 'Refresh the success'
+    loadSuccess: 'Refresh the success',
+    errorText:'The request failed, click reload'
     }

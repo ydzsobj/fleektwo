@@ -35,6 +35,8 @@
                             v-model="loading"
                             :finished="finished"
                             @load="onLoad"
+                            :error.sync="error"
+                            :error-text="$t('errorText')"
                             :offset="10"
                             :finished-text="$t('outfloor')"
                         >
@@ -69,6 +71,7 @@
     export default {
         data() {
             return {
+                error: false,
                 loading: false,   //是否处于加载状态
                 finished: false,  //是否已加载完所有数据
                 isLoading: false,   //是否处于下拉刷新状态
@@ -159,6 +162,8 @@
                 
             },
             clickCategory(index,categoryId){
+                this.error = false
+                    this.loading = true
                 if(this.thrott){
                     this.thrott= false
                     this.goodList= [] 
@@ -166,7 +171,6 @@
                    this.page=0
                    this.finished = false
                    this.isLoading = true
-                   this.loading = true
                    this.categorySubId = categoryId
                    this.onLoad(index)
                 }
@@ -196,6 +200,9 @@
                     this.thrott= true
                 })
                 .catch(error=>{
+                    this.isLoading = false
+                    this.loading = false
+                    this.error = true
                     this.thrott= true
                     console.log(error)
                 })
