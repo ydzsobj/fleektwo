@@ -341,7 +341,7 @@
                 localStorage.cartInfo = JSON.stringify(cartInfo)
                 // this.$store.state.cartNum = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo).length : ''
                 Toast.success(this.$t('successAdd'))
-                try{fbq('track', 'AddToCart');}catch(e){} 
+                try{fbq('track', 'AddToCart');console.log('addtocart')}catch(e){} 
                 this.$router.push({name:'Cart'})
             },
             tohome(){
