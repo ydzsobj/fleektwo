@@ -166,7 +166,7 @@
           
        }, 
        activated(){
-           this.getCartInfo()   
+           this.getCartInfo() 
        },
        mounted() {console.log(this.cartInfo)},
        computed:{
@@ -214,6 +214,7 @@
                     console.log(this.$route.params.skuData)
                     this.cartInfo=[]
                     this.cartInfo.push(skuData)
+                    this.checkedGoods=[]
                     this.checkedGoods.push(skuData.selectedSkuComb.id)
                 }else{
                    if(localStorage.cartInfo){
