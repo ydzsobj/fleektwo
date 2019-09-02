@@ -17,7 +17,7 @@ export default {
     addCart: 'Tambahkan ke daftar belanja',
     buy: 'segera pesan',//立即购买
     ok: 'Konfirm',
-    buyNum: 'Jumlah pembelian', //购买数量
+    buyNum: 'Jumlah pesanan', //购买数量
     message: 'tinggalkan pesan', //留言
     messagePlaceholder: 'silakan masukkan teks anda',
     serveError: 'Galat server, pengiriman data gagal',
