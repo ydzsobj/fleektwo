@@ -14,7 +14,7 @@
         <van-cell-group>
           <van-cell>
             <div class="goods-title">{{ goodsInfo.title}}</div>
-            <div class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price}}</s></div>
+            <div class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price | int}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | int}}</s></div>
           </van-cell>
           <van-cell class="goods-express">
             <van-col class="huicolor" span="6">{{ $t('carriage') }}</van-col>
@@ -115,7 +115,7 @@
         >
            <template slot="sku-header-price" slot-scope="props">
              <div class="van-sku__goods-price">
-               <span class="van-sku__price-symbol">{{goodsInfo.money_sign}}</span><span class="van-sku__price-num">{{ props.price }}</span>
+               <span class="van-sku__price-symbol">{{goodsInfo.money_sign}}</span><span class="van-sku__price-num">{{ props.price | int}}</span>
              </div>
            </template>
         </van-sku>
@@ -129,7 +129,7 @@
     import {Toast} from 'vant'
     import {Sku} from '../../vant' //sku组件有改动所以用自定义的vant
     import '../../vant/lib/index.css';
-    import {toMoney} from '@/filter/moneyFilter.js'
+    import {toMoney, int} from '@/filter/moneyFilter.js'
     import checkoutLang from '@/lang.js'
     export default {
       components: {
@@ -260,6 +260,9 @@
         filters:{
             moneyFilter(money){
                 return toMoney(money)
+            },
+            int(money){
+                return int(money)
             }
         },
         created(){

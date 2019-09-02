@@ -35,7 +35,7 @@
               :thumb="showImage(item.skuAttrText)"
             >
                <div slot="tags" class="redcolor">
-                   <span>{{$store.money_sign}}{{item.selectedSkuComb.price | toDivide}}</span>
+                   <span>{{$store.money_sign}}{{item.selectedSkuComb.price | int}}</span>
                </div>
                <div v-if="!isBuy" slot="footer">
                  <van-button size="mini" style="padding:0 2px" plain hairline type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)">{{ $t('clear') }}</van-button>
@@ -125,6 +125,7 @@
          :loading="submitloading"
          :currency="$store.money_sign"
           :price="totalMoney"
+          :decimal-length="0"
           :disabled="!checkedGoods.length"
           :button-text="$t('account')"
           :label="$t('total')"
@@ -138,7 +139,7 @@
     import axios from 'axios'
     import {Toast} from 'vant'
     import url from '@/serviceAPI.config.js'
-    import { toMoney, toDivide, toThousands} from '@/filter/moneyFilter.js'
+    import { toMoney, toDivide, toThousands,int} from '@/filter/moneyFilter.js'
     export default {
        data() {
            return {
@@ -170,6 +171,7 @@
            let storefix = this.$store.state.fix
            let locafix = JSON.parse(localStorage.fix)-0
            if(!storefix){
+               console.log('cartinitfix')
              try {
                 fbq('init', locafix); 
                 fbq('track', 'PageView');
@@ -214,6 +216,9 @@
            },
            toDivide (money){
                return toDivide(money)
+           },
+           int(money){
+               return int(money)
            }
        },
        methods: {
@@ -291,7 +296,7 @@
                             localStorage.cartInfo =  JSON.stringify(newCart)       
                             }
                             try{fbq('track', 'InitiateCheckout')}catch(e){};
-                            try{ fbq('track', 'Purchase', {value: toDivide(this.countPrice), currency:'USD'}) }catch(e){}
+                            try{ fbq('track', 'Purchase', {value: int(this.countPrice), currency:'USD'}) }catch(e){}
                             this.$router.push({name:'order',params:{orderData: this.malldataOrder,orderResponse: response.data.data}})
                         
                         }else{

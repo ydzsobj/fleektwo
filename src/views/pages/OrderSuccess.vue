@@ -27,7 +27,7 @@
            :thumb="showImage(item.skuAttrText)"
          >
             <div slot="tags" class="redcolor">
-                <span>{{moneySign}}{{item.selectedSkuComb.price | toDivide}}</span>
+                <span>{{moneySign}}{{item.selectedSkuComb.price | int}}</span>
             </div>
         </van-card>
         <van-row style="background-color: #fafafa;">
@@ -40,7 +40,7 @@
     </div>
 </template>
 <script>
-    import { toMoney, toDivide} from '@/filter/moneyFilter.js'
+    import { toMoney, toDivide, int} from '@/filter/moneyFilter.js'
 export default {
     data () {
         return {
@@ -71,6 +71,9 @@ export default {
     filters:{
         toDivide (money){
             return toDivide(money)
+        },
+        int (money){
+            return int(money)
         }
     },
     created(){

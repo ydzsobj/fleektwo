@@ -26,3 +26,6 @@ export function toThousands(num) {
 	if (num) { result = num + result; }
 	return result;
 }
+export function int (money = 0){
+	return Number(money)/100
+}
