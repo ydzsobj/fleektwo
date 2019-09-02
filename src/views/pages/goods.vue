@@ -420,6 +420,8 @@
                 fbq('init', fix); 
                 fbq('track', 'PageView');
               } catch (error) {}
+              this.$store.state.fix = fix
+              localStorage.fix = JSON.stringify(fix)
             },
             onRefresh() {
               this.getInfo().then(()=>{

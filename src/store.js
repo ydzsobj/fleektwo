@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
       cartNum: '',
-      money_sign: ''
+      money_sign: '',
+      fix: null
   },
   mutations: {
       // cartNumCount(state) {

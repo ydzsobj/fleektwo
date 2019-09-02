@@ -138,7 +138,7 @@
     import axios from 'axios'
     import {Toast} from 'vant'
     import url from '@/serviceAPI.config.js'
-    import { toMoney, toDivide} from '@/filter/moneyFilter.js'
+    import { toMoney, toDivide, toThousands} from '@/filter/moneyFilter.js'
     export default {
        data() {
            return {
@@ -165,6 +165,18 @@
            }
           
        }, 
+       created(){
+           console.log('ddd',this.$store.state.fix, 'cc',JSON.parse(localStorage.fix))
+           let storefix = this.$store.state.fix
+           let locafix = JSON.parse(localStorage.fix)-0
+           if(!storefix){
+             try {
+                fbq('init', locafix); 
+                fbq('track', 'PageView');
+              } catch (error) {}
+           }
+
+       },
        activated(){
            this.getCartInfo() 
        },
@@ -194,6 +206,9 @@
            }
        },
        filters:{
+           toThousands(money){
+              return toThousands()
+           },
            moneyFilter(money){
                return toMoney(money)
            },
