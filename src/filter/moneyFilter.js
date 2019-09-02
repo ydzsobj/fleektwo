@@ -29,3 +29,6 @@ export function toThousands(num) {
 export function int (money = 0){
 	return Number(money)/100
 }
+export function num (money = 0){
+	return Number(money)
+}
