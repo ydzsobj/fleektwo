@@ -212,6 +212,7 @@
                  this.isBuy = skuData ? true : false //立即购买还是购物车
                 if(this.isBuy){
                     console.log(this.$route.params.skuData)
+                    this.cartInfo=[]
                     this.cartInfo.push(skuData)
                     this.checkedGoods.push(skuData.selectedSkuComb.id)
                 }else{
