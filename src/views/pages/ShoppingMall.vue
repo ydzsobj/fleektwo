@@ -208,9 +208,10 @@
         font-size:14px;
         /* height: 1.8rem; */
         line-height:1.8rem;
+        padding-bottom: 50px
     }
     .hot-goods{
-        height: 130rem;
+        /* height: 130rem; */
         overflow: hidden;
         background-color: #fff;
     }
