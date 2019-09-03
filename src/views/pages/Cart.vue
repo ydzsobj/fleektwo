@@ -93,6 +93,7 @@
             @input="fbinput"
           />
           <van-field
+            @focus="focusProvin"
             v-model="short_address"
             :label="$t('province')"
             clearable
@@ -132,6 +133,14 @@
           :label="$t('total')"
           @submit="onSubmit"
         />
+        <van-overlay
+         z-index="101"
+         :show="areaShow"
+          @click="areaShow = false"
+        />
+        <transition name="fade">
+          <van-area class="area left50" :area-list="areaList()" v-show="areaShow" @confirm="confirm" @cancel="cancel"/>
+        </transition>
     </div>
     
 </template>
@@ -141,9 +150,11 @@
     import {Toast} from 'vant'
     import url from '@/serviceAPI.config.js'
     import { toMoney, toDivide, toThousands,int} from '@/filter/moneyFilter.js'
+    import obj from '@/province/ndnxy.js'
     export default {
        data() {
            return {
+               areaShow: false,
                fbinputFalg: true,
                submitloading: false,
                radio: '1',
@@ -339,12 +350,41 @@
                 }else{
                     return false
                 }
+            },
+            areaList(){
+                return obj
+            },
+            focusProvin(){
+              this.areaShow = true
+            },
+            confirm(list){
+                this.areaShow = false
+                console.log(list)
+                this.short_address = list[0].name + '/' + list[1].name + '/' +list[2].name
+            },
+            cancel(){
+                this.areaShow = false
             }
         },
     }
 </script>
 
 <style scoped>
+.fade-enter-active, .fade-leave-active {
+  transition: all .3s
+}
+.fade-enter, .fade-leave-to {
+  transform: translatey(300px);
+}
+.area{
+    z-index: 101;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+>>> .van-picker-column{
+    font-size: 10px;
+}
 .cart-title{
     height: 2rem;
     line-height: 2rem;
