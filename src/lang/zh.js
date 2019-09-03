@@ -41,6 +41,7 @@ export default {
     messageholder: '请输入留言',
     nameerr: '姓名不能为空！',
     errTelephone: '电话不能为空！',
+    errTelephone2:'电话号码格式错误',
     errShort_address: '省市区不能为空！',
     errAddress: '详细地址不能为空',
     errEmail: '邮箱格式不能为空',

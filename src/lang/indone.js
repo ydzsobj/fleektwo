@@ -42,6 +42,7 @@ export default {
     messageholder: 'silakan tinggalkan pesan',
     nameerr: 'tempat ini tidak boleh kosong',
     errTelephone: 'tempat ini tidak boleh kosong',
+    errTelephone2:'Kesalahan format nomor telepon',
     errShort_address: 'tempat ini tidak boleh kosong',
     errAddress: 'tempat ini tidak boleh kosong',
     errEmail: 'Format alamat email salah',

@@ -29,6 +29,7 @@
             :name="item.selectedSkuComb.id"
           >
             <van-card
+              style="background-color:#fff"
               :title="item.title"
               :desc="showDesc(item)"
               :num="item.selectedNum"
@@ -255,10 +256,13 @@
                this.errAddress=''
                this.errShort_address=''
                let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
+               let regTele= /^[0-9]{11,12}$/;
                if(this.name === ''){
                    this.errName = this.$t('nameerr');return
                }else if (this.telephone===''){
                    this.errTelephone = this.$t('errTelephone');return
+               }else if (!regTele.test(this.telephone)){
+                   this.errTelephone = this.$t('errTelephone2');return
                }else if (this.short_address===''){
                    this.errShort_address = this.$t('errShort_address');return
                }else if(this.address===''){
@@ -394,7 +398,7 @@
 }
 .card-goods .card-goods__item {
   position: relative;
-  background-color: #fafafa;
+  background-color: #fff;
 }
 .card-goods .card-goods__item >>> .van-checkbox__label {
       width: 100%;

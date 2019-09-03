@@ -42,6 +42,7 @@ export default {
     messageholder: 'Please input your message',
     nameerr: 'Name can’t be blank!',
     errTelephone: 'Phone number can’t be blank!',
+    errTelephone2:'Wrong format of phone number!',
     errShort_address: 'Province, city and district can’t be blank!',
     errAddress: 'Full address can’t be blank',
     errEmail: 'Email format can’t be blank!',
