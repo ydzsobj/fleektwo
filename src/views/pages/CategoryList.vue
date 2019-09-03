@@ -78,7 +78,7 @@
                 category: [],
                 categoryIndex:0,
                 active:0,    //激活标签的值
-                page:0,        //商品列表的页数
+                page:1,        //商品列表的页数
                 goodList:[],   //商品列表信息
                 categorySubId:null, //商品子类ID
                 errorImg:'this.src="'+require('@/assets/images/errorimg.png')+'"',
@@ -106,7 +106,7 @@
             if(!categorySubId || this.categorySubId === categorySubId) {
                return false
             }else {
-                    this.page=0
+                    this.page=1
                     this.categoryIndex=this.$route.params.index
                     this.categorySubId=categorySubId
                     this.finished = false
@@ -144,7 +144,7 @@
                     this.finished = false;
                     this.isLoading = true;
                     this.loading = true
-                    this.page = 0
+                    this.page = 1
                     this.onLoad()
             },
             
@@ -174,7 +174,7 @@
                     this.thrott= false
                     this.goodList= [] 
                    this.categoryIndex=index
-                   this.page=0
+                   this.page=1
                    this.finished = false
                    this.isLoading = true
                    this.categorySubId = categoryId
@@ -183,9 +183,8 @@
             },
             getGoodList(index){
               if(this.categorySubId){
-                 this.page++
-                axios({
-                    url:url.getGoodsListByCategorySubID,
+                  axios({
+                      url:url.getGoodsListByCategorySubID,
                     method:'get',
                     params:{
                         category_id:this.categorySubId,
@@ -193,6 +192,7 @@
                     }
                 })
                 .then(response=>{
+                 this.page++
                     if(response.data.success  && response.data.data.data.length > 0){
                         if(index > -1){this.goodList = [];this.categoryIndex=index}
                         this.goodList=this.goodList.concat(response.data.data.data)
