@@ -56,5 +56,7 @@ export default {
     lossText: 'Lepaskan untuk menyegarkan...',
     loading: 'Loading...',
     loadSuccess: 'segarkan dengan sukses',
-    errorText:'Permintaan gagal, klik reload'
+    errorText:'Permintaan gagal, klik reload',
+    confirm: 'konfirmasi',
+    cancel: 'batalkan'
     }

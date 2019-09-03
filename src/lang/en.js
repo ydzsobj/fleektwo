@@ -56,5 +56,7 @@ export default {
     lossText: 'Loosen to refresh...',
     loading: 'loading...',
     loadSuccess: 'Refresh the success',
-    errorText:'The request failed, click reload'
+    errorText:'The request failed, click reload',
+    confirm: 'Confirm',
+    cancel: 'Cancel'
     }

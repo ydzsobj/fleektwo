@@ -55,6 +55,8 @@ export default {
     lossText: '释放即可刷新...',
     loading: '加载中...',
     loadSuccess: '刷新成功',
-    errorText:'请求失败，点击重新加载'
+    errorText:'请求失败，点击重新加载',
+    confirm: '确认',
+    cancel: '取消'
   }
   

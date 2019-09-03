@@ -139,7 +139,7 @@
           @click="areaShow = false"
         />
         <transition name="fade">
-          <van-area class="area left50" :area-list="areaList()" v-show="areaShow" @confirm="confirm" @cancel="cancel"/>
+          <van-area class="area left50" :area-list="areaList()" v-show="areaShow" @confirm="confirm" @cancel="cancel" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
         </transition>
     </div>
     
