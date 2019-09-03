@@ -57,7 +57,7 @@
                 <van-list>
                     <van-row gutter="20">
                         <van-col span="12" v-for="(item , index) in hotGoods" :key="index">
-                                <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price">
+                                <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price | num">
 
                                 </goods-info>
                         </van-col>
@@ -77,7 +77,7 @@
     import {swiper , swiperSlide} from 'vue-awesome-swiper'
  
     import floorComponent from '../component/floorComponent'
-    // import { toMoney } from '@/filter/moneyFilter.js'
+    import { toMoney , int,num} from '@/filter/moneyFilter.js'
     import goodsInfo from '../component/goodsInfoComponent'
     import url from '@/serviceAPI.config.js'
    
@@ -103,11 +103,17 @@
               
             }
         },
-        // filters:{
-        //     moneyFilter(money){
-        //         return toMoney(money)
-        //     }
-        // },
+        filters:{
+            moneyFilter(money){
+                return toMoney(money)
+            },
+            int(money){
+                return int(money)
+            },
+            num(money){
+                return num(money)
+            }
+        },
         components:{swiper,swiperSlide,floorComponent,goodsInfo},
         created(){
             axios({
