@@ -10,14 +10,6 @@
           <div class="turight">
           </div>
        </div>
-       <van-row style="background-color: #ffffff;">
-         <van-col span="2"><van-icon name="location-o" style="margin: 10px"/></van-col>
-         <van-col span="22" style="font-size: 14px;line-height: 6px;">
-             <p>{{orderResponse.receiver_name}} &nbsp;&nbsp;<span class="huicolor">{{orderResponse.receiver_phone}}</span> &nbsp;&nbsp;<span class="huicolor">{{orderResponse.receiver_email}}</span></p>
-             <p>{{orderResponse.short_address}} &nbsp;&nbsp; {{orderResponse.address}}</p>
-             <p>{{orderResponse.leave_word}} </p>
-          </van-col>
-       </van-row>
         <van-card
             v-for="item in cartInfo"
            :key="item.selectedSkuComb.id"
@@ -30,6 +22,29 @@
                 <span>{{moneySign}}{{item.selectedSkuComb.price | int}}</span>
             </div>
         </van-card>
+
+        <van-row style="background-color: #ffffff;font-size: 14px;line-height: 16px;word-break:break-word">
+           <van-row>
+              <van-col span="2"><van-icon name="user-circle-o" style="margin: 10px"/></van-col>
+              <van-col span="22">
+                   <p>{{orderResponse.receiver_name}} &nbsp;&nbsp;<span class="huicolor">{{orderResponse.receiver_phone}}</span> &nbsp;&nbsp;<span class="huicolor">{{orderResponse.receiver_email}}</span></p>
+              </van-col>
+           </van-row>
+           <van-row>
+               <van-col span="2"><van-icon name="location-o" style="margin: 10px"/></van-col>
+               <van-col span="22">
+                   <div>{{orderResponse.short_address}}</div>
+                   <div>{{orderResponse.address}}</div>
+                </van-col>
+           </van-row>
+            <van-row v-if="orderResponse.leave_word">
+               <van-col span="2"><van-icon name="comment-o" style="margin: 10px"/></van-col>
+               <van-col span="22">
+                   <div>{{orderResponse.leave_word}} </div>
+                </van-col>
+           </van-row>
+       </van-row>
+
         <van-row style="background-color: #fafafa;">
          <van-col span="1"></van-col>
          <van-col span="23" style="font-size: 14px;line-height: 6px;">
