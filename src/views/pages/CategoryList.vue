@@ -50,7 +50,7 @@
                                 </div>
                                 <div class="list-item-text">
                                     <div>{{item.name}}</div>                                    
-                                    <div>{{$store.money_sign}}{{item.price | moneyFilter}}</div>                                    
+                                    <div>{{$store.money_sign}}{{item.price | num}}</div>                                    
                                  </div>
                             </div>
         
@@ -67,7 +67,7 @@
 <script>
     import axios from 'axios'
     import url from '@/serviceAPI.config.js'
-    import {toMoney} from '@/filter/moneyFilter.js'
+    import {toMoney , int,num} from '@/filter/moneyFilter.js'
     export default {
         data() {
             return {
@@ -88,6 +88,12 @@
         filters:{
             moneyFilter(money){
                 return toMoney(money)
+            },
+            int(money){
+                return int(money)
+            },
+            num(money){
+                return num(money)
             }
         },
         created(){
