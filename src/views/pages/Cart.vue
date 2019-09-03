@@ -32,14 +32,14 @@
               style="background-color:#fff"
               :title="item.title"
               :desc="showDesc(item)"
-              :num="item.selectedNum"
               :thumb="showImage(item.skuAttrText)"
             >
                <div slot="tags" class="redcolor">
                    <span>{{$store.money_sign}}{{item.selectedSkuComb.price | int}}</span>
                </div>
-               <div v-if="!isBuy" slot="footer">
-                 <van-button size="mini" style="padding:0 2px" plain hairline type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)">{{ $t('clear') }}</van-button>
+               <div slot="num">
+                    <van-button v-if="!isBuy" size="mini" style="vertical-align: bottom;margin-right: 5px;" icon="delete" round type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)"></van-button>
+                   <van-stepper style="display: inline-block;" v-model="item.selectedNum" integer @click.native.stop @plus="checkedGo(item.selectedSkuComb.id)" @minus="checkedGo(item.selectedSkuComb.id)" @focus="checkedGo(item.selectedSkuComb.id)"/>
                </div>
            </van-card>
           </van-checkbox>
@@ -364,6 +364,12 @@
             },
             cancel(){
                 this.areaShow = false
+            },
+            checkedGo(skuid){
+            //   console.log(skuid,this.checkedGoods.every((e)=>{return e!=skuid}),this.checkedGoods)
+              if(this.checkedGoods.every((e)=>{return e!=skuid})){
+                  this.checkedGoods.push(skuid)
+              }
             }
         },
     }
@@ -381,6 +387,10 @@
     position: fixed;
     width: 100%;
     bottom: 0;
+}
+.van-button--mini{
+    min-width: 36px;
+    font-size: 14px;
 }
 >>> .van-picker-column{
     font-size: 10px;
