@@ -2,7 +2,7 @@
     <div>
       <van-pull-refresh v-model="pullLoading" @refresh="onRefresh" :pulling-text="$t('pullingText')" :loosing-text="$t('lossText')" :loading-text="$t('loading')">
         <div class="swiper-area">
-            <van-swipe :autoplay="3000">
+            <van-swipe :autoplay="4000">
               <van-swipe-item v-if="goodsInfo.main_video_url">
                 <video :src="goodsInfo.main_video_url" controls="controls" width="100%"/>
               </van-swipe-item>
