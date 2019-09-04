@@ -379,8 +379,8 @@
                        title: this.goodsInfo.title,
                        skuAttrText: this.skuAttrTextFun(skuData)
                    } 
+                  try{fbq('track', 'Lead');console.log('Lead')}catch(e){} 
                   this.$router.push({name:'Cart',params:{skuData: Object.assign(newGoodsInfo , skuData)}}) 
-
               }else if (this.isBuyCartAttr==="cart"){
                 this.addGoodsToCart(skuData)
                 console.log(this.isBuyCartAttr,'购物车')
