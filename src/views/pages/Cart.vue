@@ -93,6 +93,7 @@
             @input="fbinput"
           />
           <van-field
+            readonly
             @focus="focusProvin"
             v-model="short_address"
             :label="$t('province')"
