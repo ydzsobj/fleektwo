@@ -1,5 +1,11 @@
 <template>
     <div>
+      <div class="notice" v-show="notice_show">
+        <van-notice-bar
+          :text="notice_con_1"
+          left-icon="volume-o"
+        />
+      </div>
       <van-pull-refresh v-model="pullLoading" @refresh="onRefresh" :pulling-text="$t('pullingText')" :loosing-text="$t('lossText')" :loading-text="$t('loading')">
         <div class="swiper-area">
             <van-swipe :autoplay="3000">
@@ -131,12 +137,17 @@
     import '../../vant/lib/index.css';
     import {toMoney, int,num} from '@/filter/moneyFilter.js'
     import checkoutLang from '@/lang.js'
+import { setTimeout } from 'timers';
     export default {
       components: {
         [Sku.name]: Sku
       },
         data() {
             return {
+                notice_show:false,
+                index_1:0,
+                notice_con_1:'',
+                notice_con:['一觉游仙好梦，任它竹冷松寒；轩辕事，古今谈，风流河山；沉醉赴白首，舒怀成大观，梦在人间，醒亦在人间。','天地俱不醒，落得昏沉醉梦；鸿蒙率是客，罔寻辽阔主人。','悟来时见江海古，苍崖行遍谒玄门'],
                 attrText: '',
                 goodsId:'',
                 goodsInfo:{},  //商品详细信息 
@@ -272,6 +283,7 @@
             this.goodsId=this.$route.query.goodsId ?this.$route.query.goodsId-0: this.$route.params.goodsId-0
             console.log(this.goodsId)
             this.getInfo()
+            this.getNotice()
             this.sku.messages[0].name = this.$t('message') //sku留言 语言包
             this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
             // this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
@@ -282,9 +294,54 @@
             if(this.goodsId != goodsId){
               this.goodsId = goodsId
               this.getInfo()
+              this.getNotice()
             }
         },
         methods: {
+            getNotice() {
+              axios({
+                          url:url.getNotice,
+                          method:'get',
+                          params:{}
+                      })
+                      .then(response=>{
+                        console.log(response.data)
+                          if(response.data.success == true){
+                            console.log(response.data)
+                              this.attrTextFun()  
+                              this.index_1 = 0
+                              this.notice(response.data.data)
+                          }
+                      })
+                      .catch(error=>{
+                          console.log(error)
+                          reject(error)
+                      })
+            },
+            notice(a){
+              console.log(a)
+              var that = this
+              var date = 8000
+              if(a.length >0){
+                var t=setInterval(fn,date);
+              }
+              function fn(){
+                console.log(a)
+                  date = 23000
+                  that.notice_show = true
+                  that.notice_con_1=a[that.index_1].receiver_name+'刚刚购买了此商品刚刚购买了此商品刚刚购买了此商品'
+                  that.index_1=that.index_1+1;
+                  setTimeout(function(){ that.notice_show = false },15000)
+                  if(that.index_1==a.length){
+                    clearInterval(t)
+                  }
+                  if (that.index_1 == 1) {
+                    clearInterval(t);
+                    t = setInterval(fn, date);
+                  }
+              }
+              
+            },
             getInfo() {
              return new Promise ((reslove,reject)=>{   
                       axios({
@@ -482,5 +539,17 @@
     }
     .detail >>> .van-image {
       display: block
+    }
+    .notice{
+      position: fixed;
+    max-height: 100%;
+    overflow-y: auto;
+        top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 2002;
+    }
+    .notice >>>.van-notice-bar{
+      background-color: rgba(255,251,230,.6)
     }
 </style>
