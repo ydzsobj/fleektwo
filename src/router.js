@@ -23,5 +23,6 @@ export default new Router({
     {path:'/order',name:'order',component: () => import('@/views/pages/OrderSuccess')},
     {path:'*',redirect: '/'}
 
-  ]
+  ],
+  mode: 'history'
 })

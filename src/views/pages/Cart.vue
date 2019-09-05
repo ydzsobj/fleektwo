@@ -22,7 +22,7 @@
 
         <van-checkbox-group class="card-goods" v-model="checkedGoods">
           <van-checkbox
-            :disabled ="isBuy"
+            :disabled ="true"
             class="card-goods__item"
             v-for="item in cartInfo"
             :key="item.selectedSkuComb.id"
@@ -93,6 +93,7 @@
             @input="fbinput"
           />
           <van-field
+            readonly
             @focus="focusProvin"
             v-model="short_address"
             :label="$t('province')"
@@ -118,6 +119,8 @@
             :label="$t('message')"
             clearable
             clickable
+            type="textarea"
+            maxlength="200"
             :placeholder="$t('messageholder')"
             @input="fbinput"
           />
@@ -139,7 +142,7 @@
           @click="areaShow = false"
         />
         <transition name="fade">
-          <van-area class="area left50" :area-list="areaList()" v-show="areaShow" @confirm="confirm" @cancel="cancel"/>
+          <van-area class="area left50" :area-list="areaList()" v-show="areaShow" @confirm="confirm" @cancel="cancel" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
         </transition>
     </div>
     
@@ -251,7 +254,13 @@
                 }else{
                    if(localStorage.cartInfo){
                     this.cartInfo=JSON.parse(localStorage.cartInfo)
+                    this.checkedGoods = []
+                    //默认全部选中
+                    this.cartInfo.forEach(element => {
+                       this.checkedGoods.push(element.selectedSkuComb.id)
+                    });
                    } 
+                   console.log('checkedGoods',this.checkedGoods)
                    console.log(' this.cartInfo:'+JSON.stringify(this.cartInfo))
                    this.isEmpty=this.cartInfo.length>0 ?true : false
                 }
@@ -288,8 +297,8 @@
                 data.receiver_name = this.name
                 data.receiver_phone = this.telephone
                 data.receiver_email = this.email
-                data.address = this.address
-                data.short_address = this.short_address
+                data.address =  this.short_address
+                data.short_address = this.address
                 data.leave_word = this.message
                 this.submitloading=true
                     axios({
@@ -462,6 +471,8 @@
       z-index: 1;
       position: absolute;
       margin-top: -10px;
+      display: none;     
+       /* 选中复选框全部隐藏 需要的话以后再显示*/
     }
 .card-goods .card-goods__item >>> .van-card__price {
       color: #f44;

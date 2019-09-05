@@ -23,22 +23,22 @@
             </div>
         </van-card>
 
-        <van-row style="background-color: #ffffff;font-size: 14px;line-height: 16px;word-break:break-word">
+        <van-row style="background-color: #ffffff;font-size: 14px;line-height: 20px;word-break:break-word">
            <van-row>
-              <van-col span="2"><van-icon name="user-circle-o" style="margin: 10px"/></van-col>
+              <van-col span="2"><van-icon name="user-circle-o" style="margin: 2px 0 0 10px"/></van-col>
               <van-col span="22">
-                   <p>{{orderResponse.receiver_name}} &nbsp;&nbsp;<span class="huicolor">{{orderResponse.receiver_phone}}</span> &nbsp;&nbsp;<span class="huicolor">{{orderResponse.receiver_email}}</span></p>
+                   <div>{{orderResponse.receiver_name}} &nbsp;&nbsp;<span class="huicolor">{{orderResponse.receiver_phone}}</span> &nbsp;&nbsp;<span class="huicolor">{{orderResponse.receiver_email}}</span></div>
               </van-col>
            </van-row>
            <van-row>
-               <van-col span="2"><van-icon name="location-o" style="margin: 10px"/></van-col>
+               <van-col span="2"><van-icon name="location-o" style="margin: 2px 0 0 10px"/></van-col>
                <van-col span="22">
-                   <div>{{orderResponse.short_address}}</div>
                    <div>{{orderResponse.address}}</div>
+                   <div>{{orderResponse.short_address}}</div>
                 </van-col>
            </van-row>
             <van-row v-if="orderResponse.leave_word">
-               <van-col span="2"><van-icon name="comment-o" style="margin: 10px"/></van-col>
+               <van-col span="2"><van-icon name="comment-o" style="margin: 2px 0 0 10px"/></van-col>
                <van-col span="22">
                    <div>{{orderResponse.leave_word}} </div>
                 </van-col>
