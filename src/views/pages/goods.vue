@@ -76,8 +76,8 @@
                         <div slot="default" class="huicolor">
                            &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
                            <van-row gutter="20">
-                             <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
-                                 <van-image width="100%" height="100%" lazy-load :src="elem.image_url"/>
+                             <van-col span="8" v-for="(elem, index) in item.comment_images" :key="elem.id">
+                                 <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" @click.native="imgShow(item.comment_images,index)"/>
                              </van-col>
                            </van-row>
                         </div>
@@ -209,6 +209,7 @@
     import axios from 'axios'
     import url from '@/serviceAPI.config.js'
     import {Toast} from 'vant'
+    import {ImagePreview} from 'vant'
     import {Sku} from '../../vant' //sku组件有改动所以用自定义的vant
     import '../../vant/lib/index.css';
     import {toMoney, int,num} from '@/filter/moneyFilter.js'
@@ -565,6 +566,16 @@
                          Toast(this.$t('serveError'))
                      }
                  })
+            },
+            imgShow(img,index){
+                    // console.log(img,index,img.map((item)=>{return item.image_url}))
+                  ImagePreview({
+                    images: img.map((item)=>{return item.image_url}),
+                    startPosition: index,
+                    onClose() {
+                      // do something
+                    }
+                  });
             }
         },
     }
