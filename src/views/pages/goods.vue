@@ -38,7 +38,7 @@
         </van-cell-group>
       </van-pull-refresh>
         <div>
-            <van-tabs class="mallFlexd" swipeable sticky>
+            <van-tabs class="mallFlexd" v-model="activeTab" swipeable sticky>
                 <van-tab :title="$t('goodsDetails')">
                    <div class="detail">
                       <div v-for="(image, index) in goodsInfo.detail_list_images" :key="index">
@@ -48,7 +48,34 @@
                             <van-loading type="spinner" size="20" />
                           </template>
                         </van-image>   
-                      </div>         
+                      </div>
+                      <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff">
+                        <van-swipe-item v-for="(item,index) in goodsInfo.comments" :key="item.id" v-if=" index < 4" @click.native="gocommenttab">
+                            <van-cell>
+                              <div>
+                                {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
+                                <van-rate
+                                   style="display: inline-block"
+                                   v-model="item.star_scores"
+                                   :size="14"
+                                   disabled
+                                   disabled-color="#f44"
+                                   void-icon="star"
+                                   void-color="#eee"
+                                 />
+                                {{item.created_at}}
+                              </div>
+                              <div class="huicolor">
+                                 &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
+                                 <van-row gutter="20">
+                                   <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
+                                       <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
+                                   </van-col>
+                                 </van-row>
+                              </div>
+                            </van-cell>
+                        </van-swipe-item>
+                      </van-swipe>       
                    </div>
                 </van-tab>
                 <van-tab class="comment" :title="$t('comment')">
@@ -220,6 +247,7 @@
       },
         data() {
             return {
+                activeTab: 0,
                 star_scores: 1,
                 message: '',
                 telephone: '',
@@ -576,6 +604,9 @@
                       // do something
                     }
                   });
+            },
+            gocommenttab(){
+              this.activeTab=1
             }
         },
     }
