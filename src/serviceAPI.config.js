@@ -1,7 +1,7 @@
 // const BASEURL = "https://www.easy-mock.com/mock/5ae2eeb23fbbf24d8cd7f0b6/SmileVue/"
 
 if(process.env.NODE_ENV === 'development'){
-    var LOCALURL =  "http://192.168.1.132:8081/"
+    var LOCALURL =  "http://www.website.cc/"
 }else if(process.env.NODE_ENV === 'test'){
     var LOCALURL =  "http://www.website.cc/"
 }else{

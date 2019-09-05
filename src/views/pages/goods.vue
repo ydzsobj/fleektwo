@@ -25,8 +25,8 @@
           <van-cell class="goods-express">
             <van-col class="huicolor" span="6">{{ $t('carriage') }}</van-col>
             <van-col class="huicolor" span="6">0</van-col>
-            <van-col class="huicolor" span="6">{{ $t('inventory') }}</van-col>
-            <van-col class="huicolor" span="6">{{goodsInfo.stock_num}}</van-col>
+            <!-- <van-col class="huicolor" span="6">{{ $t('inventory') }}</van-col>
+            <van-col class="huicolor" span="6">{{goodsInfo.stock_num}}</van-col> -->
           </van-cell>
         </van-cell-group>
         <van-cell-group @click.native= showSkuAttr>
