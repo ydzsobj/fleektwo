@@ -55,17 +55,99 @@
                     <van-list
                       v-model="loading"
                       :finished="true"
-                      :finished-text="$t('nomore')"
                      >
                       <van-cell
-                        v-for="item in commentList"
-                        :key="item"
-                        :title="item"/>
+                        v-for="item in goodsInfo.comments"
+                        :key="item.id"
+                        >
+                        <div>
+                          {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
+                          <van-rate
+                             style="display: inline-block"
+                             v-model="item.star_scores"
+                             :size="14"
+                             disabled
+                             disabled-color="#f44"
+                             void-icon="star"
+                             void-color="#eee"
+                           />
+                          {{item.created_at}}
+                        </div>
+                        <div slot="default" class="huicolor">
+                           &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
+                           <van-row gutter="20">
+                             <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
+                                 <van-image width="100%" height="100%" lazy-load :src="elem.image_url"/>
+                             </van-col>
+                           </van-row>
+                        </div>
+                    </van-cell>
+                        <van-row type="flex" justify="space-around" style="background-color: #fff">
+                            <van-button icon="comment" plain type="danger" @click="commentclick">{{$t('tocomment')}}</van-button>
+                        </van-row>
+
                     </van-list>
                 </van-tab>
             </van-tabs>
 <!-- @load="onLoad" -->
         </div>
+        <van-popup
+          v-model="popupshow"
+          round
+          position="bottom"
+          :style="{ height: '310px' }">
+            <van-nav-bar
+              :title="$t('comment')"
+              :left-text="$t('back')"
+              @click-left="barClickLeft"
+              left-arrow
+            />
+            <van-cell-group>
+               <van-field
+                 v-model="name"
+                 required
+                 clearable
+                 :label="$t('name')"
+                 :placeholder="$t('nameholder')"
+                 :error-message="errName"
+               />
+               <van-field
+                 v-model="telephone"
+                 :label="$t('phoneNumber')"
+                 clearable
+                 clickable
+                 :placeholder="$t('phoneNumberholder')"
+                 type="number"
+                 required
+                 :error-message="errTelephone"
+               />
+               <van-cell>
+                 <span style="width:90px;display:inline-block">{{$t('score')}}</span>
+                  <van-rate
+                    style="display: inline-block"
+                    v-model="star_scores"
+                    :size="14"
+                    void-icon="star"
+                    color="#f44"
+                    void-color="#eee"
+                  />
+               </van-cell>
+               <van-field
+                 v-model="message"
+                 :label="$t('message')"
+                 clearable
+                 clickable
+                 type="textarea"
+                 maxlength="200"
+                 required
+                 :error-message="errMessage"
+                 :placeholder="$t('messageholder')"
+               />
+            </van-cell-group>
+            <van-row type="flex" justify="space-around">
+                <van-button icon="comment" type="danger" @click="commentSubmit">{{$t('tocomment')}}</van-button>
+            </van-row>
+        </van-popup>
         <van-goods-action style="z-index: 2;" class="marginauto">
           <van-goods-action-icon
             :info="cartNumCount"
@@ -137,6 +219,14 @@
       },
         data() {
             return {
+                star_scores: 1,
+                message: '',
+                telephone: '',
+                name:'',
+                errMessage: '',
+                errTelephone:'',
+                errName:'',
+                popupshow: false,
                 attrText: '',
                 goodsId:'',
                 goodsInfo:{},  //商品详细信息 
@@ -434,6 +524,47 @@
                 Toast(this.$t('loadSuccess'))
                 this.pullLoading = false
               })
+            },
+            commentclick(){
+                this.popupshow=true
+            },
+            barClickLeft(){
+              this.popupshow = false
+            },
+            commentSubmit(){
+               this.errName=''
+               this.errTelephone=''
+               this.errMessage=''
+               let regTele= /^[0-9]{11,12}$/;
+               if(this.name === ''){
+                   this.errName = this.$t('nameerr');return
+               }else if (this.telephone===''){
+                   this.errTelephone = this.$t('errTelephone');return
+               }else if (this.message===''){
+                   this.errMessage = this.$t('errMessage');return
+               }else if (!regTele.test(this.telephone)){
+                   this.errTelephone = this.$t('errTelephone2');return
+               }
+                 axios({
+                     url:url.sedGood_comments,
+                     method:'post',
+                     data:{
+                       good_id: this.goodsId,
+                       name: this.name,
+                       phone: this.telephone,
+                       comment: this.message,
+                       star_scores: this.star_scores
+                     }
+                 })
+                 .then(response=>{
+                   console.log(response)
+                     if(response.status== 200 && response.data.success){
+                       this.popupshow = false
+                      Toast(this.$t('sendSucess')) 
+                     }else{
+                         Toast(this.$t('serveError'))
+                     }
+                 })
             }
         },
     }

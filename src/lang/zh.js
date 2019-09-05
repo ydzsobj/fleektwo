@@ -57,6 +57,10 @@ export default {
     loadSuccess: '刷新成功',
     errorText:'请求失败，点击重新加载',
     confirm: '确认',
-    cancel: '取消'
+    cancel: '取消',
+    score: '评分',
+    tocomment: '发表评论',
+    sendSucess: '发送成功',
+    errMessage: '评论不能为空'
   }
   

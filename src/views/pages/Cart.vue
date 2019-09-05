@@ -119,6 +119,8 @@
             :label="$t('message')"
             clearable
             clickable
+            type="textarea"
+            maxlength="200"
             :placeholder="$t('messageholder')"
             @input="fbinput"
           />

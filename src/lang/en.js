@@ -58,5 +58,9 @@ export default {
     loadSuccess: 'Refresh the success',
     errorText:'The request failed, click reload',
     confirm: 'Confirm',
-    cancel: 'Cancel'
+    cancel: 'Cancel',
+    score: 'Score',
+    tocomment: 'comment',
+    sendSucess: 'Send a success',
+    errMessage: 'Comments cannot be empty'
     }
