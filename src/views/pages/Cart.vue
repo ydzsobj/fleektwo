@@ -297,8 +297,8 @@
                 data.receiver_name = this.name
                 data.receiver_phone = this.telephone
                 data.receiver_email = this.email
-                data.address = this.address
-                data.short_address = this.short_address
+                data.address =  this.short_address
+                data.short_address = this.address
                 data.leave_word = this.message
                 this.submitloading=true
                     axios({
