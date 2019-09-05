@@ -20,7 +20,8 @@ const URL ={
     getCateGoryList : LOCALURL+'api/user/good_categories',  //得到大类信息
     getCateGorySubList : LOCALURL+'goods/getCategorySubList',  //得到小类信息
     getGoodsListByCategorySubID : LOCALURL+'api/user/goods',  //得到小类商品信息
-    sendOrderInfo: LOCALURL+'api/user/good_orders'
+    sendOrderInfo: LOCALURL+'api/user/good_orders',
+    getNotice: LOCALURL+'api/user/order_notice'
 }
 
 module.exports = URL
