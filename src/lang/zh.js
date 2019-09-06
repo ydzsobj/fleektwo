@@ -61,6 +61,7 @@ export default {
     score: '评分',
     tocomment: '发表评论',
     sendSucess: '发送成功',
-    errMessage: '评论不能为空'
+    errMessage: '评论不能为空',
+    justbuy: '刚刚购买了此商品！'
   }
   

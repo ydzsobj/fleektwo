@@ -62,5 +62,6 @@ export default {
     score: 'skor',
     tocomment: 'Untuk berkomentar',
     sendSucess: 'Kirim berhasil',
-    errMessage: 'Komentar tidak boleh kosong'
+    errMessage: 'Komentar tidak boleh kosong',
+    justbuy: 'barusan membeli barang ini !'
     }

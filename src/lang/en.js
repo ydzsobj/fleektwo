@@ -62,5 +62,6 @@ export default {
     score: 'Score',
     tocomment: 'comment',
     sendSucess: 'Send a success',
-    errMessage: 'Comments cannot be empty'
+    errMessage: 'Comments cannot be empty',
+    justbuy: 'has just bought this item !'
     }
