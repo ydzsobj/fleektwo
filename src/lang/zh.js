@@ -44,6 +44,8 @@ export default {
     errTelephone2:'电话号码格式错误',
     errShort_address: '省市区不能为空！',
     errAddress: '详细地址不能为空',
+    zipCode: '邮政编码',
+    zipCodeholder: '请输入邮政编码',
     errEmail: '邮箱格式不能为空',
     orderNumber: '订单号码：',
     orderTime: '订单时间：',

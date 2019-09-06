@@ -38,6 +38,8 @@ export default {
     provinceholder: 'Please input your Province, city and district',
     address: 'Detailed Address',
     addressholder: 'Please input your Detailed Address',
+    zipCode: 'Zip code',
+    zipCodeholder: 'Please input zip code',
     message: 'Message',
     messageholder: 'Please input your message',
     nameerr: 'Name can’t be blank!',

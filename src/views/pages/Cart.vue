@@ -114,6 +114,15 @@
             :error-message="errAddress"
             @input="fbinput"
           />
+          <van-field
+            v-model="zipCode"
+            :label="$t('zipCode')"
+            clearable
+            clickable
+            type="number"
+            :placeholder="$t('zipCodeholder')"
+            @input="fbinput"
+          />
             <van-field
             v-model="message"
             :label="$t('message')"
@@ -173,6 +182,7 @@
                address: '',
                short_address:'',
                email: '',
+               zipCode: '',
                message: '',
                errName:'',
                errTelephone:'',
@@ -299,6 +309,7 @@
                 data.receiver_email = this.email
                 data.address =  this.short_address
                 data.short_address = this.address
+                data.postcode = this.zipCode
                 data.leave_word = this.message
                 this.submitloading=true
                     axios({

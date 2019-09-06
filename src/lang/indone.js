@@ -38,6 +38,8 @@ export default {
     provinceholder: 'masukan Kota provinsi kabupaten',
     address: 'alamat lengkap',
     addressholder: 'masukan alamat lengkap',
+    zipCode: 'P. M. A.',
+    zipCodeholder: 'Kode pos, silakan',
     message: 'tinggalkan pesan',
     messageholder: 'silakan tinggalkan pesan',
     nameerr: 'tempat ini tidak boleh kosong',
