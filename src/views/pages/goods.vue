@@ -4,6 +4,7 @@
         <van-notice-bar
           :text="notice_con_1"
           left-icon="volume-o"
+          :speed="90"
         />
       </div>
       <van-pull-refresh v-model="pullLoading" @refresh="onRefresh" :pulling-text="$t('pullingText')" :loosing-text="$t('lossText')" :loading-text="$t('loading')">
@@ -440,17 +441,15 @@ import { setTimeout } from 'timers';
                       })
             },
             notice(a){
-              console.log(a)
               var that = this
               var date = 8000
               if(a.length >0){
                 var t=setInterval(fn,date);
               }
               function fn(){
-                console.log(a)
                   date = 23000
                   that.notice_show = true
-                  that.notice_con_1=a[that.index_1].receiver_name + that.$t('justbuy')
+                  that.notice_con_1= a[that.index_1].receiver_name +'  ' + that.$t('justbuy') +'　　'
                   that.index_1=that.index_1+1;
                   setTimeout(function(){ that.notice_show = false },15000)
                   if(that.index_1==a.length){
