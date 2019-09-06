@@ -445,7 +445,7 @@ import { setTimeout } from 'timers';
               function fn(){
                   date = 23000
                   that.notice_show = true
-                  that.notice_con_1= a[that.index_1].receiver_name +'  ' + that.$t('justbuy') +'　　'
+                  that.notice_con_1= '  '+ a[that.index_1].receiver_name +'  ' + that.$t('justbuy') +'　　'
                   that.index_1=that.index_1+1;
                   setTimeout(function(){ that.notice_show = false },15000)
                   if(that.index_1==a.length){
