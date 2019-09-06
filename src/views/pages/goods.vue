@@ -131,7 +131,7 @@
           v-model="popupshow"
           round
           position="bottom"
-          :style="{ height: '310px' }">
+         >
             <van-nav-bar
               :title="$t('comment')"
               :left-text="$t('back')"
@@ -434,10 +434,6 @@ import { setTimeout } from 'timers';
                               this.index_1 = 0
                               this.notice(response.data.data)
                           }
-                      })
-                      .catch(error=>{
-                          console.log(error)
-                          reject(error)
                       })
             },
             notice(a){
