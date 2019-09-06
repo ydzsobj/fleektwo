@@ -56,7 +56,8 @@
                         </van-image>   
                       </div>
                       <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff">
-                        <van-swipe-item v-for="(item,index) in goodsInfo.comments" :key="item.id" v-if=" index < 4" @click.native="gocommenttab">
+                        <template v-for="(item,index) in goodsInfo.comments" >
+                        <van-swipe-item :key="item.id" v-if=" index < 4" @click.native="gocommenttab">
                             <van-cell>
                               <div>
                                 {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
@@ -81,6 +82,7 @@
                               </div>
                             </van-cell>
                         </van-swipe-item>
+                        </template>
                       </van-swipe>       
                    </div>
                 </van-tab>
