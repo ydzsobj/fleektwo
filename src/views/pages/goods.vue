@@ -184,6 +184,18 @@
                 <van-button icon="comment" type="danger" @click="commentSubmit">{{$t('tocomment')}}</van-button>
             </van-row>
         </van-popup>
+        <!-- <div class="notification">
+          <van-card
+            desc="描述信息描述信息描述信息描述信息"  
+            title="商品标题商品标题商品标题商品标题"
+            thumb="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1567766979892&di=e0b53b99a3ff8423b87878a665ef32fd&imgtype=0&src=http%3A%2F%2Fb-ssl.duitang.com%2Fuploads%2Fitem%2F201810%2F13%2F20181013001600_ygrin.jpg"
+          >
+            <div slot="tags">
+              <span style="color: #7d7e80">5 hours ago</span>
+            </div>
+          </van-card>
+        </div> -->
+
         <van-goods-action style="z-index: 2;" class="marginauto">
           <van-goods-action-icon
             :info="cartNumCount"
@@ -420,7 +432,7 @@ import { setTimeout } from 'timers';
             }
         },
         methods: {
-            getNotice() {
+            getNotice() {   
               axios({
                           url:url.getNotice,
                           method:'get',
@@ -445,7 +457,7 @@ import { setTimeout } from 'timers';
               function fn(){
                   date = 23000
                   that.notice_show = true
-                  that.notice_con_1= '  '+ a[that.index_1].receiver_name +'  ' + that.$t('justbuy') +'　　'
+                  that.notice_con_1= '　　'+ a[that.index_1].receiver_name +'  ' + that.$t('justbuy') +'　　'
                   that.index_1=that.index_1+1;
                   setTimeout(function(){ that.notice_show = false },15000)
                   if(that.index_1==a.length){
@@ -722,4 +734,39 @@ import { setTimeout } from 'timers';
     .notice >>>.van-notice-bar{
       background-color: rgba(255,251,230,.6)
     }
+    .notification{
+    position: fixed;
+    right: 0;
+    bottom: 60px;
+    left: 0;
+    max-width: 600px;
+    margin: 0 auto;
+    z-index: 2;
+  }
+  .notification>>>.van-card{
+    width: 80%;
+  margin: 0 auto;
+  border-radius: 40px;
+  box-shadow: 1px 1px 7px 0px;
+  padding-left: 8px;
+  }
+  .notification>>>.van-card div{
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+  .notification>>>.van-card .van-card__title{
+    display: block
+  }
+  .notification>>>.van-card .van-card__thumb{
+    width: 70px;
+  height: 70px;
+  }
+  .notification>>>.van-card .van-card__thumb img{
+  border-radius: 50px;
+
+  }
+  .notification>>>.van-card .van-card__content{
+    min-height: 70px;
+  }
 </style>
