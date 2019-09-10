@@ -17,14 +17,14 @@
         <div class="swiper-area">
             <van-swipe :autoplay="1000">
                 <van-swipe-item v-for="( banner ,index) in bannerPicArray" :key="index" >
-                    <img v-lazy="banner.image" width="100%"/>
+                    <img v-lazy="banner.image" width="100%" @click="goGoodsPage(banner.good_id)"/>
                 </van-swipe-item>
             </van-swipe>
         </div>  
         <!--type bar-->
         <div class="type-bar">
             <div v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)">
-                <img v-lazy="nav_img" width="90%">
+                <img :src="cate.image_url" width="90%">
                 <span>{{cate.mallCategoryName}}</span>
             </div>
         </div>  
@@ -99,7 +99,7 @@
                 floor3:[],
                 floorName:{},
                 hotGoods:[],  //热卖商品
-                nav_img:"//m.360buyimg.com/mobilecms/s120x120_jfs/t1/39401/17/2391/5859/5cc06fcfE2ad40668/28cda0a571b4a576.png"
+                nav_img:[require('../../assets/images/cartempty.png')]
               
             }
         },
@@ -139,6 +139,10 @@
         methods:{
             golistPage(id,index) {
                 this.$router.push({name:'CategoryList',params:{categorySubId:id,index:index}})
+            },
+            goGoodsPage(id) {
+                console.log(id)
+                this.$router.push({name:'Goods',query:{goodsId:id}})
             }
         }
        
@@ -189,6 +193,9 @@
     }
     .type-bar div span{
         display: inline-block
+    }
+    .type-bar div img{
+        border-radius: 50%;
     }
     .recommend-area{
         background-color: #fff;
