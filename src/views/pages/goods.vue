@@ -21,6 +21,7 @@
         <van-cell-group>
           <van-cell>
             <div class="goods-title">{{ goodsInfo.title}}</div>
+            <div class="huicolor">{{ goodsInfo.about}}</div>
             <div class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
           </van-cell>
           <van-cell class="goods-express">
