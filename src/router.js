@@ -35,8 +35,13 @@ router.beforeEach((to, from, next) => {
     if(to.name==='Goods'){
        deviceData.good_id = to.query.goodsId-0 || null
     }
+    if(!from.name){
+      deviceData.referer_url = document.referrer
+    }else{
+      deviceData.referer_url = location.origin + from.fullPath 
+    }
 
-    deviceData.access_url = deviceData.referer_url + to.fullPath 
+    deviceData.access_url = location.origin + to.fullPath 
     axios({
         url:url.sendDecicedata,
         method:'post',

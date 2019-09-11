@@ -63,7 +63,7 @@
     var data = {
         device: JSON.stringify(browser.versions),
         lang: browser.versions.language,
-        referer_url: location.origin,
+        referer_url: null,
         access_url: null,
         good_id: null
     }
