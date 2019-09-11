@@ -17,6 +17,7 @@ const URL ={
     getDetailGoodsInfo : LOCALURL+'api/user/goods',  //获取商品详情
     getLang : LOCALURL+'api/user/configs',  //获取语言
     sedGood_comments : LOCALURL+'api/user/good_comments',
+    sendDecicedata : LOCALURL+'api/user/trace_logs',
     
     getCateGoryList : LOCALURL+'api/user/good_categories',  //得到大类信息
     getCateGorySubList : LOCALURL+'goods/getCategorySubList',  //得到小类信息

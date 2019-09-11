@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import axios from 'axios'
+import url from '@/serviceAPI.config.js'
+import deviceData from '@/divcedata.js'
 
 import Main from '@/views/pages/Main'
 import Register from '@/views/pages/Register'
@@ -7,7 +10,7 @@ import Login from '@/views/pages/Login'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {path:'/', redirect: '/main' , name:'Main', component:Main,
     children:[
@@ -26,3 +29,20 @@ export default new Router({
   ],
   mode: 'history'
 })
+// 每次变换路由发送用户行为
+router.beforeEach((to, from, next) => {
+    deviceData.good_id= null
+    if(to.name==='Goods'){
+       deviceData.good_id = to.query.goodsId-0 || null
+    }
+
+    deviceData.access_url = deviceData.referer_url + to.fullPath 
+    axios({
+        url:url.sendDecicedata,
+        method:'post',
+        data: deviceData
+    })
+    next()
+})
+
+export default router
