@@ -44,11 +44,11 @@
            </van-card>
           </van-checkbox>
         </van-checkbox-group>
-        <van-row style="padding: 10px">
+        <van-row style="padding: 5px 10px">
              <van-col>
                  <van-radio-group v-model="radio">
                    <van-radio name="1">
-                     <span style="font-size: 14px">{{ $t('payOnDelivery') }}</span> <img style="height: 25px;vertical-align: bottom;" src="../../assets/images/cash.jpg" alt="">
+                     <span style="font-size: 14px">{{ $t('payOnDelivery') }}</span> <img style="height: 30px;vertical-align: bottom; padding-left: 10px;" src="../../assets/images/cash.jpg" alt="">
                    </van-radio>
                    <!-- <van-radio name="2">
                      单选框 2
