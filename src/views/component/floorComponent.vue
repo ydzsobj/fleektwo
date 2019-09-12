@@ -71,8 +71,8 @@
         background-color: #fff;
         border-bottom:1px solid #ddd;
     }
-    .floor-anomaly div{
-        width:10rem;
+    .floor-anomaly>div{
+        width:50%;
         box-sizing:border-box;
         -webkit-box-sizing: border-box;
     }

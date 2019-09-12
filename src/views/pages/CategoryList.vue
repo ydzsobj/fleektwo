@@ -49,8 +49,10 @@
                                      /> 
                                 </div>
                                 <div class="list-item-text">
-                                    <div>{{item.name}}</div>                                    
-                                    <div>{{$store.money_sign}}{{item.price | num}}</div>                                    
+                                    <div>{{item.name}}</div>                                                                        
+                                    <!-- <div>{{$store.state.money_sign}}{{ $store.state.lang ==='ind-BA' ? item.price | int : item.price | toDivide}}</div> -->
+                                    <div v-if="$store.state.lang==='ind-BA'">{{$store.state.money_sign}}{{item.price |num}}</div>
+                                    <div v-else>{{$store.state.money_sign}}{{item.price}}</div>
                                  </div>
                             </div>
         
@@ -67,7 +69,7 @@
 <script>
     import axios from 'axios'
     import url from '@/serviceAPI.config.js'
-    import {toMoney , int,num} from '@/filter/moneyFilter.js'
+    import {toMoney ,toDivide, int,num} from '@/filter/moneyFilter.js'
     export default {
         data() {
             return {
@@ -88,6 +90,9 @@
         filters:{
             moneyFilter(money){
                 return toMoney(money)
+            },
+            toDivide(money){
+                return toDivide(money)
             },
             int(money){
                 return int(money)
