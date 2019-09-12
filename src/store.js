@@ -7,6 +7,7 @@ export default new Vuex.Store({
   state: {
       cartNum: '',
       money_sign: '',
+      lang: '',
       fix: null
   },
   mutations: {

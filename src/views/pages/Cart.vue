@@ -151,7 +151,7 @@
           @click="areaShow = false"
         />
         <transition name="fade">
-          <van-area class="area left50" :area-list="areaList()" v-show="areaShow" @confirm="confirm" @cancel="cancel" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
+          <van-area class="area left50" :area-list="areaList" v-show="areaShow" @confirm="confirm" @cancel="cancel" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
         </transition>
     </div>
     
@@ -230,7 +230,14 @@
                });
                console.log(this.malldata,this.countPrice)
                return this.countPrice
-           }
+           },
+           areaList(){
+               if(this.$store.state.lang === 'ind-BA'){
+                    return obj
+                }else{
+                    return obj
+                }
+               }
        },
        filters:{
            toThousands(money){
@@ -370,9 +377,6 @@
                 }else{
                     return false
                 }
-            },
-            areaList(){
-                return obj
             },
             focusProvin(){
               this.areaShow = true
