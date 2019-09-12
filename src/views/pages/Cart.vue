@@ -35,7 +35,8 @@
               :thumb="showImage(item.skuAttrText)"
             >
                <div slot="tags" class="redcolor">
-                   <span>{{$store.money_sign}}{{item.selectedSkuComb.price | int}}</span>
+                   <span v-if="$store.state.lang==='ind-BA'">{{$store.state.money_sign}}{{item.selectedSkuComb.price | int}}</span>
+                   <span v-else>{{$store.state.money_sign}}{{item.selectedSkuComb.price | toDivide}}</span>
                </div>
                <div slot="num">
                     <van-button v-if="!isBuy" size="mini" style="vertical-align: bottom;margin-right: 5px;" icon="delete" round type="danger" @click.stop ="clearCartOne(item.selectedSkuComb.id)"></van-button>
@@ -137,9 +138,9 @@
         <van-submit-bar
           class="left50"
          :loading="submitloading"
-         :currency="$store.money_sign"
+         :currency="$store.state.money_sign"
           :price="totalMoney"
-          :decimal-length="0"
+          :decimal-length="decimalLength"
           :disabled="!checkedGoods.length"
           :button-text="$t('account')"
           :label="$t('total')"
@@ -166,6 +167,7 @@
     export default {
        data() {
            return {
+               decimalLength: 0,
                areaShow: false,
                fbinputFalg: true,
                submitloading: false,
@@ -233,8 +235,10 @@
            },
            areaList(){
                if(this.$store.state.lang === 'ind-BA'){
+                    this.decimalLength = 0
                     return obj
                 }else{
+                    this.decimalLength = 2
                     return obj
                 }
                }

@@ -19,7 +19,8 @@
            :thumb="showImage(item.skuAttrText)"
          >
             <div slot="tags" class="redcolor">
-                <span>{{moneySign}}{{item.selectedSkuComb.price | int}}</span>
+                <span v-if="$store.state.lang==='ind-BA'" >{{moneySign}}{{item.selectedSkuComb.price | int}}</span>
+                <span v-else >{{moneySign}}{{item.selectedSkuComb.price | toDivide}}</span>
             </div>
         </van-card>
 
@@ -65,7 +66,7 @@ export default {
     },
     computed: {
             moneySign(){
-               return this.$store.money_sign
+               return this.$store.state.money_sign
            }
     },
     methods: {

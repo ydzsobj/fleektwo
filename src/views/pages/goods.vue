@@ -22,7 +22,8 @@
           <van-cell>
             <div class="goods-title">{{ goodsInfo.title}}</div>
             <div class="huicolor">{{ goodsInfo.about}}</div>
-            <div class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
+            <div v-if="$store.state.lang==='ind-BA'" class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
+            <div v-else class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price }}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s></div>
           </van-cell>
           <van-cell class="goods-express">
             <van-col class="huicolor" span="6">{{ $t('carriage') }}</van-col>
@@ -246,7 +247,9 @@
         >
            <template slot="sku-header-price" slot-scope="props">
              <div class="van-sku__goods-price">
-               <span class="van-sku__price-symbol">{{goodsInfo.money_sign}}</span><span class="van-sku__price-num">{{ props.price | num}}</span>
+               <span class="van-sku__price-symbol">{{goodsInfo.money_sign}}</span>
+               <span  v-if="$store.state.lang==='ind-BA'" class="van-sku__price-num">{{ props.price | num}}</span>
+               <span v-else class="van-sku__price-num">{{ props.price }}</span>
              </div>
            </template>
         </van-sku>
@@ -484,7 +487,7 @@ import { setTimeout } from 'timers';
                               // 商品属性基本信息赋值
                               this.goods.title = this.goodsInfo.title             //默认名
                               this.goods.picture = this.goodsInfo.main_image_url  //无属性规格，默认图片
-                              this.$store.money_sign = this.goodsInfo.money_sign  //货币
+                              this.$store.state.money_sign = this.goodsInfo.money_sign  //货币
                               this.sku.list = this.goodsInfo.list                 // sku
                               this.sku.tree = this.goodsInfo.tree || []                 // 所有属性 
                               this.sku.price = this.goodsInfo.price               // 默认价格（单位元）
