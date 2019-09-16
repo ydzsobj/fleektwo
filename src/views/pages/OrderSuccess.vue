@@ -35,7 +35,7 @@
                <van-col span="2"><van-icon name="location-o" style="margin: 2px 0 0 10px"/></van-col>
                <van-col span="22">
                    <div>{{orderResponse.address}}</div>
-                   <div>{{orderResponse.short_address}}</div>
+                   <div>{{orderResponse.short_address}}&nbsp;&nbsp;{{orderResponse.postcode}}</div>
                 </van-col>
            </van-row>
             <van-row v-if="orderResponse.leave_word">

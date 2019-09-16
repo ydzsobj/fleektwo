@@ -105,25 +105,29 @@
             :error-message="errShort_address"
             @input="fbinput"
           />
-            <van-field
-            v-model="address"
-            :label="$t('address')"
-            clearable
-            clickable
-            :placeholder="$t('addressholder')"
-            required
-            :error-message="errAddress"
-            @input="fbinput"
-          />
           <van-field
-            v-model="zipCode"
+            required
             :label="$t('zipCode')"
             clearable
             clickable
-            type="number"
-            :placeholder="$t('zipCodeholder')"
-            @input="fbinput"
-          />
+          > 
+               <select slot="input" style="width: 100%;border: none;" @change="selectChange" ref="zipselect" :class="{'huicolor' : optionsArrt.length===0}">
+                   <option value="" v-if="optionsArrt.length===0">
+                       {{$t('zipCodeholder')}}
+                   </option>
+                   <option v-for="(item, index) in optionsArrt" :key="index" :value="item">{{item}}</option>
+               </select>
+          </van-field>
+            <van-field
+              v-model="address"
+              :label="$t('address')"
+              clearable
+              clickable
+              :placeholder="$t('addressholder')"
+              required
+              :error-message="errAddress"
+              @input="fbinput"
+            />
             <van-field
             v-model="message"
             :label="$t('message')"
@@ -189,7 +193,8 @@
                errName:'',
                errTelephone:'',
                errAddress: '',
-               errShort_address: ''
+               errShort_address: '',
+               optionsArrt: []
            }
           
        }, 
@@ -389,6 +394,9 @@
                 this.areaShow = false
                 console.log(list)
                 this.short_address = list[0].name + '/' + list[1].name + '/' +list[2].name
+                this.optionsArrt = this.areaList.post[list[2].code]   //对应省市区的 邮政编码数组赋值
+                this.zipCode= this.optionsArrt[0]
+                this.fbinput()
             },
             cancel(){
                 this.areaShow = false
@@ -398,6 +406,10 @@
               if(this.checkedGoods.every((e)=>{return e!=skuid})){
                   this.checkedGoods.push(skuid)
               }
+            },
+            selectChange(){
+            //    console.log('ddd',this.$refs.zipselect.value)
+               this.zipCode = this.$refs.zipselect.value
             }
         },
     }
@@ -496,4 +508,7 @@
 .card-goods .card-goods__item >>> .van-card__price {
       color: #f44;
     }
+.huicolor{
+      color: #969799
+    } 
 </style>
