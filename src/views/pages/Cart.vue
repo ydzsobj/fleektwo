@@ -145,7 +145,7 @@
          :currency="$store.state.money_sign"
           :price="totalMoney"
           :decimal-length="decimalLength"
-          :disabled="!checkedGoods.length"
+          :disabled="checkedGoods.length <= 0 || submitloading"
           :button-text="$t('account')"
           :label="$t('total')"
           @submit="onSubmit"
@@ -295,6 +295,7 @@
             clearCart(){
                 localStorage.removeItem('cartInfo')
                 this.cartInfo=[]
+                this.checkedGoods=[]
             },
             onSubmit(){
                this.errName=''
@@ -317,6 +318,7 @@
                   Toast(this.$t('errEmail'));return
                }
                 console.log(this.malldata,this.countPrice)
+                this.submitloading=true
                 let data = {}
                 data.cart_data = this.malldata
                 data.countPrice = this.countPrice
@@ -327,7 +329,6 @@
                 data.short_address = this.address
                 data.postcode = this.zipCode
                 data.leave_word = this.message
-                this.submitloading=true
                     axios({
                         url:url.sendOrderInfo,
                         method:'post',
@@ -371,6 +372,13 @@
                         this.cartInfo.splice(i,1);break
                     }
                 }
+                // checkedGoods 也需要去除
+                for(let i=0;i<this.checkedGoods.length;i++){
+                    if(this.checkedGoods[i] == id){
+                        this.checkedGoods.splice(i,1);break
+                    }
+                }
+                // console.log(this.checkedGoods)
                 let cartIn = JSON.parse(localStorage.cartInfo)
                 for(let i=0;i<cartIn.length;i++){
                     if(cartIn[i].selectedSkuComb.id === id){
