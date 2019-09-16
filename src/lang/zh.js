@@ -46,6 +46,7 @@ export default {
     errAddress: '详细地址不能为空',
     zipCode: '邮政编码',
     zipCodeholder: '请输入邮政编码',
+    zipCodeholder1: '请先选择省市区',
     errEmail: '邮箱格式不能为空',
     orderNumber: '订单号码：',
     orderTime: '订单时间：',

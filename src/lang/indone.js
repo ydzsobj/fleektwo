@@ -40,6 +40,7 @@ export default {
     addressholder: 'masukan alamat lengkap',
     zipCode: 'P. M. A.',
     zipCodeholder: 'Kode pos, silakan',
+    zipCodeholder1: 'Memilih daerah metropolitan pertama',
     message: 'tinggalkan pesan',
     messageholder: 'silakan tinggalkan pesan',
     nameerr: 'tempat ini tidak boleh kosong',

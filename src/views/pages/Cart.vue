@@ -113,7 +113,7 @@
           > 
                <select slot="input" style="width: 100%;border: none;" @change="selectChange" ref="zipselect" :class="{'huicolor' : optionsArrt.length===0}">
                    <option value="" v-if="optionsArrt.length===0">
-                       {{$t('zipCodeholder')}}
+                       {{$t('zipCodeholder1')}}
                    </option>
                    <option v-for="(item, index) in optionsArrt" :key="index" :value="item">{{item}}</option>
                </select>

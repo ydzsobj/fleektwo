@@ -40,6 +40,7 @@ export default {
     addressholder: 'Please input your Detailed Address',
     zipCode: 'Zip code',
     zipCodeholder: 'Please input zip code',
+    zipCodeholder1: 'Please choose the provincial area first',
     message: 'Message',
     messageholder: 'Please input your message',
     nameerr: 'Name can’t be blank!',
