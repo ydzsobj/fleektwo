@@ -335,7 +335,6 @@
                         data: data
                     })
                     .then(response=>{
-                        this.submitloading=false
                         console.log(response)
                         if(response.status== 200 && response.data.success){
                             //如果不是直接购买，下单成功后删除对应购物车商品
@@ -349,10 +348,12 @@
                             }
                             try{fbq('track', 'InitiateCheckout');console.log('initcheckout')}catch(e){};
                             try{ fbq('track', 'Purchase', {value: int(this.countPrice), currency:'USD'}) ;console.log('Purchase')}catch(e){}
+                            this.submitloading=false
                             this.$router.push({name:'order',params:{orderData: this.malldataOrder,orderResponse: response.data.data}})
                         
                         }else{
                             Toast(this.$t('serveError'))
+                            this.submitloading=false
                         }
                     })
             },
