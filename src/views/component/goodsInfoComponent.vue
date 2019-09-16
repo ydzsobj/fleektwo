@@ -4,18 +4,23 @@
             <img v-lazy="goodsImage" width="90%" />
         </div>
         <div class="goods-name">{{goodsName}}</div>
-        <div class="goods-price">{{$store.money_sign}}{{goodsPrice  }}</div>
+        <!-- <div class="goods-price">{{$store.state.money_sign}}{{goodsPrice  }}</div> -->
+        <div class="goods-price" v-if="$store.state.lang==='ind-BA'">{{$store.state.money_sign}}{{goodsPrice |num}}</div>
+        <div class="goods-price" v-else>{{$store.state.money_sign}}{{goodsPrice}}</div>
     </div>
 </template>
 
 <script>
-    import {toMoney}  from '@/filter/moneyFilter.js'
+    import {toMoney,num}  from '@/filter/moneyFilter.js'
     export default {
         props:['goodsImage','goodsName','goodsPrice','goodsId'],
         filters:{
-            // moneyFilter(money){
-            //     return toMoney(money)
-            // }
+            moneyFilter(money){
+                return toMoney(money)
+            },
+            num(money){
+                return num(money)
+            }
         },
         methods: {
             goGoodsPage() {
