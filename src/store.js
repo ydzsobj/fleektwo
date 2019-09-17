@@ -8,6 +8,7 @@ export default new Vuex.Store({
       cartNum: '',
       money_sign: '',
       lang: '',
+      email: '',
       fix: null
   },
   mutations: {

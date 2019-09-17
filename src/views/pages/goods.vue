@@ -86,7 +86,43 @@
                             </van-cell>
                         </van-swipe-item>
                         </template>
-                      </van-swipe>       
+                      </van-swipe>
+                      <van-cell-group>
+                        <van-cell>
+                            <div>{{$t('floorPage_1Title')}}</div>
+                            <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-US'" v-html="$t('floorPage_1Html')"></div>
+                            <div slot="default" class="huicolor maxheight" v-else>
+                                <p>{{$t('floorPage_1_1')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_1_2')}}</p>
+                            </div>
+                        </van-cell>
+                        <van-cell>
+                            <div>{{$t('floorPage_2Title')}}</div>
+                            <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-US'">
+                               <p>{{$t('floorPage_2Flb_1')}} <van-icon name="service" color="#F8770E" size="20px"/></p>
+                               <p>{{$t('floorPage_2Flb_2')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> </p>
+                               <p>{{$t('floorPage_2Flb_3')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2Flb_4')}}</p>
+                            </div>
+                            <div slot="default" class="huicolor maxheight" v-else>
+                               <p>{{$t('floorPage_2_1')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2_2')}}</p>
+                               <p>{{$t('floorPage_2_3')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2_4')}}</p>
+                            </div>
+                        </van-cell>
+                        <van-cell>
+                            <div>{{$t('floorPage_3Title')}}</div>
+                            <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-US'" v-html="$t('floorPage_3Html')"></div>
+                            <div slot="default" class="huicolor maxheight" v-else>
+                                <p> {{$t('floorPage_3_1')}} </p>
+                                <p>{{$t('floorPage_3_2')}}</p>
+                            </div>
+                        </van-cell>
+                        <van-cell>
+                            <div slot="default" class="huicolor maxheight">
+                              <img src="../../assets/images/ydzs.png" width="100px" style="float: left;margin-right: 10px;">
+                               <p> {{$t('floorPage_4')}} </p>
+                            </div>
+                        </van-cell>
+
+                      </van-cell-group>     
                    </div>
                 </van-tab>
                 <van-tab class="comment" :title="$t('comment')">
@@ -772,5 +808,9 @@ import { setTimeout } from 'timers';
   }
   .notification>>>.van-card .van-card__content{
     min-height: 70px;
+  }
+  .maxheight {
+    overflow: auto;
+    max-height: 350px;
   }
 </style>

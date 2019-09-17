@@ -53,6 +53,7 @@
                       checkoutLang(response.data.data.config.lang)
                        this.$store.state.money_sign = response.data.data.config.money_sign
                        this.$store.state.lang = response.data.data.config.lang
+                       this.$store.state.email = response.data.data.config.email
                     }else{
                         Toast(this.$t('serveError'))
                     }
