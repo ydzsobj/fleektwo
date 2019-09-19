@@ -15,7 +15,7 @@
         </div> -->
         <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3>
             <van-icon name="wap-nav" slot="left" />
-            <img src="http://mallbaik.com/img/site.png" slot="title" style="max-height:40px">
+            <img src="../../assets/images/ydzs.png" slot="title" style="max-height:40px">
             <van-icon name="search" slot="right" />
         </van-nav-bar>
         <div style="height:46px"></div>
