@@ -70,7 +70,7 @@
             </span>
         </div>
         <div class="new-sale-big tu" style="margin-bottom:10px">
-            <img src="http://mallbaik.com/img/site_img/ourstory.jpg" style="width: 100%;">
+            <img src="../../assets/images/ourstory.jpg" style="width: 100%;">
         </div>
         <div class="hot-area">
             <div class="hot-title">{{ $t('hotgoods') }}</div>
@@ -301,7 +301,7 @@
         font-size:14px;
         /* height: 1.8rem; */
         line-height:1.8rem;
-        padding-bottom: 50px
+        padding-bottom: 20px
     }
     .hot-goods{
         /* height: 130rem; */

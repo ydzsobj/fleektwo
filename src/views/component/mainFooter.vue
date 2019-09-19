@@ -1,7 +1,10 @@
 <template>
     <div class="footer4">
+        <div class="new-sale-big">
+            <img src="../../assets/images/zlt.jpg" style="width: 100%;">
+        </div>
         <div class="baozhang">
-            <div class="buy-logo"><img src="http://ydeea.xyz/img/site_img/buy-logo.png"></div>
+            <div class="buy-logo"><img src="../../assets/images/buy-logo.png"></div>
             <div class="buy-p">
             <h3>{{$t('mainFooter_1')}}</h3>
                 <p><em></em>{{$t('mainFooter_1_1')}} </p>
@@ -12,11 +15,11 @@
             <div class="footmenu-list">
                 <ul class="f-list">
                     <li>
-                        <a href="/footer/about">{{$t('mainFooter_About')}}</a>
-                        <a href="/footer/shipping">{{$t('mainFooter_shipping')}}</a>
-                        <a href="/footer/return">{{$t('mainFooter_return')}}</a>
-                        <a href="/footer/privacy">{{$t('mainFooter_privacy')}}</a>
-                        <a href="/footer/contact">{{$t('mainFooter_privacy')}}</a>
+                        <a href="javascript:void(0);" @click="go(1)">{{$t('mainFooter_About')}}</a>
+                        <a href="javascript:void(0);" @click="go(2)">{{$t('mainFooter_shipping')}}</a>
+                        <a href="javascript:void(0);" @click="go(3)">{{$t('mainFooter_return')}}</a>
+                        <a href="javascript:void(0);" @click="go(4)">{{$t('mainFooter_privacy')}}</a>
+                        <a href="javascript:void(0);" @click="go(5)">{{$t('mainFooter_privacy')}}</a>
                     </li>
                     <li>© 2019 <a href="/" title="">{{href}}</a>{{$t('mainFooter_2')}}</li>
                 </ul>
@@ -34,7 +37,7 @@ export default {
     },
     methods:{
             go(type) {
-                this.$router.push({name:'about'})
+                this.$router.push({name:'flootPage',params:{flootType:type}})
             }
     },
     mounted(){
