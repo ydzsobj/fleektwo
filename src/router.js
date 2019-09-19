@@ -18,6 +18,7 @@ let router = new Router({
       {path:'CategoryList',name:'CategoryList',component: () => import('@/views/pages/CategoryList')},
       {path:'Cart',name:'Cart',component: () => import('@/views/pages/Cart')},
       {path:'goods',name:'Goods',component: () => import('@/views/pages/goods')},
+      {path:'flootPage',name:'flootPage',component: () => import('@/views/pages/flootPage')},
       // {path:'/Member',name:'Member',component:Member},
     ]
     },
