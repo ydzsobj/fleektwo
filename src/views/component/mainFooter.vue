@@ -1,8 +1,8 @@
 <template>
     <div class="footer4">
-        <div class="new-sale-big">
+        <!-- <div class="new-sale-big">
             <img src="../../assets/images/zlt.jpg" style="width: 100%;">
-        </div>
+        </div> -->
         <div class="baozhang">
             <div class="buy-logo"><img src="../../assets/images/buy-logo.png"></div>
             <div class="buy-p">
