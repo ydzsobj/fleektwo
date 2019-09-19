@@ -1,53 +1,53 @@
 
 export default { 
-    home: 'halaman utama',
+    home: 'Halaman utama',
     list: 'Klasifikasi',
     classlist:'Daftar kategori',
-    outfloor: 'tidak ada lagi',
+    outfloor: 'Tidak ada lagi',
     hotgoods: 'Baru saja dikirimkan barang',
-    carriage: 'biaya ongkir',  //运费
-    inventory: 'sisa stok', //库存
-    select: 'pilih', //选择
+    carriage: 'Biaya ongkir',  //运费
+    inventory: 'Sisa stok', //库存
+    select: 'Pilih', //选择
     selected: 'Telah dipilih', //已选
-    goodsDetails: 'parameter produk',
+    goodsDetails: 'Parameter produk',
     comment: 'komentar',
-    nomore: 'tidak ada lagi',
+    nomore: 'Tidak ada lagi',
     shopCart: 'Daftar belanja',
-    store: 'toko', //店铺
+    store: 'Toko', //店铺
     addCart: 'Tambahkan ke daftar belanja',
-    buy: 'segera pesan',//立即购买
+    buy: 'Segera pesan',//立即购买
     ok: 'Konfirm',
     buyNum: 'Jumlah pesanan', //购买数量
-    message: 'tinggalkan pesan', //留言
-    messagePlaceholder: 'silakan masukkan teks anda',
+    message: 'Tinggalkan pesan', //留言
+    messagePlaceholder: 'Silakan masukkan teks anda',
     serveError: 'Galat server, pengiriman data gagal',
     successAdd: 'Berhasil ditambahkan',
     account: 'Penyelesaian',
-    total: 'jumlah',
+    total: 'Jumlah',
     back: 'Kembali',
-    clearCart: 'hapuskan daftar',
-    clear: 'hapuskan',
-    payOnDelivery: 'cara pembayaran COD', //货到付款
+    clearCart: 'Hapuskan daftar',
+    clear: 'Hapuskan',
+    payOnDelivery: 'Cara pembayaran COD', //货到付款
     name: 'Nama',
-    nameholder: 'masukan nama lengkap',
-    phoneNumber: 'nomor telpon',
-    phoneNumberholder: 'masukan nomor telpon yg aktif',
-    email: 'alamat email',
-    emailholder: 'masukan alamat email',
+    nameholder: 'Masukan nama lengkap',
+    phoneNumber: 'Nomor telpon',
+    phoneNumberholder: 'Masukan nomor telpon yg aktif',
+    email: 'Alamat email',
+    emailholder: 'Masukan alamat email',
     province: 'Kota provinsi kabupaten',
-    provinceholder: 'masukan Kota provinsi kabupaten',
-    address: 'alamat lengkap',
-    addressholder: 'masukan alamat lengkap',
+    provinceholder: 'Masukan Kota provinsi kabupaten',
+    address: 'Alamat lengkap',
+    addressholder: 'Masukan alamat lengkap',
     zipCode: 'P. M. A.',
     zipCodeholder: 'Kode pos, silakan',
     zipCodeholder1: 'Memilih daerah metropolitan pertama',
-    message: 'tinggalkan pesan',
-    messageholder: 'silakan tinggalkan pesan',
-    nameerr: 'tempat ini tidak boleh kosong',
-    errTelephone: 'tempat ini tidak boleh kosong',
+    message: 'Tinggalkan pesan',
+    messageholder: 'Silakan tinggalkan pesan',
+    nameerr: 'Tempat ini tidak boleh kosong',
+    errTelephone: 'Tempat ini tidak boleh kosong',
     errTelephone2:'Kesalahan format nomor telepon',
-    errShort_address: 'tempat ini tidak boleh kosong',
-    errAddress: 'tempat ini tidak boleh kosong',
+    errShort_address: 'Tempat ini tidak boleh kosong',
+    errAddress: 'Tempat ini tidak boleh kosong',
     errEmail: 'Format alamat email salah',
     orderNumber: 'Nomor pesanan:',
     orderTime: 'Waktu pemesanan:',
@@ -58,15 +58,15 @@ export default {
     pullingText: 'Tarik ke bawah untuk menyegarkan...',
     lossText: 'Lepaskan untuk menyegarkan...',
     loading: 'Loading...',
-    loadSuccess: 'segarkan dengan sukses',
+    loadSuccess: 'Segarkan dengan sukses',
     errorText:'Permintaan gagal, klik reload',
-    confirm: 'konfirmasi',
-    cancel: 'batalkan',
-    score: 'skor',
+    confirm: 'Konfirmasi',
+    cancel: 'Batalkan',
+    score: 'Skor',
     tocomment: 'Untuk berkomentar',
     sendSucess: 'Kirim berhasil',
     errMessage: 'Komentar tidak boleh kosong',
-    justbuy: 'barusan membeli barang ini !',
+    justbuy: 'Barusan membeli barang ini !',
     floorPage_1Title: 'Perhatikan',
     floorPage_1_1: 'Hasil penggunaan sebenarnya produk ini ditentukan oleh keadaan pribadi, tidak bisa menjamin semua pengguna dapat menikmati efek promosi.Kalau ada pertanyaan,bisa hubungi kami via layanan pengguna online atau email(',
     floorPage_1_2: '),perusahaan kami memiliki hak interpretasi akhir.',
