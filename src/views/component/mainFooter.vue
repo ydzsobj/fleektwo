@@ -38,7 +38,7 @@ export default {
             }
     },
     mounted(){
-        this.href=location.href
+        this.href=location.host
     }
 }
 </script>
