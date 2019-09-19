@@ -28,7 +28,10 @@ let router = new Router({
     {path:'*',redirect: '/'}
 
   ],
-  mode: 'history'
+  mode: 'history',
+   scrollBehavior (to, from ,savedPosition) {
+        return {x:0,y:0} 
+      }
 })
 // 每次变换路由发送用户行为
 router.beforeEach((to, from, next) => {

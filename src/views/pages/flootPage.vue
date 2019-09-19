@@ -1,13 +1,13 @@
 <template>
     <div>
-        <van-nav-bar :title="selectTitle" :left-text="$t('back')" left-arrow @click-left="onClickLeft">
+        <van-nav-bar :title="selectTitle" :left-text="$t('back')" left-arrow @click-left="onClickLeft" fixed>
         </van-nav-bar>
         <div class="imgdiv"><img src="../../assets/images/ydzs.png" width="100px"></div>
         <div style="background: #fff">
             <div class="huicolor" v-html="selectContent"></div>
         </div>
 
-        <div class="imgdiv"><img src="../../assets/images/ourstory.jpg" width="100%"></div>
+        <div><img src="../../assets/images/ourstory.jpg" width="100%"></div>
 
     </div>
 </template>
@@ -61,12 +61,14 @@ export default {
   .imgdiv{
       background: #fff;
       text-align: center;
+      margin-top: 50px;
   }
   .huicolor{
     color: #969799;
     width: 80%;
     margin: 0 auto;
     font-size: 14px;
-    padding-bottom: 15px
+    padding-bottom: 15px;
+    overflow: hidden;
   } 
 </style>
