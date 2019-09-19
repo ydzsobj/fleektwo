@@ -13,6 +13,19 @@
                 </van-col>
             </van-row>
         </div> -->
+        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3>
+            <van-icon name="wap-nav" slot="left" />
+            <img src="http://mallbaik.com/img/site.png" slot="title" style="max-height:40px">
+            <van-icon name="search" slot="right" />
+        </van-nav-bar>
+        <div style="height:46px"></div>
+        <van-sidebar v-model="activeKey" id="navLeft" v-show="navLeft_show">
+            <van-sidebar-item :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
+        </van-sidebar>
+        <van-overlay
+        :show="show"
+        @click="show = false,navLeft_show=false"
+        />
         <!--swiper area-->
         <div class="swiper-area">
             <van-swipe :autoplay="1000">
@@ -50,6 +63,15 @@
             </div>
         </div> -->
         <floor-component v-for="(item, index) in floorData" :floorData="item.floor " :floorTitle="item.name" :key="index"></floor-component>
+        <div class="STPRY">
+            <div></div>
+            <span>
+                OUR STORY
+            </span>
+        </div>
+        <div class="new-sale-big tu" style="margin-bottom:10px">
+            <img src="http://mallbaik.com/img/site_img/ourstory.jpg" style="width: 100%;">
+        </div>
         <div class="hot-area">
             <div class="hot-title">{{ $t('hotgoods') }}</div>
             <div class="hot-goods">
@@ -65,6 +87,7 @@
                 </van-list>
             </div>
         </div>
+        <mainFooter></mainFooter>
         
        
         
@@ -77,6 +100,7 @@
     import {swiper , swiperSlide} from 'vue-awesome-swiper'
  
     import floorComponent from '../component/floorComponent'
+    import mainFooter from '../component/mainFooter'
     import { toMoney , int,num} from '@/filter/moneyFilter.js'
     import goodsInfo from '../component/goodsInfoComponent'
     import url from '@/serviceAPI.config.js'
@@ -84,6 +108,10 @@
     export default {
         data() {
             return {
+                bar_fixed:true,
+                navLeft_show:false,
+                activeKey:9999999,
+                show:false,
                 swiperOption:{
                     slidesPerView:3
                 },
@@ -114,7 +142,7 @@
                 return num(money)
             }
         },
-        components:{swiper,swiperSlide,floorComponent,goodsInfo},
+        components:{swiper,swiperSlide,floorComponent,goodsInfo,mainFooter},
         created(){
             axios({
                 url:url.getShopingMallInfo,
@@ -138,18 +166,70 @@
         },
         methods:{
             golistPage(id,index) {
+                this.show=false
+                this.navLeft_show=false
                 this.$router.push({name:'CategoryList',params:{categorySubId:id,index:index}})
             },
             goGoodsPage(id) {
                 console.log(id)
                 this.$router.push({name:'Goods',query:{goodsId:id}})
+            },
+            onClickNavLeft(){
+                this.show=!this.show
+                this.navLeft_show=!this.navLeft_show
             }
+        },
+        mounted(){
+            console.log(location.href)
+            let winHeight = document.documentElement.clientHeight
+            document.getElementById("navLeft").style.height=winHeight -46 +'px'
         }
        
     }
 </script>
 
 <style scoped>
+    .van-sidebar-item--select {
+        border-color: #f8f8f8;
+        background-color: #f8f8f8;
+        color: #7d7e80;
+    }
+    .van-nav-bar .van-icon {
+        font-size: 26px;
+        color:#333
+    }
+    #navLeft{
+        position: fixed;
+        top: 46px;
+        left: 0;
+        z-index: 3;
+        background: #f8f8f8;
+        overflow-y: auto;
+    }
+    .van-overlay{
+        z-index: 2!important;
+    }
+    .STPRY {
+        height: 20px;
+        margin-bottom: 6px;
+        margin-top: 6px;
+        line-height: 20px;
+        position: relative;
+        text-align: center;
+    }
+    .STPRY div {
+        position: absolute;
+        top: 9px;
+        border-top: 2px solid #000;
+        width: 80%;
+        left: 10%;
+    }
+    .STPRY span {
+        background: #f0f0f0;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+    }
     .search-bar{
         height:2.2rem;
         background-color: #e5017d;

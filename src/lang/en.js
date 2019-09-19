@@ -84,5 +84,14 @@ export default {
     floorPage_3Html: "<p>Items can only be returned for a refund if they are unopened, unused and in a re-saleable condition with all tamper-resistant seals, packaging and any cellophane intact. You must notify us in writing that you are returning your purchase within 14 days, beginning the day after the day on which you receive the product.</p><p>Please ensure that you also return any free gifts that are associated with your return items or the related order. If the free gift isn't returned, then we reserve the right to deduct the value of the free gift from your refund.</p><p>We recommend a photograph is taken of the item prior to returning it if you are concerned about damage during its return journey.</p><p>Please note that we do not accept returns of personalised products.</p><p><strong>Please note the order number needs to be entered without any letter at the end.</strong> If you do not have your dispatch note or invoice, please include an explanatory note quoting your order number and reason for return.</p><p>Your refund will be processed, once it has been delivered to our warehouse and within 3 working days of arriving back to our us. Refunds can take up to 1 week to show on your account; this is due to the time taken by some banks to process the payment.</p><p>We will refund you by the same payment method used to make the original order (e.g. if you have paid by PayPal, we will reimburse your PayPal account). If you have not received your refund after this time, please contact our<strong> Customer Care Team</strong> and we will be happy assist you.</p><p>Receipt confirmation—Apply for returns/exchanges—Confirmation by customer service-Ship the item back-Delivered to warehouse—Inspection--- Refund/Exchange.</p><p>Please attach with the Order No., Contact No., and Customer name.</p>",
     floorPage_3_1: '',
     floorPage_3_2: '',
-    floorPage_4: 'Fleekfly, known as "Strictly Selected Mall", insists on its usual precise attitude for selection of products origin, workmanship and raw materials of all goods adhering to strict criteria including clothing, shoes, bags, houseware, kitchenware and sportswear in order to satisfy our customers with the best products pursuing to the excellent quality.'
+    floorPage_4: 'Fleekfly, known as "Strictly Selected Mall", insists on its usual precise attitude for selection of products origin, workmanship and raw materials of all goods adhering to strict criteria including clothing, shoes, bags, houseware, kitchenware and sportswear in order to satisfy our customers with the best products pursuing to the excellent quality.',
+    mainFooter_1:'Buyer Protection',
+    mainFooter_1_1:'Full refund for failure shipping orders.',
+    mainFooter_1_2:'Full or Partial refund for not-as-described goods.',
+    mainFooter_About:'About Us',
+    mainFooter_shipping:'Shipping Terms',
+    mainFooter_return:'Return and Exchange Policy',
+    mainFooter_privacy:'Privacy Policy',
+    mainFooter_contact:'Contact Us',
+    mainFooter_2:'. All rights reserved'
     }
