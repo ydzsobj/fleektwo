@@ -51,7 +51,7 @@ export default {
             }
         }
     },
-    created(){
+    activated(){
          this.flootType = this.$route.params.flootType
     }
     
