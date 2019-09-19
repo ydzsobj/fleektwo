@@ -78,5 +78,14 @@ export default {
     floorPage_3Title: 'Alur penggantian dan pengembalian',
     floorPage_3_1: 'Konfirmasi terima barang–minta ganti dan kembali barang–setuju oleh pelayan pelanggan–pelanggan kirim barang –gudang terima dan periksa barang–periksa ganti dan kembali barang –kembali uang/ganti barang',
     floorPage_3_2: 'Silakan isi : Nomor pesanan, nama dan no HP.',
-    floorPage_4: 'Fleekfly adalah online mall yang memilih produk dengan sikap yang ketat mengikuti secara konsisten, Menyebar ke seluruh dunia, secara ketat mengontrol asal produk, baik komoditas kerajinan, bahan baku, pakaian, tas dan sepatu, peralatan rumah tangga,  peralatan dapur, olahraga dll. Kami berusaha memberikan produk kualitas terbaik kepada Anda .'
+    floorPage_4: 'Fleekfly adalah online mall yang memilih produk dengan sikap yang ketat mengikuti secara konsisten, Menyebar ke seluruh dunia, secara ketat mengontrol asal produk, baik komoditas kerajinan, bahan baku, pakaian, tas dan sepatu, peralatan rumah tangga,  peralatan dapur, olahraga dll. Kami berusaha memberikan produk kualitas terbaik kepada Anda .',
+    mainFooter_1:'jaminan',
+    mainFooter_1_1:'jika anda tidak menerima barang pengembalian uang sepenuhnya！',
+    mainFooter_1_2:'Jika barang yang Anda beli tidak cocok dengan deskripsi，Pengembalian uang penuh ！',
+    mainFooter_About:'tentang kami',
+    mainFooter_shipping:'ketentuan pengiriman',
+    mainFooter_return:'kebijakan retur',
+    mainFooter_privacy:'kebijakan pribadi',
+    mainFooter_contact:'hubungi kami',
+    mainFooter_2:'. All rights reserved'
     }
