@@ -106,6 +106,7 @@
             @input="fbinput"
           />
           <van-field
+            v-if="$store.state.lang === 'ind-BA'"
             required
             :label="$t('zipCode')"
             clearable
@@ -118,6 +119,16 @@
                    <option v-for="(item, index) in optionsArrt" :key="index" :value="item">{{item}}</option>
                </select>
           </van-field>
+          <van-field
+            v-else
+            v-model="zipCode"
+            :label="$t('zipCode')"
+            clearable
+            clickable
+            :placeholder="$t('zipCodeholder')"
+            type="number"
+            @input="fbinput"
+           />
             <van-field
               v-model="address"
               :label="$t('address')"
@@ -168,6 +179,7 @@
     import url from '@/serviceAPI.config.js'
     import { toMoney, toDivide, toThousands,int} from '@/filter/moneyFilter.js'
     import obj from '@/province/ndnxy.js'
+    import objFlb from '@/province/flb.js'
     export default {
        data() {
            return {
@@ -243,6 +255,9 @@
                if(this.$store.state.lang === 'ind-BA'){
                     this.decimalLength = 0
                     return obj
+                }else if (this.$store.state.lang === 'en-PHP'){
+                    this.decimalLength = 2
+                    return objFlb
                 }else{
                     this.decimalLength = 2
                     return obj
@@ -304,7 +319,15 @@
                this.errAddress=''
                this.errShort_address=''
                let reg = /^([a-zA-Z]|[0-9])(\w|\-)+@[a-zA-Z0-9]+\.([a-zA-Z]{2,4})$/;
-               let regTele= /^[0-9]{11,12}$/;
+               let regTele = null
+               if(this.$store.state.lang === 'ind-BA'){
+                   regTele= /^[0-9]{11,12}$/; //印尼电话号码要求11,12位
+               }else if(this.$store.state.lang === 'en-PHP'){
+                   regTele= /\d/;
+               }else{
+                   regTele= /\d/;
+               }
+
                if(this.name === ''){
                    this.errName = this.$t('nameerr');return
                }else if (this.telephone===''){
@@ -402,8 +425,9 @@
                 this.areaShow = false
                 console.log(list)
                 this.short_address = list[0].name + '/' + list[1].name + '/' +list[2].name
-                this.optionsArrt = this.areaList.post[list[2].code]   //对应省市区的 邮政编码数组赋值
-                this.zipCode= this.optionsArrt[0]
+                this.optionsArrt = this.areaList.post[list[2].code] || []  //对应省市区的 邮政编码数组赋值
+                if( this.areaList.post[list[2].code] ){  this.zipCode= this.optionsArrt[0] }
+               
                 this.fbinput()
             },
             cancel(){

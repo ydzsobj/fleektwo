@@ -22,7 +22,8 @@ const i18n = new VueI18n({
   messages: {
     'zh-CN': zh,   // 中文语言包
     'en-US': en,    // 英文语言包
-    'ind-BA': ind    // 印尼语言包
+    'ind-BA': ind,    // 印尼语言包
+    'en-PHP': en    // 菲律宾语言包
   }
 })
 
