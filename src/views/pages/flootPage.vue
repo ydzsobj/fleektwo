@@ -39,20 +39,20 @@ export default {
         },
         selectTitle () {
             if(this.flootType ==1){
-                return this.$t('floorabout')
+                return this.$t('mainFooter_About')
             }else if(this.flootType ==2){
-                return this.$t('floorshoping')
+                return this.$t('mainFooter_shipping')
             }else if(this.flootType ==3){
-                return this.$t('floorreturn')
+                return this.$t('mainFooter_return')
             }else if(this.flootType ==4){
-                return this.$t('floorprivacy')
+                return this.$t('mainFooter_privacy')
             }else if(this.flootType ==5){
-                return this.$t('floorcontact')
+                return this.$t('mainFooter_contact')
             }
         }
     },
     created(){
-         this.flootType = 5 //this.$route.params.flootType
+         this.flootType = this.$route.params.flootType
     }
     
 }
