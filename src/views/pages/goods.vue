@@ -540,7 +540,7 @@ import { setTimeout } from 'timers';
                            console.log(this.goodsInfo)
                       })
                       .catch(error=>{
-                          console.log(error)
+                          Toast(this.$t('serveError'))
                           reject(error)
                       })
                     })
