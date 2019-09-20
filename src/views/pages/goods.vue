@@ -503,7 +503,7 @@ import { setTimeout } from 'timers';
                   if(that.index_1==a.length){
                     clearInterval(t)
                   }
-                  if (that.index_1 == 1) {
+                  if (that.index_1 == 1 && that.index_1 !=a.length) {
                     clearInterval(t);
                     t = setInterval(fn, date);
                   }
