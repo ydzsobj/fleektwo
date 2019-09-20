@@ -252,8 +252,11 @@
     }
     .swiper-area{
         clear:both;
-        max-height:15rem;
+        max-height:600px;
         overflow: hidden;
+    }
+    .van-swipe{
+        max-height:600px;
     }
 
     .type-bar{
