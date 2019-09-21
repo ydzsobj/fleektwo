@@ -107,13 +107,10 @@
            
         },
         activated(){
-            let categorySubId =  this.$route.params.categorySubId
-            if(!categorySubId || this.categorySubId === categorySubId) {
-               return false
-            }else {
+            if(this.categorySubId && this.$route.params.categorySubId && this.categorySubId != this.$route.params.categorySubId){
                     this.page=1
                     this.categoryIndex=this.$route.params.index
-                    this.categorySubId=categorySubId
+                    this.categorySubId=this.$route.params.categorySubId
                     this.finished = false
                     this.isLoading= true
                     this.loading = true
@@ -161,8 +158,9 @@
                 .then(response=>{
                     if(response.data.success && response.data.data ){
                       this.category = response.data.data
-                      this.categorySubId = this.categorySubId?this.categorySubId:this.category[0].category_id
-                      this.onLoad()
+                        this.categorySubId = this.$route.params.categorySubId || this.category[0].category_id
+                        this.categoryIndex = this.$route.params.index || 0
+                        this.onLoad()
                     }else{
                         Toast($t('serveError'))
                     }
