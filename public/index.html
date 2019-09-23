@@ -6,13 +6,20 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no">
     <meta name="description" content="FleekFly online shopping mall!" />
     <meta property="og:description" content="FleekFly online shopping mall!"/>
-    <meta property="og:image" content="../src/assets/images/ydzs.png"/>
+    <meta property="og:image" content="./img/ydzs.png"/>
     <meta property="og:type" content="website"/>
     <!-- <meta property="og:url" content="http://www.richard-market.com/"/> -->
     <meta property="og:title" content="FleekFly"/>
-    <meta property="fb:app_id" content="" />
+    <!-- <meta property="fb:app_id" content="" /> -->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>FleekFly</title>
+    <script>
+      var head = document.getElementsByTagName('head');
+      var meta = document.createElement('meta')
+      meta.setAttribute('property', 'og:url')
+      meta.content = location.host
+      head[0].appendChild(meta)
+    </script>
     <script>
       !function(f,b,e,v,n,t,s)
       {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
