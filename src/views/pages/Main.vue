@@ -37,6 +37,14 @@
            this.getlang()
             this.cartNumFun()
        },
+       mounted(){
+               let head = document.getElementsByTagName('head');
+               let meta = document.createElement('meta')
+               meta.setAttribute('property', 'og:url')
+               meta.content = location.host
+               head[0].appendChild(meta)
+
+       },
        updated(){
            this.changeTabBarActive()
        },
