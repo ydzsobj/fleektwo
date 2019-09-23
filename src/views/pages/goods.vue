@@ -424,7 +424,7 @@ import { setTimeout } from 'timers';
                            placeholder: '' // 可选值，占位文本
                          }
                        ],
-                       hide_stock: false // 是否隐藏剩余库存
+                       hide_stock: true // 是否隐藏剩余库存
                 },
                 goods: {
                    // 商品标题
