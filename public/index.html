@@ -8,12 +8,13 @@
     <meta property="og:description" content="FleekFly online shopping mall!"/>
     <meta property="og:image" content="/img/ydzs.eca6653c.png"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:url" content="http://about:blank/"/>
+    <meta property="og:url" content="http://www.richard-market.com/"/>
     <meta property="og:title" content="FleekFly"/>
     <!-- <meta property="fb:app_id" content="" /> -->
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title>FleekFly</title>
     <script>
+      document.querySelector("meta[property='og:url']").remove();
       var head = document.getElementsByTagName('head');
       var meta = document.createElement('meta')
       meta.setAttribute('property', 'og:url')
