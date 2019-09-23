@@ -303,7 +303,7 @@
                     });
                    } 
                    console.log('checkedGoods',this.checkedGoods)
-                   console.log(' this.cartInfo:'+JSON.stringify(this.cartInfo))
+                   console.log(this.cartInfo)
                    this.isEmpty=this.cartInfo.length>0 ?true : false
                 }
             

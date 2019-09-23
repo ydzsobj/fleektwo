@@ -19,13 +19,14 @@ let router = new Router({
       {path:'Cart',name:'Cart',component: () => import('@/views/pages/Cart')},
       {path:'goods',name:'Goods',component: () => import('@/views/pages/goods')},
       {path:'flootPage',name:'flootPage',component: () => import('@/views/pages/flootPage')},
+      {path:'404',name:'404',component: () => import('@/views/pages/404')},
       // {path:'/Member',name:'Member',component:Member},
     ]
     },
     {path:'/register',name:'Register',component:Register},
     {path:'/login',name:'login',component:Login},
     {path:'/order',name:'order',component: () => import('@/views/pages/OrderSuccess')},
-    {path:'*',redirect: '/'}
+    {path:'*',redirect: '404'}
 
   ],
   mode: 'history',

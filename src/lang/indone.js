@@ -64,6 +64,7 @@ export default {
     cancel: 'Batalkan',
     score: 'Skor',
     tocomment: 'Untuk berkomentar',
+    resgoods: 'Anda mungkin seperti ini lagi',
     sendSucess: 'Kirim berhasil',
     errMessage: 'Komentar tidak boleh kosong',
     justbuy: 'Barusan membeli barang ini !',

@@ -53,11 +53,14 @@
              <p>{{ $t('orderTime') }} {{orderResponse.created_at}} </p>
           </van-col>
        </van-row>
+       <res-goods></res-goods>
     </div>
 </template>
 <script>
     import { toMoney, toDivide, int} from '@/filter/moneyFilter.js'
+    import resGoods from '../component/resGoods'
 export default {
+    components:{resGoods},
     data () {
         return {
             cartInfo:'',

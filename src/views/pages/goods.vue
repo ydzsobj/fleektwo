@@ -542,6 +542,7 @@ import { setTimeout } from 'timers';
                       .catch(error=>{
                           Toast(this.$t('serveError'))
                           reject(error)
+                          this.$router.push({name:'404'})
                       })
                     })
             },
