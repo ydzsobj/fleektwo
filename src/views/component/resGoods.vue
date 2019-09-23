@@ -65,6 +65,7 @@ export default {
        border-bottom:1px solid #eee;
        background-color: #ffffff;
        font-size: 18px;
+       text-align: center;
    }
     .recommend-item{
         width:99%;
