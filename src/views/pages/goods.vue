@@ -237,6 +237,7 @@
         <van-goods-action style="z-index: 2;" class="marginauto">
           <van-goods-action-icon
             :info="cartNumCount"
+            :class="{ 'animationCartCount': skuSelectedImg }"
             icon="cart-o"
             :text="$t('shopCart')"
             @click.native="tocart"
@@ -289,7 +290,9 @@
              </div>
            </template>
         </van-sku>
-
+        
+          <img :src="skuSelectedImg" alt="" width="80" height="80" class="fadeimg" :class="{ 'animationCart': skuSelectedImg }">
+        
     </div>
 </template>
 
@@ -309,6 +312,7 @@ import { setTimeout } from 'timers';
       },
         data() {
             return {
+                skuSelectedImg: null,
                 notice_show:false,
                 index_1:0,
                 notice_con_1:'',
@@ -568,10 +572,21 @@ import { setTimeout } from 'timers';
                      cartInfo.push(Object.assign(newGoodsInfo , skuData))     
                  }
                 localStorage.cartInfo = JSON.stringify(cartInfo)
-                // this.$store.state.cartNum = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo).length : ''
-                Toast.success(this.$t('successAdd'))
                 try{fbq('track', 'AddToCart');console.log('addtocart')}catch(e){} 
-                this.$router.push({name:'Cart'})
+                // this.$router.push({name:'Cart'})
+                if(this.goodsInfo.tree.length>0){
+                    this.goodsInfo.tree[0].v.forEach(ele=>{
+                      if(ele.id === skuData.selectedSkuComb.s1){ this.skuSelectedImg = ele.imgUrl || this.goodsInfo.main_image_url}
+                    })
+                }else{ this.skuSelectedImg = this.goodsInfo.main_image_url }  // 添加购物车飞入动画图片内容
+                this.show = false
+                setTimeout(() => {
+                   Toast.success(this.$t('successAdd'))
+                   this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
+                   this.skuSelectedImg = null
+                }, 2000);
+
+
             },
             tohome(){
                 this.$router.push({name:"ShoppingMall"})
@@ -822,4 +837,87 @@ import { setTimeout } from 'timers';
     overflow: auto;
     max-height: 350px;
   }
+  .fadeimg {
+    position: fixed;
+    bottom: -100px;
+    left: 0px
+  }
+  .animationCart {
+    animation: bounce-in 2s ease 0.2s;
+    -webkit-animation: bounce-in 2s ease 0.2s;
+    animation-fill-mode:forwards;
+-webkit-animation-fill-mode:forwards; /* Safari 和 Chrome */
+  }
+  /* .fade-leave-active {
+    animation: bounce-in 2s ease 0.2s;
+    -webkit-animation: bounce-in 2s ease 0.2s;
+}
+ .fade-enter-active{
+    transition: all 1s;
+ }
+.fade-enter {
+  transform: translatey(300px);
+} */
+
+@keyframes bounce-in {
+  0% {
+    transform: scale(1);
+    left:100px;
+    bottom:300px;
+  }
+  25% {
+    left:150px;
+    bottom:400px;
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(0.2);
+    left: 5px; 
+    bottom:0px;
+  }
+}
+@-webkit-keyframes bounce-in /*Safari and Chrome*/
+{
+  0% {
+    transform: scale(1);
+    left:60px;
+    bottom:320px;
+  }
+  50% {
+    transform: scale(0.5);
+  }
+  100% {
+    transform: scale(0);
+    left: 20px; 
+    bottom:0px;
+  }
+}
+.animationCartCount {
+   animation: cartcount 0.2s linear 1.8s;
+   -webkit-animation: cartcount 0.2s linear 1.8s;
+}
+@keyframes cartcount {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@-webkit-keyframes cartcount {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
 </style>
