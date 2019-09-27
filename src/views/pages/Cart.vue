@@ -496,8 +496,12 @@
                       
                       if(response.status== 200 && response.data.success){
                          console.log(response.data.data)
-                         this.total_off = response.data.data.total_off
-                         this.couponid= response.data.data.coupon_code_id
+                         if(response.data.data.total_off===0){
+                            Toast(this.$t('couponUn')) 
+                         }else{
+                            this.total_off = response.data.data.total_off
+                            this.couponid= response.data.data.coupon_code_id
+                         }
                       }else{
                           Toast(this.$t('couponerr'))
                       }

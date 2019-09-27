@@ -24,6 +24,11 @@
             </div>
         </van-card>
 
+          <van-cell>
+                <span class="redcolorpirce" v-if="$store.state.lang==='ind-BA'" >{{moneySign}}{{orderResponse.price*100 | int}}</span>
+                <span class="redcolorpirce" v-else >{{moneySign}}{{orderResponse.price*100 | toDivide}}</span>
+          </van-cell>
+
         <van-row style="background-color: #ffffff;font-size: 14px;line-height: 20px;word-break:break-word">
            <van-row>
               <van-col span="2"><van-icon name="user-circle-o" style="margin: 2px 0 0 10px"/></van-col>
@@ -133,6 +138,10 @@ export default {
 }
 .redcolor{
     color:#f44
+}
+.redcolorpirce{
+    color:#f44;
+    float: right;
 }
 .huicolor{
   color: #969799;

@@ -71,6 +71,7 @@ export default {
     coupoCodeSend: '验证',
     couponerr: '优惠码无效',
     couponmoney: '优惠金额：',
+    couponUn: '优惠条件未满足',
     justbuy: '刚刚购买了此商品！',
     floorPage_1Title: '用户须知',
     floorPage_1_1: '本产品的实际使用效果根据个人情况决定，不保证每位用户都能享受到宣传的效果。若有疑问请咨询在线客服或通过电子邮箱(',

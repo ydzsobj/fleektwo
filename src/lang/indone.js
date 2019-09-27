@@ -27,6 +27,7 @@ export default {
     coupoCodeSend: 'Verifikasi',
     couponerr: 'Kode promo tidak valid',
     couponmoney: 'Jumlah bantuan',
+    couponUn: 'Preferential terms not met',
     account: 'Penyelesaian',
     total: 'Jumlah',
     back: 'Kembali',
