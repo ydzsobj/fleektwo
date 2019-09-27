@@ -62,7 +62,7 @@
                  </van-radio-group>
              </van-col>
         </van-row>
-        <van-cell-group style="margin-bottom: 50px">
+        <van-cell-group style="margin-bottom: 80px">
           <van-field
             v-model="name"
             required
@@ -149,18 +149,33 @@
             :placeholder="$t('messageholder')"
             @input="fbinput"
           />
+            <van-field
+              v-model="coupoCode"
+              :label="$t('coupoCode')"
+              clearable
+              clickable
+              :placeholder="$t('coupoCodeholder')"
+              @input="fbinput"
+            >
+                <van-button slot="button" size="small" type="primary" @click.native="coupoCodeSend">{{$t('coupoCodeSend')}}</van-button>
+            </van-field>
         </van-cell-group>
         <van-submit-bar
           class="left50"
          :loading="submitloading"
          :currency="$store.state.money_sign"
-          :price="totalMoney"
+          :price="totalMoneyCoupon"
           :decimal-length="decimalLength"
           :disabled="checkedGoods.length <= 0 || submitloading"
           :button-text="$t('account')"
           :label="$t('total')"
           @submit="onSubmit"
-        />
+        >
+           <div v-if="total_off" slot="tip"> {{$t('couponmoney')}}
+                <span v-if="$store.state.lang==='ind-BA'" style="float: right;">-{{$store.state.money_sign}}{{total_off| int}}</span>
+                <span v-else style="float: right;">-{{$store.state.money_sign}}{{total_off| toDivide}}</span>
+            </div>
+        </van-submit-bar>
         <van-overlay
          z-index="101"
          :show="areaShow"
@@ -183,6 +198,8 @@
     export default {
        data() {
            return {
+               couponid: null,
+               total_off: null,
                decimalLength: 0,
                areaShow: false,
                fbinputFalg: true,
@@ -195,6 +212,7 @@
                malldataOrder:[],
                countPrice: null,
                isBuy: false,
+               coupoCode: '',
                name: '',
                telephone: '',
                address: '',
@@ -251,6 +269,16 @@
                console.log(this.malldata,this.countPrice)
                return this.countPrice
            },
+           totalMoneyCoupon(){
+               console.log(this.totalMoney - this.total_off)
+               let num = this.totalMoney - this.total_off
+                 if(this.$store.state.lang === 'ind-BA' && (num/100).toString().indexOf('.')>0){
+                     this.decimalLength = 2
+                 }else if(this.$store.state.lang === 'ind-BA' && (num/100).toString().indexOf('.') === -1){
+                     this.decimalLength = 0
+                 }   //印尼地区每次价格变动都会看有没有小数点，有小数就保留两位，否则还是保留整数
+               return num
+           },
            areaList(){
                if(this.$store.state.lang === 'ind-BA'){
                     this.decimalLength = 0
@@ -263,6 +291,16 @@
                     return obj
                 }
                }
+       },
+       watch: {
+          malldata: {
+              handler(){
+                this.couponid = null;  // 数量变化先把优惠码id清空
+                this.total_off = null; // 数量变化先把优惠清空了
+                this.coupoCodeSend() //如果购物车数量价格变化，发送优惠码和购物车数据去后台
+              },
+              deep: true
+          }
        },
        filters:{
            toThousands(money){
@@ -345,7 +383,7 @@
                 this.submitloading=true
                 let data = {}
                 data.cart_data = this.malldata
-                data.countPrice = this.countPrice
+                data.total_off = this.total_off
                 data.receiver_name = this.name
                 data.receiver_phone = this.telephone
                 data.receiver_email = this.email
@@ -353,6 +391,7 @@
                 data.short_address = this.address
                 data.postcode = this.zipCode
                 data.leave_word = this.message
+                data.coupon_code_id = this.couponid
                     axios({
                         url:url.sendOrderInfo,
                         method:'post',
@@ -442,6 +481,30 @@
             selectChange(){
             //    console.log('ddd',this.$refs.zipselect.value)
                this.zipCode = this.$refs.zipselect.value
+            },
+            coupoCodeSend(){
+              if(this.coupoCode.length>0){
+                  axios({
+                      url:url.sendCoupon,
+                      method:'post',
+                      data: {
+                         cart_data: this.malldata,
+                         coupon_code: this.coupoCode
+                      }
+                  })
+                  .then(response=>{
+                      
+                      if(response.status== 200 && response.data.success){
+                         console.log(response.data.data)
+                         this.total_off = response.data.data.total_off
+                         this.couponid= response.data.data.coupon_code_id
+                      }else{
+                          Toast(this.$t('couponerr'))
+                      }
+                  }).catch(err=>{
+                      Toast(this.$t('serveError'))
+                  })
+              }
             }
         },
     }
