@@ -76,6 +76,9 @@
         box-sizing:border-box;
         -webkit-box-sizing: border-box;
     }
+    .floor-anomaly>div img{
+        display: block
+    }
     .floor-one{
         border-right:1px solid #ddd;
     }
