@@ -93,6 +93,7 @@
                             <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-PHP'" v-html="$t('floorPage_1Html')"></div>
                             <div slot="default" class="huicolor maxheight" v-else>
                                 <p>{{$t('floorPage_1_1')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_1_2')}}</p>
+                                <div v-html="$t('floorPage_1_2_1_Html')"></div>
                             </div>
                         </van-cell>
                         <van-cell>

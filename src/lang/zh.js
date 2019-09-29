@@ -76,6 +76,7 @@ export default {
     floorPage_1Title: '用户须知',
     floorPage_1_1: '本产品的实际使用效果根据个人情况决定，不保证每位用户都能享受到宣传的效果。若有疑问请咨询在线客服或通过电子邮箱(',
     floorPage_1_2: ')联络我们，本公司享有最终解释权。',
+    floorPage_1_2_1_Html: '<strong>免责声明</strong><p>本网站不是Facebook网站或Facebook Inc.的一部分。此外，本网站不被Facebook以任何方式认可。FACEBOOK是FACEBOOK, Inc.的商标。</p>',
     floorPage_2Title: '如何申请退换货',
     floorPage_2_1: '1.由于个人原因产生的退换货：至收到商品起7天内，在不影响二次销售的情况下请联系我们的在线客服或发邮件至',
     floorPage_2_2: '，售后客服会在收到消息后的1-3个工作日内受理您的请求，退换货所产生的运费需自行承担。',
