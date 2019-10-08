@@ -56,6 +56,8 @@
                        this.$store.state.money_sign = response.data.data.config.money_sign
                        this.$store.state.lang = response.data.data.config.lang
                        this.$store.state.email = response.data.data.config.email
+                       this.$store.state.phone = response.data.data.config.phone
+                       this.$store.state.global_address = response.data.data.global_configs.global_address
                     }else{
                         Toast(this.$t('serveError'))
                     }

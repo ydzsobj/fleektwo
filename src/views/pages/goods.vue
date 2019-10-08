@@ -8,6 +8,16 @@
         />
       </div>
       <van-pull-refresh v-model="pullLoading" @refresh="onRefresh" :pulling-text="$t('pullingText')" :loosing-text="$t('lossText')" :loading-text="$t('loading')">
+        <div style="font-size: 14px;">
+            <img src="../../assets/images/ydzstou.png" width="50px" style="float: right;margin: 9px 0;">
+            <div style="margin-left:10px">
+                <van-icon name="phone" v-if="$store.state.phone"/> {{$store.state.phone}}
+                <br/>
+                <van-icon name="envelop-o"  v-if="$store.state.email"/> {{$store.state.email}}
+                <br/>
+                <van-icon name="location" v-if="$store.state.global_address"/> {{$store.state.global_address}}
+            </div>
+        </div>
         <div class="swiper-area">
             <van-swipe>
               <van-swipe-item v-if="goodsInfo.main_video_url">

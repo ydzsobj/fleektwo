@@ -9,6 +9,8 @@ export default new Vuex.Store({
       money_sign: '',
       lang: '',
       email: '',
+      phone: '',
+      global_address: '',
       fix: null
   },
   mutations: {
