@@ -37,7 +37,6 @@ export default {
     provinceholder: '请输入省市区',
     address: '详细地址',
     addressholder:'请输入详细地址',
-    message: '留言',
     messageholder: '请输入留言',
     nameerr: '姓名不能为空！',
     errTelephone: '电话不能为空！',

@@ -47,7 +47,6 @@ export default {
     zipCode: 'P. M. A.',
     zipCodeholder: 'Kode pos, silakan',
     zipCodeholder1: 'Memilih daerah metropolitan pertama',
-    message: 'Tinggalkan pesan',
     messageholder: 'Silakan tinggalkan pesan',
     nameerr: 'Tempat ini tidak boleh kosong',
     errTelephone: 'Tempat ini tidak boleh kosong',

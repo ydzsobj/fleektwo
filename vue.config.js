@@ -1,4 +1,17 @@
+
 module.exports = {
+    css: {
+        loaderOptions: {
+          less: {
+            modifyVars: {
+              red: '#ff8917',
+              blue: '#3eaf7c',
+            //   orange: '#f08d49',
+              'text-color': '#111'
+            }
+          }
+        }
+      },
     devServer: {
         proxy: {
             '/api': {

@@ -41,7 +41,6 @@ export default {
     zipCode: 'Zip code',
     zipCodeholder: 'Please input zip code',
     zipCodeholder1: 'Please choose the provincial area first',
-    message: 'Message',
     messageholder: 'Please input your message',
     nameerr: 'Name can’t be blank!',
     errTelephone: 'Phone number can’t be blank!',

@@ -313,7 +313,7 @@
     import {Toast} from 'vant'
     import {ImagePreview} from 'vant'
     import {Sku} from '../../vant' //sku组件有改动所以用自定义的vant
-    import '../../vant/lib/index.css';
+    // import '../../vant/lib/index.css';
     import {toMoney, int,num} from '@/filter/moneyFilter.js'
     import checkoutLang from '@/lang.js'
 import { setTimeout } from 'timers';
@@ -473,9 +473,19 @@ import { setTimeout } from 'timers';
             console.log(this.goodsId)
             this.getInfo()
             this.getNotice()
-            this.sku.messages[0].name = this.$t('message') //sku留言 语言包
-            this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
             // this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
+        },
+        mounted(){
+            clearInterval(inte)
+            var inte = setInterval(() => {
+                this.sku.messages[0].name = this.$t('message') //sku留言 语言包
+                this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
+                console.log('+++',this.sku.messages[0].name,this.$store.state.lang)
+              if(this.$store.state.lang){
+                 clearInterval(inte)
+              }
+            }, 2000);
+
         },
         activated(){
             this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
