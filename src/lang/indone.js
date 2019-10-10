@@ -19,6 +19,8 @@ export default {
     ok: 'Konfirm',
     buyNum: 'Jumlah pesanan', //购买数量
     message: 'Tinggalkan pesan', //留言
+    storeenter: 'Masuk ke toko',
+    official: 'The official',
     messagePlaceholder: 'Silakan masukkan teks anda',
     serveError: 'Galat server, pengiriman data gagal',
     successAdd: 'Berhasil ditambahkan',

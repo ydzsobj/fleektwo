@@ -4,8 +4,8 @@ module.exports = {
         loaderOptions: {
           less: {
             modifyVars: {
-              red: '#ff8917',
-              blue: '#3eaf7c',
+              red: '#ef3470',
+              blue: '#ef3470',
             //   orange: '#f08d49',
               'text-color': '#111'
             }

@@ -19,6 +19,8 @@ export default {
     ok: 'CONFIRM',
     buyNum: 'Quantity', //购买数量
     message: 'Leave word ', //留言
+    storeenter: 'Enter the store',
+    official: 'resmi',
     messagePlaceholder: 'Please enter your text',
     serveError: 'Server error, data retrieval failed',
     successAdd: 'Successfully added',

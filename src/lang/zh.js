@@ -18,6 +18,8 @@ export default {
     ok: '确定',
     buyNum: '购买数量',
     message: '留言',
+    storeenter: '进入店铺',
+    official: '官方',
     messagePlaceholder:'请输入文本',
     serveError: '服务器错误，数据提交失败',
     successAdd: '添加成功',

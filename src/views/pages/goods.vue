@@ -24,7 +24,7 @@
                 <video :src="goodsInfo.main_video_url" controls="controls" width="100%"/>
               </van-swipe-item>
               <van-swipe-item v-for="(image, index) in goodsInfo.list_images" :key="index">
-                <img :src="image" width="100%"/>
+                <img :src="image" width="100%" style="display: block"/>
               </van-swipe-item>
             </van-swipe>
         </div>
@@ -33,16 +33,16 @@
             <div class="goods-title">{{ goodsInfo.title}}</div>
             <div class="huicolor">{{ goodsInfo.about}}</div>
             <div v-if="$store.state.lang==='ind-BA'" class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
-            <div v-else class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price }}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s></div>
+            <div v-else class="goods-price"> <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s> {{goodsInfo.money_sign}}{{goodsInfo.price }} </div>
           </van-cell>
-          <van-cell class="goods-express">
-            <van-col class="huicolor" span="6">{{ $t('carriage') }}</van-col>
-            <van-col class="huicolor" span="6">0</van-col>
-            <!-- <van-col class="huicolor" span="6">{{ $t('inventory') }}</van-col>
-            <van-col class="huicolor" span="6">{{goodsInfo.stock_num}}</van-col> -->
+          <van-cell :value="$t('storeenter')" icon="shop-o" is-link @click.native="tohome">
+            <template slot="title">
+              <span class="van-cell-text">{{ $t('store') }}</span>
+              <van-tag class="goods-tag" type="danger">{{ $t('official') }}</van-tag>
+            </template>
           </van-cell>
         </van-cell-group>
-        <van-cell-group @click.native= showSkuAttr>
+        <!-- <van-cell-group @click.native= showSkuAttr>
           <van-cell class="goods-express">
             <van-col class="huicolor" span="4">{{ $t('select') }}</van-col>
             <van-col span="19">{{ attrText }}</van-col>
@@ -54,7 +54,7 @@
               </div>
             </van-col>
           </van-cell>
-        </van-cell-group>
+        </van-cell-group> -->
       </van-pull-refresh>
         <div>
             <van-tabs class="mallFlexd" v-model="activeTab" swipeable sticky>
@@ -251,22 +251,22 @@
             :class="{ 'animationCartCount': skuSelectedImg }"
             icon="cart-o"
             :text="$t('shopCart')"
-            @click.native="tocart"
+            @click.native="tocart" style="margin: 0 15px;"
           />
-          <van-goods-action-icon
+          <!-- <van-goods-action-icon
             icon="shop-o"
             :text="$t('store')"
             @click.native="tohome"
-          />
+          /> -->
           <van-goods-action-button
             type="warning"
             :text="$t('addCart')"
-            @click.native="showSkuCart"
+            @click.native="showSkuCart" style="border-radius: 0;margin-right: 5px; background: linear-gradient(to right, #ffd01e, #ef3470)"
           />
           <van-goods-action-button
             type="danger"
             :text="$t('buy')"
-            @click.native="showSkuBuy"
+            @click.native="showSkuBuy" style="border-radius: 0;background: linear-gradient(to right, #ef3470, #ef3470)"
           />
         </van-goods-action>
         <van-sku
@@ -784,7 +784,7 @@ import { setTimeout } from 'timers';
         overflow: hidden;
     }
     .goods-title{
-        font-size: 18px;
+        font-size: 24px;
     }
     .goods-price{
         color: #f44;
