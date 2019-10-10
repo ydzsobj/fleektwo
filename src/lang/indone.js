@@ -13,13 +13,13 @@ export default {
     comment: 'komentar',
     nomore: 'Tidak ada lagi',
     shopCart: 'Daftar belanja',
-    store: 'Toko', //店铺
+    store: 'Mall', //店铺
     addCart: 'Tambahkan ke daftar belanja',
     buy: 'Segera pesan',//立即购买
     ok: 'Konfirm',
     buyNum: 'Jumlah pesanan', //购买数量
     message: 'Tinggalkan pesan', //留言
-    storeenter: 'Masuk ke toko',
+    storeenter: 'Masuk ke mall',
     official: 'The official',
     messagePlaceholder: 'Silakan masukkan teks anda',
     serveError: 'Galat server, pengiriman data gagal',

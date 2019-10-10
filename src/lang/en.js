@@ -13,13 +13,13 @@ export default {
     comment: 'Comment',
     nomore: 'No more',
     shopCart: 'Shopping cart',
-    store: 'Store', //店铺
+    store: 'Mall', //店铺
     addCart: 'Add to shopping cart',
     buy: 'Buy',//立即购买
     ok: 'CONFIRM',
     buyNum: 'Quantity', //购买数量
     message: 'Leave word ', //留言
-    storeenter: 'Enter the store',
+    storeenter: 'Enter the mall',
     official: 'resmi',
     messagePlaceholder: 'Please enter your text',
     serveError: 'Server error, data retrieval failed',
