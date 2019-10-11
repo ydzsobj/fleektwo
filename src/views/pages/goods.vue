@@ -41,6 +41,9 @@
               <van-tag class="goods-tag" type="danger">{{ $t('official') }}</van-tag>
             </template>
           </van-cell>
+          <van-cell>
+            <van-progress :percentage="78" :show-pivot="false" :stroke-width="12" color="#ef3470" style="width: 60%; display: inline-block;"/> <span style=" float: right;">{{$t('stock')}}</span>
+          </van-cell>
         </van-cell-group>
         <!-- <van-cell-group @click.native= showSkuAttr>
           <van-cell class="goods-express">

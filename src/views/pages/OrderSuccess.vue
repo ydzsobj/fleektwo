@@ -109,14 +109,14 @@ export default {
 </script>
 <style scoped>
 .nav{
-    background-color: #f44;
+    background-color: #ef3470;
     color: #fafafa;
     font-size: 16px;
     padding-left: 10px;
     padding-top: 5px;
 }
 .tu {
-    background-color: #f44;
+    background-color: #ef3470;
     color: #fafafa;
     height: 5rem
 }
@@ -137,10 +137,10 @@ export default {
     align-items: center;
 }
 .redcolor{
-    color:#f44
+    color:#ef3470
 }
 .redcolorpirce{
-    color:#f44;
+    color:#ef3470;
     float: right;
 }
 .huicolor{
