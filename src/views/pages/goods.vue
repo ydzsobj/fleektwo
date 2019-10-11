@@ -270,6 +270,7 @@
           />
         </van-goods-action>
         <van-sku
+        ref="sku"
         class="left50"
           v-model="show"
           :sku="sku"
@@ -292,12 +293,22 @@
           @buy-clicked="onBuyClicked"
           @add-cart="onAddCartClicked"
           @sku-selected="skuSelected"
+          @stepper-change="stepperChange"
         >
            <template slot="sku-header-price" slot-scope="props">
              <div class="van-sku__goods-price">
                <span class="van-sku__price-symbol">{{goodsInfo.money_sign}}</span>
                <span  v-if="$store.state.lang==='ind-BA'" class="van-sku__price-num">{{ props.price | num}}</span>
                <span v-else class="van-sku__price-num">{{ props.price }}</span>
+             </div>
+           </template>
+           <template slot="sku-messages" v-if="isBuyCartAttr==='buy'">
+             <div>
+                 <cart :is-buy-cart-attr="isBuyCartAttr" :father-sku-data="fatherSkuData" ref="cart"></cart>
+             </div>
+           </template>
+            <template slot="sku-actions" v-if="isBuyCartAttr==='buy'">
+             <div>
              </div>
            </template>
         </van-sku>
@@ -316,13 +327,17 @@
     // import '../../vant/lib/index.css';
     import {toMoney, int,num} from '@/filter/moneyFilter.js'
     import checkoutLang from '@/lang.js'
-import { setTimeout } from 'timers';
+    import { setTimeout } from 'timers'
+    import cart from '@/views/pages/Cart'
     export default {
       components: {
-        [Sku.name]: Sku
+        [Sku.name]: Sku,
+        cart
       },
         data() {
             return {
+                skuDatas: {},
+                skuSelectedNum: 1,
                 skuSelectedImg: null,
                 notice_show:false,
                 index_1:0,
@@ -629,7 +644,7 @@ import { setTimeout } from 'timers';
                 }
               }, 500);
             },
-            showSkuBuy() {this.show = true ; this.isBuyCartAttr = 'buy';this.showAddCartBtn=false;this.buyText= this.$t('ok')},
+            showSkuBuy() {this.show = true ; this.isBuyCartAttr = 'buy';this.showAddCartBtn=false;this.buyText= this.$t('ok');setTimeout(()=>{ this.$refs.cart.getCartInfo() },200)},
             showSkuCart() {this.show = true ; this.isBuyCartAttr = 'cart';this.showAddCartBtn=false;this.buyText= this.$t('ok')},
             showSkuAttr() {this.show = true ; this.isBuyCartAttr = 'attr';this.showAddCartBtn=true;this.buyText= this.$t('buy')},
             onBuyClicked(skuData){
@@ -655,6 +670,38 @@ import { setTimeout } from 'timers';
               },
             skuSelected(skuValue) {
               // console.log(skuValue)
+              if(this.isBuyCartAttr === 'buy'){
+                  if(skuValue.selectedSkuComb){
+                      let skuData=skuValue
+                      skuData.goodsId = this.goodsId
+                      skuData.selectedNum = this.skuSelectedNum
+                      skuData.messages = {message_0: ''}
+    
+                      let newGoodsInfo = {
+                           name:this.goodsInfo.name,
+                           title: this.goodsInfo.title,
+                           skuAttrText: this.skuAttrTextFun(skuData)
+                       } 
+                      try{fbq('track', 'AddToCart');console.log('addtocart')}catch(e){} 
+                      try{fbq('track', 'Lead');console.log('Lead')}catch(e){} 
+                      this.skuDatas  = Object.assign(newGoodsInfo , skuData)
+                      console.log(this.skuDatas)
+                      this.$refs.cart.getCartInfo(this.skuDatas)
+                  }else{
+                    this.$refs.cart.getCartInfo()
+                    this.skuDatas = {}
+                  }
+              }
+            },
+            stepperChange(value){
+              if(this.isBuyCartAttr === 'buy'){
+                 this.skuSelectedNum = value
+                 if(this.skuDatas.selectedSkuComb){
+                    this.skuDatas.selectedNum = this.skuSelectedNum
+                    this.$refs.cart.getCartInfo(this.skuDatas)
+                    console.log(this.skuDatas)
+                 }
+              }
             },
             attrTextFun () {
               let arr = []
@@ -758,6 +805,21 @@ import { setTimeout } from 'timers';
             },
             gocommenttab(){
               this.activeTab=1
+            },
+            fatherSkuData(){
+                  let skuData=this.$refs.sku.getSkuData()
+                   let skuDatas = null
+                   if(skuData.selectedSkuComb){
+                      let newGoodsInfo = {
+                       name:this.goodsInfo.name,
+                       title: this.goodsInfo.title,
+                       skuAttrText: this.skuAttrTextFun(skuData)
+                      } 
+                      skuDatas =  Object.assign(newGoodsInfo , skuData)
+                   }else{
+                      skuDatas = skuData
+                   }
+              return  skuDatas
             }
         },
     }

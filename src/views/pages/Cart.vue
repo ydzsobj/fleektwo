@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="navbar-div">
+        <div class="navbar-div" v-if="isBuyCartAttr != 'buy'">
             <van-nav-bar :title="isBuy ? $t('account'): $t('shopCart')" :left-text="$t('back')" left-arrow @click-left="onClickLeft">
               <!-- <van-icon name="search" slot="right" /> -->
               <van-button size="small" round  slot="right"  type="danger" @click="clearCart" v-if="!isBuy">
@@ -8,7 +8,7 @@
               </van-button>
             </van-nav-bar>
         </div>
-        <div v-if="cartInfo.length===0" style="height: 200px;display: flex;justify-content: center;flex-direction: column;align-items: center; background-color: #fff">
+        <div v-if="cartInfo.length===0 && isBuyCartAttr != 'buy'" style="height: 200px;display: flex;justify-content: center;flex-direction: column;align-items: center; background-color: #fff">
             <van-row>
                  <img src="../../assets/images/cartempty.png" alt="" style="width:100px;height:100px">
             </van-row>
@@ -20,7 +20,7 @@
             </van-row>
         </div>
 
-        <van-checkbox-group class="card-goods" v-model="checkedGoods">
+        <van-checkbox-group class="card-goods" v-model="checkedGoods" v-if="isBuyCartAttr != 'buy'">
           <van-checkbox
             :disabled ="true"
             class="card-goods__item"
@@ -166,7 +166,7 @@
          :currency="$store.state.money_sign"
           :price="totalMoneyCoupon"
           :decimal-length="decimalLength"
-          :disabled="checkedGoods.length <= 0 || submitloading"
+          :disabled="(checkedGoods.length <= 0 && isBuyCartAttr != 'buy')|| submitloading"
           :button-text="$t('account')"
           :label="$t('total')"
           @submit="onSubmit"
@@ -196,6 +196,13 @@
     import obj from '@/province/ndnxy.js'
     import objFlb from '@/province/flb.js'
     export default {
+       props: {
+           isBuyCartAttr: String,
+           fatherSkuData: {
+               type: Function,
+               default: null
+           }
+       },
        data() {
            return {
                couponid: null,
@@ -321,16 +328,33 @@
                this.$router.go(-1)
            },
             //得到购物车数据的方法
-            getCartInfo() { 
-                let skuData = this.$route.params.skuData ? this.$route.params.skuData : this.$route.query.skuData
+            getCartInfo(skuDatas) { 
+                console.log('laofan',skuDatas)
+                // let skuData = this.$route.params.skuData ? this.$route.params.skuData : this.$route.query.skuData
 
-                 this.isBuy = skuData ? true : false //立即购买还是购物车
-                if(this.isBuy){
-                    console.log(this.$route.params.skuData)
-                    this.cartInfo=[]
-                    this.cartInfo.push(skuData)
-                    this.checkedGoods=[]
-                    this.checkedGoods.push(skuData.selectedSkuComb.id)
+                //  this.isBuy = skuData ? true : false //立即购买还是购物车
+                if(this.isBuyCartAttr === 'buy'){
+                    console.log(skuDatas)
+                    if(skuDatas){
+                        this.cartInfo=[]
+                        this.cartInfo.push(skuDatas)
+                        this.checkedGoods=[]
+                        this.checkedGoods.push(skuDatas.selectedSkuComb.id)
+                    }else{
+                        let datas = this.fatherSkuData()
+                        console.log(datas)
+                        if(datas.selectedSkuComb){
+                           this.cartInfo=[]
+                           this.cartInfo.push(datas)
+                           this.checkedGoods=[]
+                           this.checkedGoods.push(datas.selectedSkuComb.id)
+                        }else{
+                           this.cartInfo=[]
+                           this.checkedGoods=[]
+                        }
+
+
+                    }
                 }else{
                    if(localStorage.cartInfo){
                     this.cartInfo=JSON.parse(localStorage.cartInfo)
@@ -365,8 +389,10 @@
                }else{
                    regTele= /\d/;
                }
-
-               if(this.name === ''){
+               console.log(this.fatherSkuData());
+               if(this.isBuyCartAttr === 'buy' && !this.fatherSkuData().selectedSkuComb){
+                Toast(this.$t('selectGoodsFirst')); Toast(this.$t('selectGoodsFirst')); return  //判断如果是skubuy模式且sku规格没选就提示请选择
+               }else if(this.name === ''){
                    this.errName = this.$t('nameerr');return
                }else if (this.telephone===''){
                    this.errTelephone = this.$t('errTelephone');return
@@ -377,7 +403,7 @@
                }else if(this.address===''){
                    this.errAddress = this.$t('errAddress');return
                }else if (this.email!='' && !reg.test(this.email)){
-                  Toast(this.$t('errEmail'));return
+                  Toast(this.$t('errEmail'));Toast(this.$t('errEmail'));return
                }
                 console.log(this.malldata,this.countPrice)
                 this.submitloading=true
@@ -413,7 +439,7 @@
                             try{ fbq('track', 'Purchase', {value: int(this.countPrice), currency:'USD'}) ;console.log('Purchase')}catch(e){}
                             this.$router.push({name:'order',params:{orderData: this.malldataOrder,orderResponse: response.data.data}})
                         }else{
-                            Toast(this.$t('serveError'))
+                            Toast(this.$t('serveError'));Toast(this.$t('serveError'))
                             this.submitloading=false
                         }
                     })
@@ -497,16 +523,16 @@
                       if(response.status== 200 && response.data.success){
                          console.log(response.data.data)
                          if(response.data.data.total_off===0){
-                            Toast(this.$t('couponUn')) 
+                            Toast(this.$t('couponUn'));Toast(this.$t('couponUn')) 
                          }else{
                             this.total_off = response.data.data.total_off
                             this.couponid= response.data.data.coupon_code_id
                          }
                       }else{
-                          Toast(this.$t('couponerr'))
+                          Toast(this.$t('couponerr'));Toast(this.$t('couponerr'))
                       }
                   }).catch(err=>{
-                      Toast(this.$t('serveError'))
+                      Toast(this.$t('serveError'));Toast(this.$t('serveError'))
                   })
               }
             }
