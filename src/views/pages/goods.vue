@@ -8,8 +8,8 @@
         />
       </div>
       <van-pull-refresh v-model="pullLoading" @refresh="onRefresh" :pulling-text="$t('pullingText')" :loosing-text="$t('lossText')" :loading-text="$t('loading')">
-        <div style="font-size: 14px;">
-            <img src="../../assets/images/ydzstou.png" width="50px" style="float: right;margin: 9px 0;">
+        <div style="font-size: 10px;">
+            <img src="../../assets/images/ydzstou.png" width="50px" style="float: right;">
             <div style="margin-left:10px">
                 <van-icon name="phone" v-if="$store.state.phone"/> {{$store.state.phone}}
                 <br/>
@@ -317,7 +317,7 @@
         </van-sku>
         
           <img :src="skuSelectedImg" alt="" width="80" height="80" class="fadeimg" :class="{ 'animationCart': skuSelectedImg }">
-        
+          <div class="upgrade" @click="top"><van-icon name="upgrade" color="#ef3470" size="30px"/></div>
     </div>
 </template>
 
@@ -823,6 +823,9 @@
                       skuDatas = skuData
                    }
               return  skuDatas
+            },
+            top(){
+              window.scrollTo(0,0);
             }
         },
     }
@@ -1005,5 +1008,12 @@
   100% {
     transform: scale(1);
   }
+}
+.upgrade{
+  width: 30px;
+  height: 30px;
+    top: 35%;
+    right: 5px;
+    position: fixed;
 }
 </style>
