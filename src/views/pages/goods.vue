@@ -45,7 +45,7 @@
             </template>
           </van-cell>
         </van-cell-group>
-        <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments.length>0">
+        <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments && goodsInfo.comments.length > 0">
           <template v-for="(item,index) in goodsInfo.comments" >
           <van-swipe-item :key="item.id" v-if=" index < 4" @click.native="gocommenttab">
               <van-cell>
@@ -564,6 +564,7 @@
                       .then(response=>{
                           if(response.status== 200 && response.data.good){
                               this.goodsInfo = response.data.good
+                              console.log(this.goodsInfo.comments.length)
                               // 商品属性基本信息赋值
                               this.goods.title = this.goodsInfo.title             //默认名
                               this.goods.picture = this.goodsInfo.main_image_url  //无属性规格，默认图片
