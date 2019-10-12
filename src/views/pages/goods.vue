@@ -29,22 +29,51 @@
             </van-swipe>
         </div>
         <van-cell-group>
-          <van-cell>
+          <van-cell :border="false">
             <div class="goods-title">{{ goodsInfo.title}}</div>
             <div class="huicolor">{{ goodsInfo.about}}</div>
             <div v-if="$store.state.lang==='ind-BA'" class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
             <div v-else class="goods-price"> <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s> {{goodsInfo.money_sign}}{{goodsInfo.price }} </div>
           </van-cell>
-          <van-cell :value="$t('storeenter')" icon="shop-o" is-link @click.native="tohome">
+          <van-cell :border="false">
+            <van-progress :percentage="78" :show-pivot="false" :stroke-width="12" color="#ef3470" style="width: 60%; display: inline-block;"/> <span style=" float: right;">{{$t('stock')}}</span>
+          </van-cell>
+          <van-cell :value="$t('storeenter')" icon="shop-o" is-link @click.native="tohome" :border="false">
             <template slot="title">
               <span class="van-cell-text">{{ $t('store') }}</span>
               <van-tag class="goods-tag" type="danger">{{ $t('official') }}</van-tag>
             </template>
           </van-cell>
-          <van-cell>
-            <van-progress :percentage="78" :show-pivot="false" :stroke-width="12" color="#ef3470" style="width: 60%; display: inline-block;"/> <span style=" float: right;">{{$t('stock')}}</span>
-          </van-cell>
         </van-cell-group>
+        <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments.length>0">
+          <template v-for="(item,index) in goodsInfo.comments" >
+          <van-swipe-item :key="item.id" v-if=" index < 4" @click.native="gocommenttab">
+              <van-cell>
+                <div>
+                  {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
+                  <van-rate
+                     style="display: inline-block"
+                     v-model="item.star_scores"
+                     :size="14"
+                     disabled
+                     disabled-color="#f44"
+                     void-icon="star"
+                     void-color="#eee"
+                   />
+                  {{item.created_at}}
+                </div>
+                <div class="huicolor">
+                   &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
+                   <van-row gutter="20">
+                     <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
+                         <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
+                     </van-col>
+                   </van-row>
+                </div>
+              </van-cell>
+          </van-swipe-item>
+          </template>
+        </van-swipe>
         <!-- <van-cell-group @click.native= showSkuAttr>
           <van-cell class="goods-express">
             <van-col class="huicolor" span="4">{{ $t('select') }}</van-col>
@@ -71,35 +100,7 @@
                           </template>
                         </van-image>   
                       </div>
-                      <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff">
-                        <template v-for="(item,index) in goodsInfo.comments" >
-                        <van-swipe-item :key="item.id" v-if=" index < 4" @click.native="gocommenttab">
-                            <van-cell>
-                              <div>
-                                {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
-                                <van-rate
-                                   style="display: inline-block"
-                                   v-model="item.star_scores"
-                                   :size="14"
-                                   disabled
-                                   disabled-color="#f44"
-                                   void-icon="star"
-                                   void-color="#eee"
-                                 />
-                                {{item.created_at}}
-                              </div>
-                              <div class="huicolor">
-                                 &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
-                                 <van-row gutter="20">
-                                   <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
-                                       <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
-                                   </van-col>
-                                 </van-row>
-                              </div>
-                            </van-cell>
-                        </van-swipe-item>
-                        </template>
-                      </van-swipe>
+
                       <van-cell-group>
                         <van-cell>
                             <div>{{$t('floorPage_1Title')}}</div>
