@@ -19,13 +19,21 @@
             </div>
         </div>
         <div class="swiper-area">
-            <van-swipe>
+            <van-swipe @change="onChange" ref="swipe">
               <van-swipe-item v-if="goodsInfo.main_video_url">
                 <video :src="goodsInfo.main_video_url" controls="controls" width="100%"/>
               </van-swipe-item>
               <van-swipe-item v-for="(image, index) in goodsInfo.list_images" :key="index">
                 <img :src="image" width="100%" style="display: block"/>
               </van-swipe-item>
+                <div class="custom-indicator" slot="indicator">
+                   <div @click="clickswipe(0)" :class="{ active: current===0 }" v-if="goodsInfo.main_video_url" style="display: inline-block; width: 30px;height:30px; padding: 0 5px;">
+                       <van-icon name="video" size="30px"/>
+                   </div>
+                   <div @click="clickswipe(goodsInfo.main_video_url ? index+1 :  index )" :class="{ active: goodsInfo.main_video_url ? current === index+1 : current === index }" v-for="(image, index) in goodsInfo.list_images" :key="index" style="display: inline-block; width: 30px;height:30px; padding: 0 5px;">
+                     <img :src="image" width="100%" style="display: block"/>
+                   </div>
+                </div>
             </van-swipe>
         </div>
         <van-cell-group>
@@ -340,6 +348,7 @@
       },
         data() {
             return {
+                current: 0,
                 skuDatas: {},
                 skuSelectedNum: 1,
                 skuSelectedImg: null,
@@ -828,6 +837,15 @@
             },
             top(){
               window.scrollTo(0,0);
+            },
+            onChange(index) {
+              this.current = index;
+            },
+            clickswipe(index){
+              this.current=index
+              // console.log( this.current)
+              this.$refs.swipe.swipeTo( this.current)
+
             }
         },
     }
@@ -850,7 +868,6 @@
 
     .swiper-area{
         clear:both;
-        max-height:20rem;
         overflow: hidden;
     }
     .goods-title{
@@ -1017,5 +1034,15 @@
     top: 35%;
     right: 5px;
     position: fixed;
+}
+.custom-indicator {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    width: 100%;
+    background-color: white;
+}
+.active {
+  border: 2px solid #ef3470
 }
 </style>
