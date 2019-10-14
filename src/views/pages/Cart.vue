@@ -389,8 +389,8 @@
                }else{
                    regTele= /\d/;
                }
-               console.log(this.fatherSkuData());
-               if(this.isBuyCartAttr === 'buy' && !this.fatherSkuData().selectedSkuComb){
+
+               if(this.isBuyCartAttr === 'buy' && this.fatherSkuData() && !this.fatherSkuData().selectedSkuComb){
                 Toast(this.$t('selectGoodsFirst')); Toast(this.$t('selectGoodsFirst')); return  //判断如果是skubuy模式且sku规格没选就提示请选择
                }else if(this.name === ''){
                    this.errName = this.$t('nameerr');return

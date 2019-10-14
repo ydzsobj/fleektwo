@@ -686,34 +686,37 @@
               // console.log(skuValue)
               if(this.isBuyCartAttr === 'buy'){
                   if(skuValue.selectedSkuComb){
-                      let skuData=skuValue
-                      skuData.goodsId = this.goodsId
-                      skuData.selectedNum = this.skuSelectedNum
-                      skuData.messages = {message_0: ''}
+                      // let skuData=skuValue
+                      // skuData.goodsId = this.goodsId
+                      // skuData.selectedNum = this.skuSelectedNum
+                      // skuData.messages = {message_0: ''}
     
-                      let newGoodsInfo = {
-                           name:this.goodsInfo.name,
-                           title: this.goodsInfo.title,
-                           skuAttrText: this.skuAttrTextFun(skuData)
-                       } 
+                      // let newGoodsInfo = {
+                      //      name:this.goodsInfo.name,
+                      //      title: this.goodsInfo.title,
+                      //      skuAttrText: this.skuAttrTextFun(skuData)
+                      //  } 
                       try{fbq('track', 'AddToCart');console.log('addtocart')}catch(e){} 
                       try{fbq('track', 'Lead');console.log('Lead')}catch(e){} 
-                      this.skuDatas  = Object.assign(newGoodsInfo , skuData)
-                      console.log(this.skuDatas)
-                      this.$refs.cart.getCartInfo(this.skuDatas)
+                      // this.skuDatas  = Object.assign(newGoodsInfo , skuData)
+                      console.log(this.fatherSkuData())
+                      this.$refs.cart.getCartInfo()
                   }else{
                     this.$refs.cart.getCartInfo()
-                    this.skuDatas = {}
+                    
                   }
               }
             },
             stepperChange(value){
               if(this.isBuyCartAttr === 'buy'){
                  this.skuSelectedNum = value
-                 if(this.skuDatas.selectedSkuComb){
-                    this.skuDatas.selectedNum = this.skuSelectedNum
-                    this.$refs.cart.getCartInfo(this.skuDatas)
-                    console.log(this.skuDatas)
+                 let data = this.fatherSkuData()
+                 if(data.selectedSkuComb){
+                    data.selectedNum = this.skuSelectedNum
+                    this.$refs.cart.getCartInfo(data)
+                    console.log(data)
+                 }else{
+                   this.$refs.cart.getCartInfo()
                  }
               }
             },
