@@ -7,7 +7,12 @@ module.exports = {
               red: '#ef3470',
               blue: '#ef3470',
             //   orange: '#f08d49',
-              'text-color': '#111'
+              'text-color': '#111',
+              // 'font-size-xs': '12px',
+              'font-size-sm': '14px',
+              'font-size-md': '16px',
+              'font-size-lg': '18px',
+
             }
           }
         }
