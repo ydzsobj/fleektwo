@@ -19,7 +19,7 @@ export default {
     buyNum: '购买数量',
     message: '留言',
     storeenter: '进入商城',
-    stock: '已经卖出78%',
+    stock: '已经卖出 ',
     official: '官方',
     messagePlaceholder:'请输入文本',
     serveError: '服务器错误，数据提交失败',

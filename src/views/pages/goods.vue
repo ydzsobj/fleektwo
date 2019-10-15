@@ -44,7 +44,7 @@
             <div v-else class="goods-price"> <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s> {{goodsInfo.money_sign}}{{goodsInfo.price }} </div>
           </van-cell>
           <van-cell :border="false">
-            <van-progress :percentage="78" :show-pivot="false" :stroke-width="12" color="#ef3470" style="width: 60%; display: inline-block;"/> <span style=" float: right;">{{$t('stock')}}</span>
+            <van-progress :percentage="78" :show-pivot="false" :stroke-width="12" color="#ef3470" style="width: 60%; display: inline-block;"/> <span style=" float: right;">{{$t('stock')}}{{(70+goodsInfo.category_id)+'%'}}</span>
           </van-cell>
           <van-cell :value="$t('storeenter')" icon="shop-o" is-link @click.native="tohome" :border="false">
             <template slot="title">

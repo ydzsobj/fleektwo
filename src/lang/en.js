@@ -72,7 +72,7 @@ export default {
     coupoCodeholder: 'Please input your discount code',
     coupoCodeSend: 'Validation',
     couponerr: 'Coupon code invalid',
-    stock: 'Already snapped up78% ',
+    stock: 'Already snapped up ',
     couponmoney: 'Discount amount',
     couponUn: 'Kondisi penawaran tidak terpenuhi',
     justbuy: 'Has just bought this item !',
