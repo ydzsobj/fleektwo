@@ -442,6 +442,9 @@
                             Toast(this.$t('serveError'));Toast(this.$t('serveError'))
                             this.submitloading=false
                         }
+                    }).catch((err)=>{
+                            Toast(this.$t('serveError'));Toast(this.$t('serveError'))
+                            this.submitloading=false
                     })
             },
             showImage(skuAttrText) {
