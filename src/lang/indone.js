@@ -106,5 +106,6 @@ export default {
     mainFooter_return:'kebijakan retur',
     mainFooter_privacy:'kebijakan pribadi',
     mainFooter_contact:'hubungi kami',
-    mainFooter_2:'. All rights reserved'
+    mainFooter_2:'. All rights reserved',
+    buyNow:'Beli Sekarang'
     }

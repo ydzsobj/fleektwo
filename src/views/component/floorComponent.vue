@@ -19,6 +19,12 @@
                 <div v-for="(item, index) in floorData.slice(3)" :key="index">
                     <img :src="item.image" @click="goGoodsPage(item.goodsId)" width="100%"/>
                 </div>
+                <!-- <div >
+                    <img :src="floorData2.image" @click="goGoodsPage(floorData2.goodsId)" width="100%"/>
+                </div>
+                <div >
+                    <img :src="floorData2.image" @click="goGoodsPage(floorData2.goodsId)" width="100%"/>
+                </div> -->
 
             </div>
         </div>
@@ -64,6 +70,7 @@
         font-size:14px;
         height:1.8rem;
         line-height: 1.8rem;
+        color:#ef3470
     }
     .floor-anomaly{
         display: flex;

@@ -111,5 +111,6 @@ export default {
     mainFooter_return:'Return and Exchange Policy',
     mainFooter_privacy:'Privacy Policy',
     mainFooter_contact:'Contact Us',
-    mainFooter_2:'. All rights reserved'
+    mainFooter_2:'. All rights reserved',
+    buyNow:'Buy Now'
     }

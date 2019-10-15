@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div style="background-color: #f0f0f0;">
         <!-- <div class="search-bar">
             <van-row>
                 <van-col span="3">
@@ -13,7 +13,7 @@
                 </van-col>
             </van-row>
         </div> -->
-        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50">
+        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" >
             <van-icon name="wap-nav" slot="left" />
             <img src="../../assets/images/ydzs.png" slot="title" style="max-height:40px">
             <van-icon name="search" slot="right" />
@@ -28,11 +28,15 @@
         />
         <!--swiper area-->
         <div class="swiper-area">
-            <van-swipe :autoplay="1000">
+            <van-swipe :autoplay="1000" @change="onChange">
                 <van-swipe-item v-for="( banner ,index) in bannerPicArray" :key="index" >
                     <img v-lazy="banner.image" width="100%" @click="goGoodsPage(banner.good_id)"/>
                 </van-swipe-item>
+                <div class="custom-indicator" slot="indicator">
+                    {{ current + 1 }}/{{bannerPicArray.length}}
+                </div>
             </van-swipe>
+            <div class="swiper-span"></div>
         </div>  
         <!--type bar-->
         <div class="type-bar">
@@ -63,7 +67,7 @@
             </div>
         </div> -->
         <floor-component v-for="(item, index) in floorData" :floorData="item.floor " :floorTitle="item.name" :key="index"></floor-component>
-        <div class="STPRY">
+        <!-- <div class="STPRY">
             <div></div>
             <span>
                 OUR STORY
@@ -71,25 +75,23 @@
         </div>
         <div class="new-sale-big tu" style="margin-bottom:10px">
             <img src="../../assets/images/ourstory.jpg" style="width: 100%;">
-        </div>
+        </div> -->
         <div class="hot-area">
             <div class="hot-title">{{ $t('hotgoods') }}</div>
             <div class="hot-goods">
             <!--这里需要一个list组件-->
                 <van-list>
-                    <van-row gutter="20">
+                    <!-- <van-row gutter="20"> -->
                         <van-col span="12" v-for="(item , index) in hotGoods" :key="index">
-                                <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price">
+                                <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price" :mallPrice="item.mallPrice">
 
                                 </goods-info>
                         </van-col>
-                    </van-row>
+                    <!-- </van-row> -->
                 </van-list>
             </div>
         </div>
         <mainFooter></mainFooter>
-        
-       
         
     </div>
 </template>
@@ -127,7 +129,8 @@
                 floor3:[],
                 floorName:{},
                 hotGoods:[],  //热卖商品
-                nav_img:[require('../../assets/images/cartempty.png')]
+                nav_img:[require('../../assets/images/cartempty.png')],
+                current: 0
               
             }
         },
@@ -177,6 +180,9 @@
             onClickNavLeft(){
                 this.show=!this.show
                 this.navLeft_show=!this.navLeft_show
+            },
+            onChange(index) {
+                this.current = index;
             }
         },
         mounted(){
@@ -196,7 +202,10 @@
     }
     .van-nav-bar .van-icon {
         font-size: 26px;
-        color:#333
+        color:#ef3470
+    }
+    .hot-title{
+        color:#ef3470
     }
     #navLeft{
         position: fixed;
@@ -216,16 +225,17 @@
         line-height: 20px;
         position: relative;
         text-align: center;
+        color:#e2b2b2
     }
     .STPRY div {
         position: absolute;
         top: 9px;
-        border-top: 2px solid #000;
+        border-top: 2px solid #e2b2b2;
         width: 80%;
         left: 10%;
     }
     .STPRY span {
-        background: #f0f0f0;
+        background: #f9e7ea;
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
@@ -251,9 +261,19 @@
         padding-left:.3rem;
     }
     .swiper-area{
+        position: relative;
         clear:both;
         max-height:600px;
         overflow: hidden;
+    }
+    .custom-indicator{
+        position: absolute;
+        right: 5px;
+        bottom: 25px;
+        padding: 2px 5px;
+        color: #fff;
+        font-size: 12px;
+        background: rgba(0, 0, 0, 0.1);
     }
     .van-swipe{
         max-height:600px;
@@ -261,8 +281,8 @@
 
     .type-bar{
         background-color: #fff;
-        margin:0 .3rem .3rem .3rem;
-        border-radius: .3rem;
+        /* margin:0 .3rem .3rem .3rem; */
+        /* border-radius: .3rem; */
         font-size:14px;
         display:flex;
         flex-direction:row;
@@ -309,10 +329,26 @@
     .hot-goods{
         /* height: 130rem; */
         overflow: hidden;
-        background-color: #fff;
+        /* background-color: #fff; */
+        padding: 0 8px;
     }
-    
-
+    .hot-goods>div>div:nth-child(2n) {
+        padding-left: 2px;
+        margin-bottom: 6px
+    }
+    .hot-goods>div>div:nth-child(odd) {
+        margin-bottom: 6px;
+        padding-right: 2px;
+    }
+    .swiper-span {
+    width: 100%;
+    height: 20px;
+    position: absolute;
+    bottom: -2px;
+    background-color: #fff;
+    z-index: 999;
+    border-radius: 50% 50% 0px 0px;
+}
 
 
 

@@ -49,7 +49,7 @@
                                      /> 
                                 </div>
                                 <div class="list-item-text">
-                                    <div>{{item.name}}</div>                                                                        
+                                    <div class="name">{{item.name}}</div>                                                                        
                                     <!-- <div>{{$store.state.money_sign}}{{ $store.state.lang ==='ind-BA' ? item.price | int : item.price | toDivide}}</div> -->
                                     <div v-if="$store.state.lang==='ind-BA'">{{$store.state.money_sign}}{{item.price |num}}</div>
                                     <div v-else>{{$store.state.money_sign}}{{item.price}}</div>
@@ -245,23 +245,36 @@
 
 
     .list-item{
-        display: flex;
-        flex-direction: row;
+        /* display: flex; */
+        /* flex-direction: row; */
+        width: 50%;
+        float: left;    
         font-size:0.8rem;
         border-bottom: 1px solid #f0f0f0;
         background-color: #fff;
         padding:5px;
+        box-sizing: border-box;
     }
     #list-div{
         overflow: scroll;
+        background: #f0f0f0
     }
     .list-item-img{
-        flex:8;
+        /* flex:8; */
     }
     .list-item-text{
-        flex:16;
+        /* flex:16; */
         margin-top:10px;
         margin-left:10px;
+    }
+    .list-item-text .name{
+        overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    }
+    .van-list__finished-text{
+        float: left;
+    width: 100%;
     }
    
 </style>
