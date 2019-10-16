@@ -1,4 +1,5 @@
 export default {
+    concatus: '联系我们',
     home: '首页',
     list: '列表',
     classlist:'类别列表',

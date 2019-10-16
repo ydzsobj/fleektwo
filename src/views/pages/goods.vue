@@ -8,16 +8,29 @@
         />
       </div>
       <van-pull-refresh v-model="pullLoading" @refresh="onRefresh" :pulling-text="$t('pullingText')" :loosing-text="$t('lossText')" :loading-text="$t('loading')">
-        <div style="font-size: 10px;">
-            <img src="../../assets/images/ydzstou.png" width="50px" style="float: right;">
-            <div style="margin-left:10px">
+
+        <van-nav-bar
+          :left-text="$t('home')"
+          left-arrow
+          fixed
+          @click-left="onClickLeft"
+          @click-right="onClickRight"
+        >
+          <img src="../../assets/images/ydzstou.png" height="46px" slot="title">
+          <van-icon name="service" slot="right" size="20px"/>
+        </van-nav-bar>
+         <van-dialog
+           v-model="dialogshow"
+           :confirmButtonText="$t('confirm')"
+           :title="$t('concatus')"
+           :closeOnClickOverlay="true"
+         >
                 <van-icon name="phone" v-if="$store.state.phone"/> {{$store.state.phone}}
                 <br/>
                 <van-icon name="envelop-o"  v-if="$store.state.email"/> {{$store.state.email}}
                 <br/>
                 <van-icon name="location" v-if="$store.state.global_address"/> {{$store.state.global_address}}
-            </div>
-        </div>
+         </van-dialog>
         <div class="swiper-area">
             <van-swipe @change="onChange" ref="swipe">
               <van-swipe-item v-if="goodsInfo.main_video_url">
@@ -54,8 +67,8 @@
           </van-cell>
         </van-cell-group>
         <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments && goodsInfo.comments.length > 0">
-          <template v-for="(item,index) in goodsInfo.comments" >
-          <van-swipe-item :key="item.id" v-if=" index < 4" @click.native="gocommenttab">
+          <template v-for="item in goodsInfo.comments" >
+          <van-swipe-item :key="item.id">
               <van-cell>
                 <div>
                   {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
@@ -348,6 +361,7 @@
       },
         data() {
             return {
+                dialogshow: false,
                 current: 0,
                 skuDatas: {},
                 skuSelectedNum: 1,
@@ -849,6 +863,12 @@
               // console.log( this.current)
               this.$refs.swipe.swipeTo( this.current)
 
+            },
+            onClickLeft(){
+              this.$router.push({name:'ShoppingMall'})
+            },
+            onClickRight(){
+              this.dialogshow= true
             }
         },
     }
