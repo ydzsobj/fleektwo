@@ -1,6 +1,7 @@
 
 export default { 
     concatus: 'Hubungi kami',
+    aboutus: 'Tentang kita',
     home: 'Halaman utama',
     list: 'Klasifikasi',
     classlist:'Daftar kategori',

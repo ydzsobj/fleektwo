@@ -1,6 +1,7 @@
 
 export default { 
     concatus: 'Contact us',
+    aboutus: 'About us',
     home: 'Home',
     list: 'Category',
     classlist:'Category list',

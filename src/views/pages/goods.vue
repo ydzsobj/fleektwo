@@ -66,35 +66,7 @@
             </template>
           </van-cell>
         </van-cell-group>
-        <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments && goodsInfo.comments.length > 0">
-          <template v-for="item in goodsInfo.comments" >
-          <van-swipe-item :key="item.id">
-              <van-cell>
-                <div>
-                  {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
-                  <van-rate
-                     style="display: inline-block"
-                     v-model="item.star_scores"
-                     :size="14"
-                     disabled
-                     disabled-color="#f44"
-                     void-icon="star"
-                     void-color="#eee"
-                   />
-                  {{item.created_at}}
-                </div>
-                <div class="huicolor">
-                   &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
-                   <van-row gutter="20">
-                     <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
-                         <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
-                     </van-col>
-                   </van-row>
-                </div>
-              </van-cell>
-          </van-swipe-item>
-          </template>
-        </van-swipe>
+
         <!-- <van-cell-group @click.native= showSkuAttr>
           <van-cell class="goods-express">
             <van-col class="huicolor" span="4">{{ $t('select') }}</van-col>
@@ -121,7 +93,77 @@
                           </template>
                         </van-image>   
                       </div>
+                      <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments && goodsInfo.comments.length > 0">
+                        <template v-for="item in goodsInfo.comments" >
+                        <van-swipe-item :key="item.id">
+                            <van-cell>
+                              <div>
+                                {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
+                                <van-rate
+                                   style="display: inline-block"
+                                   v-model="item.star_scores"
+                                   :size="14"
+                                   disabled
+                                   disabled-color="#f44"
+                                   void-icon="star"
+                                   void-color="#eee"
+                                 />
+                                {{item.created_at}}
+                              </div>
+                              <div class="huicolor">
+                                 &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
+                                 <van-row gutter="20">
+                                   <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
+                                       <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
+                                   </van-col>
+                                 </van-row>
+                              </div>
+                            </van-cell>
+                        </van-swipe-item>
+                        </template>
+                      </van-swipe>
+                      <mainFooter></mainFooter>     
+                   </div>
+                </van-tab>
+                <van-tab class="comment" :title="$t('aboutus')">
+                    <!-- <van-list
+                      v-model="loading"
+                      :finished="true"
+                     >
+                      <van-cell
+                        v-for="item in goodsInfo.comments"
+                        :key="item.id"
+                        >
+                        <div>
+                          {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
+                          <van-rate
+                             style="display: inline-block"
+                             v-model="item.star_scores"
+                             :size="14"
+                             disabled
+                             disabled-color="#f44"
+                             void-icon="star"
+                             void-color="#eee"
+                           />
+                          {{item.created_at}}
+                        </div>
+                        <div slot="default" class="huicolor">
+                           &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
+                           <van-row gutter="20">
+                             <van-col span="8" v-for="(elem, index) in item.comment_images" :key="elem.id">
+                                 <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" @click.native="imgShow(item.comment_images,index)"/>
+                             </van-col>
+                           </van-row>
+                        </div>
+                    </van-cell>
+                        <van-row type="flex" justify="space-around" style="background-color: #fff">
+                            <van-button icon="comment" plain type="danger" @click="commentclick">{{$t('tocomment')}}</van-button>
+                        </van-row>
 
+                    </van-list> -->
+                        <van-row type="flex" justify="space-around" style="background-color: #fff">
+                            <van-button icon="comment" plain type="danger" @click="commentclick">{{$t('tocomment')}}</van-button>
+                        </van-row>
                       <van-cell-group>
                         <van-cell>
                             <div>{{$t('floorPage_1Title')}}</div>
@@ -158,45 +200,7 @@
                             </div>
                         </van-cell>
 
-                      </van-cell-group>     
-                   </div>
-                </van-tab>
-                <van-tab class="comment" :title="$t('comment')">
-                    <van-list
-                      v-model="loading"
-                      :finished="true"
-                     >
-                      <van-cell
-                        v-for="item in goodsInfo.comments"
-                        :key="item.id"
-                        >
-                        <div>
-                          {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
-                          <van-rate
-                             style="display: inline-block"
-                             v-model="item.star_scores"
-                             :size="14"
-                             disabled
-                             disabled-color="#f44"
-                             void-icon="star"
-                             void-color="#eee"
-                           />
-                          {{item.created_at}}
-                        </div>
-                        <div slot="default" class="huicolor">
-                           &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
-                           <van-row gutter="20">
-                             <van-col span="8" v-for="(elem, index) in item.comment_images" :key="elem.id">
-                                 <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" @click.native="imgShow(item.comment_images,index)"/>
-                             </van-col>
-                           </van-row>
-                        </div>
-                    </van-cell>
-                        <van-row type="flex" justify="space-around" style="background-color: #fff">
-                            <van-button icon="comment" plain type="danger" @click="commentclick">{{$t('tocomment')}}</van-button>
-                        </van-row>
-
-                    </van-list>
+                      </van-cell-group>
                 </van-tab>
             </van-tabs>
 <!-- @load="onLoad" -->
@@ -354,10 +358,12 @@
     import checkoutLang from '@/lang.js'
     import { setTimeout } from 'timers'
     import cart from '@/views/pages/Cart'
+    import mainFooter from '../component/mainFooter'
     export default {
       components: {
         [Sku.name]: Sku,
-        cart
+        cart,
+        mainFooter
       },
         data() {
             return {
@@ -965,8 +971,8 @@
     min-height: 70px;
   }
   .maxheight {
-    overflow: auto;
-    max-height: 350px;
+    /* overflow: auto;
+    max-height: 350px; */
   }
   .fadeimg {
     position: fixed;
@@ -1067,5 +1073,8 @@
 }
 .active {
   border: 2px solid #ef3470
+}
+>>>.footer4 {
+  padding: 0px
 }
 </style>
