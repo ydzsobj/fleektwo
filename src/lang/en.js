@@ -114,5 +114,8 @@ export default {
     mainFooter_privacy:'Privacy Policy',
     mainFooter_contact:'Contact Us',
     mainFooter_2:'. All rights reserved',
-    buyNow:'Buy Now'
+    buyNow:'Buy Now',
+    seek:'搜索',
+    searchProducts:'搜索产品'
+    
     }

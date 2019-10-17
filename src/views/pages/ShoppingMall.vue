@@ -16,7 +16,7 @@
         <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" >
             <van-icon name="wap-nav" slot="left" />
             <img src="../../assets/images/ydzs.png" slot="title" style="max-height:40px">
-            <van-icon name="search" slot="right" />
+            <van-icon name="search" slot="right" @click="onSeek" />
         </van-nav-bar>
         <div style="height:46px"></div>
         <van-sidebar v-model="activeKey" id="navLeft" v-show="navLeft_show">
@@ -183,6 +183,9 @@
             },
             onChange(index) {
                 this.current = index;
+            },
+            onSeek(){
+                this.$router.push({name:'seek'})
             }
         },
         mounted(){
@@ -346,7 +349,7 @@
     position: absolute;
     bottom: -2px;
     background-color: #fff;
-    z-index: 999;
+    z-index: 1;
     border-radius: 50% 50% 0px 0px;
 }
 

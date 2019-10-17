@@ -109,5 +109,7 @@ export default {
     mainFooter_privacy:'kebijakan pribadi',
     mainFooter_contact:'hubungi kami',
     mainFooter_2:'. All rights reserved',
-    buyNow:'Beli Sekarang'
+    buyNow:'Beli Sekarang',
+    seek:'cari',
+    searchProducts:'cari produk'
     }

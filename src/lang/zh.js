@@ -100,6 +100,9 @@ export default {
     mainFooter_privacy:'Privacy Policy',
     mainFooter_contact:'Contact Us',
     mainFooter_2:'. All rights reserved',
-    buyNow:'立即购买'
+    buyNow:'立即购买',
+        seek:'seek',
+        searchProducts:'Search Products'
+    
   }
   
