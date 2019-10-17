@@ -35,7 +35,7 @@
         <div class="swiper-area">
             <van-swipe @change="onChange" ref="swipe">
               <van-swipe-item v-if="goodsInfo.main_video_url">
-                <video :src="goodsInfo.main_video_url" controls="controls" width="100%"/>
+                <video :src="goodsInfo.main_video_url" controls="controls" width="100%" style="display: block"/>
               </van-swipe-item>
               <van-swipe-item v-for="(image, index) in goodsInfo.list_images" :key="index">
                 <img :src="image" width="100%" style="display: block"/>
