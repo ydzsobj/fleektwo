@@ -10,6 +10,7 @@
       <van-pull-refresh v-model="pullLoading" @refresh="onRefresh" :pulling-text="$t('pullingText')" :loosing-text="$t('lossText')" :loading-text="$t('loading')">
 
         <van-nav-bar
+          class="left50"
           :left-text="$t('home')"
           left-arrow
           fixed
@@ -275,13 +276,13 @@
         </div> -->
 
         <van-goods-action style="z-index: 2;" class="marginauto">
-          <van-goods-action-icon
+          <!-- <van-goods-action-icon
             :info="cartNumCount"
             :class="{ 'animationCartCount': skuSelectedImg }"
             icon="cart-o"
             :text="$t('shopCart')"
             @click.native="tocart" style="margin: 0 15px;"
-          />
+          /> -->
           <!-- <van-goods-action-icon
             icon="shop-o"
             :text="$t('store')"
@@ -343,7 +344,10 @@
         </van-sku>
         
           <img :src="skuSelectedImg" alt="" width="80" height="80" class="fadeimg" :class="{ 'animationCart': skuSelectedImg }">
-          <div class="upgrade" @click="top"><van-icon name="upgrade" color="#ef3470" size="30px"/></div>
+          <div class="upgrade" @click="top">
+            <van-icon name="upgrade" color="#ef3470" size="30px"/>
+            <van-icon name="cart" color="#ef3470" size="30px" :info="cartNumCount" @click.native="tocart" :class="{ 'animationCartCount': skuSelectedImg }" style="margin-top: 5px"/>
+          </div>
     </div>
 </template>
 
@@ -976,8 +980,8 @@
   }
   .fadeimg {
     position: fixed;
-    bottom: -100px;
-    left: 0px
+    right: -100px;
+    top: 35%
   }
   .animationCart {
     animation: bounce-in 2s ease 0.2s;
@@ -999,20 +1003,20 @@
 @keyframes bounce-in {
   0% {
     transform: scale(1);
-    left:100px;
-    bottom:300px;
+    right:200px;
+    top:45%;
   }
-  25% {
-    left:150px;
+  /* 25% {
+    left:300px;
     bottom:400px;
-  }
-  50% {
+  } */
+  /* 50% {
     transform: scale(0.5);
-  }
+  } */
   100% {
     transform: scale(0.2);
-    left: 5px; 
-    bottom:0px;
+    right:-20px;
+    top:35%;
   }
 }
 @-webkit-keyframes bounce-in /*Safari and Chrome*/
@@ -1059,9 +1063,8 @@
 }
 .upgrade{
   width: 30px;
-  height: 30px;
     top: 35%;
-    right: 5px;
+    right: 10px;
     position: fixed;
 }
 .custom-indicator {
