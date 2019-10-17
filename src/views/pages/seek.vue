@@ -45,8 +45,8 @@
         </div>
         <div class="order-no-box" v-show="errOrder">
             <img src="../../assets/images/nothing_ioc.png" alt="">
-            <h3>Tidak menemukan hasil produk '{{keywordsText}}'!</h3>
-            <p>Harap masukkan kembali permintaan produk!</p>
+            <h3>{{$t('seekErr')}} '{{keywordsText}}'!</h3>
+            <p>{{$t('seekErr_1')}}</p>
         </div>
     </div>
 </template>
@@ -186,13 +186,13 @@ export default {
     }
     .order-no-box>h3 {
         text-align: center;
-        font-size: 1em;
+        font-size: 14px;
         font-weight: bold;
         margin: 10px 0px;
     }
     .order-no-box>p {
         text-align: center;
-        font-size: 0.9em;
+        font-size: 12px;
     }
     .list-item{
         display: flex;

@@ -102,7 +102,9 @@ export default {
     mainFooter_2:'. All rights reserved',
     buyNow:'立即购买',
         seek:'seek',
-        searchProducts:'Search Products'
+        searchProducts:'Search Products',
+    seekErr:'没有搜到产品',
+    seekErr_1:'请重新输入产品名称！'
     
   }
   

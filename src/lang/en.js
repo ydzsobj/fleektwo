@@ -115,7 +115,8 @@ export default {
     mainFooter_contact:'Contact Us',
     mainFooter_2:'. All rights reserved',
     buyNow:'Buy Now',
-    seek:'搜索',
-    searchProducts:'搜索产品'
-    
+    seek:'seek',
+    searchProducts:'Search products',
+    seekErr:'Didn\'t find product results',
+    seekErr_1:'Please re-enter product requests!'
     }
