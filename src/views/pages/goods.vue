@@ -18,20 +18,9 @@
           @click-right="onClickRight"
         >
           <img src="../../assets/images/ydzstou.png" height="46px" slot="title">
-          <van-icon name="service" slot="right" size="20px"/>
+          <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" :class="{ 'animationCartCount': skuSelectedImg }"/>
         </van-nav-bar>
-         <van-dialog
-           v-model="dialogshow"
-           :confirmButtonText="$t('confirm')"
-           :title="$t('concatus')"
-           :closeOnClickOverlay="true"
-         >
-                <van-icon name="phone" v-if="$store.state.phone"/> {{$store.state.phone}}
-                <br/>
-                <van-icon name="envelop-o"  v-if="$store.state.email"/> {{$store.state.email}}
-                <br/>
-                <van-icon name="location" v-if="$store.state.global_address"/> {{$store.state.global_address}}
-         </van-dialog>
+ 
         <div class="swiper-area">
             <van-swipe @change="onChange" ref="swipe">
               <van-swipe-item v-if="goodsInfo.main_video_url">
@@ -41,23 +30,23 @@
                 <img :src="image" width="100%" style="display: block"/>
               </van-swipe-item>
                 <div class="custom-indicator" slot="indicator">
-                   <div @click="clickswipe(0)" :class="{ active: current===0 }" v-if="goodsInfo.main_video_url" style="display: inline-block; width: 30px;height:30px; padding: 0 5px;">
-                       <van-icon name="video" size="30px"/>
+                   <div @click="clickswipe(0)" v-if="goodsInfo.main_video_url" style="display: inline-block; width: 40px;height:40px; padding: 0 8px;">
+                       <van-icon name="video" size="40px" :class="{ active: current===0 }"/>
                    </div>
-                   <div @click="clickswipe(goodsInfo.main_video_url ? index+1 :  index )" :class="{ active: goodsInfo.main_video_url ? current === index+1 : current === index }" v-for="(image, index) in goodsInfo.list_images" :key="index" style="display: inline-block; width: 30px;height:30px; padding: 0 5px;">
-                     <img :src="image" width="100%" style="display: block"/>
+                   <div @click="clickswipe(goodsInfo.main_video_url ? index+1 :  index )" v-for="(image, index) in goodsInfo.list_images" :key="index" style="display: inline-block; width: 40px;height:40px; padding: 0 8px;">
+                     <img :src="image" width="100%" style="display: block" :class="{ active: goodsInfo.main_video_url ? current === index+1 : current === index }" />
                    </div>
                 </div>
             </van-swipe>
         </div>
         <van-cell-group>
           <van-cell :border="false">
-            <div class="goods-title">{{ goodsInfo.title}}</div>
-            <div class="huicolor">{{ goodsInfo.about}}</div>
-            <div v-if="$store.state.lang==='ind-BA'" class="goods-price">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
-            <div v-else class="goods-price"> <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s> {{goodsInfo.money_sign}}{{goodsInfo.price }} </div>
+            <div class="goods-title padding30">{{ goodsInfo.title}}</div>
+            <div class="huicolor padding30">{{ goodsInfo.about}}</div>
+            <div v-if="$store.state.lang==='ind-BA'" class="goods-price padding30">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
+            <div v-else class="price padding30"> {{goodsInfo.money_sign}}{{goodsInfo.price }} <s class="huicolor padding30">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s></div>
           </van-cell>
-          <van-cell :border="false">
+          <!-- <van-cell :border="false">
             <van-progress :percentage="78" :show-pivot="false" :stroke-width="12" color="#ef3470" style="width: 60%; display: inline-block;"/> <span style=" float: right;">{{$t('stock')}}{{(70+goodsInfo.category_id)+'%'}}</span>
           </van-cell>
           <van-cell :value="$t('storeenter')" icon="shop-o" is-link @click.native="tohome" :border="false">
@@ -65,7 +54,7 @@
               <span class="van-cell-text">{{ $t('store') }}</span>
               <van-tag class="goods-tag" type="danger">{{ $t('official') }}</van-tag>
             </template>
-          </van-cell>
+          </van-cell> -->
         </van-cell-group>
 
         <!-- <van-cell-group @click.native= showSkuAttr>
@@ -83,7 +72,7 @@
         </van-cell-group> -->
       </van-pull-refresh>
         <div>
-            <van-tabs class="mallFlexd" v-model="activeTab" swipeable sticky>
+            <van-tabs v-model="activeTab" swipeable >
                 <van-tab :title="$t('goodsDetails')">
                    <div class="detail">
                       <div v-for="(image, index) in goodsInfo.detail_list_images" :key="index">
@@ -94,40 +83,134 @@
                           </template>
                         </van-image>   
                       </div>
-                      <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments && goodsInfo.comments.length > 0">
-                        <template v-for="item in goodsInfo.comments" >
-                        <van-swipe-item :key="item.id">
-                            <van-cell>
-                              <div>
-                                {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
-                                <van-rate
-                                   style="display: inline-block"
-                                   v-model="item.star_scores"
-                                   :size="14"
-                                   disabled
-                                   disabled-color="#f44"
-                                   void-icon="star"
-                                   void-color="#eee"
-                                 />
-                                {{item.created_at}}
-                              </div>
-                              <div class="huicolor">
-                                 &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
-                                 <van-row gutter="20">
-                                   <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
-                                       <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
-                                   </van-col>
-                                 </van-row>
-                              </div>
-                            </van-cell>
-                        </van-swipe-item>
-                        </template>
-                      </van-swipe>
+                      <div class="padding30" style="font-size: 16px">
+                          <p><van-icon name="location" v-if="$store.state.global_address"/> {{$store.state.global_address}}</p>
+                          <p><van-icon name="phone" v-if="$store.state.phone"/> {{$store.state.phone}}</p>
+                          <p><van-icon name="envelop-o"  v-if="$store.state.email"/> {{$store.state.email}}</p>
+                      </div>
+                      <van-collapse v-model="activeName" accordion>
+                        <van-collapse-item :title="$t('tocomment')" name="1" size="large">
+                            <van-cell-group :border="false">
+                               <van-field
+                                 v-model="name"
+                                 required
+                                 clearable
+                                 :label="$t('name')"
+                                 :placeholder="$t('nameholder')"
+                                 :error-message="errName"
+                               />
+                               <van-field
+                                 v-model="telephone"
+                                 :label="$t('phoneNumber')"
+                                 clearable
+                                 clickable
+                                 :placeholder="$t('phoneNumberholder')"
+                                 type="number"
+                                 required
+                                 :error-message="errTelephone"
+                               />
+                               <van-cell>
+                                 <span style="width:90px;display:inline-block">{{$t('score')}}</span>
+                                  <van-rate
+                                    style="display: inline-block"
+                                    v-model="star_scores"
+                                    :size="14"
+                                    void-icon="star"
+                                    color="#f44"
+                                    void-color="#eee"
+                                  />
+                               </van-cell>
+                               <van-field
+                                 v-model="message"
+                                 :label="$t('message')"
+                                 clearable
+                                 clickable
+                                 type="textarea"
+                                 maxlength="200"
+                                 required
+                                 :error-message="errMessage"
+                                 :placeholder="$t('messageholder')"
+                               />
+                            </van-cell-group>
+                            <van-row type="flex" justify="space-around">
+                                <van-button icon="comment" type="danger" @click="commentSubmit">{{$t('tocomment')}}</van-button>
+                            </van-row>
+                        </van-collapse-item>
+                        <van-collapse-item :title="$t('comment')" name="2" size="large">
+                            <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments && goodsInfo.comments.length > 0">
+                              <template v-for="item in goodsInfo.comments" >
+                              <van-swipe-item :key="item.id">
+                                  <van-cell>
+                                    <div>
+                                      {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
+                                      <van-rate
+                                         style="display: inline-block"
+                                         v-model="item.star_scores"
+                                         :size="14"
+                                         disabled
+                                         disabled-color="#f44"
+                                         void-icon="star"
+                                         void-color="#eee"
+                                       />
+                                      {{item.created_at}}
+                                    </div>
+                                    <div class="huicolor">
+                                       &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
+                                       <van-row gutter="20">
+                                         <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
+                                             <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
+                                         </van-col>
+                                       </van-row>
+                                    </div>
+                                  </van-cell>
+                              </van-swipe-item>
+                              </template>
+                            </van-swipe>
+                        </van-collapse-item>
+                        <van-collapse-item :title="$t('aboutus')" name="3" size="large">
+                              <van-cell-group :border="false">
+                                <van-cell>
+                                    <div>{{$t('floorPage_1Title')}}</div>
+                                    <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-PHP'" v-html="$t('floorPage_1Html')"></div>
+                                    <div slot="default" class="huicolor maxheight" v-else>
+                                        <p>{{$t('floorPage_1_1')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_1_2')}}</p>
+                                        <div v-html="$t('floorPage_1_2_1_Html')"></div>
+                                    </div>
+                                </van-cell>
+                                <van-cell>
+                                    <div>{{$t('floorPage_2Title')}}</div>
+                                    <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-PHP'">
+                                       <p>{{$t('floorPage_2Flb_1')}} <van-icon name="service" color="#F8770E" size="20px"/></p>
+                                       <p>{{$t('floorPage_2Flb_2')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> </p>
+                                       <p>{{$t('floorPage_2Flb_3')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2Flb_4')}}</p>
+                                    </div>
+                                    <div slot="default" class="huicolor maxheight" v-else>
+                                       <p>{{$t('floorPage_2_1')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2_2')}}</p>
+                                       <p>{{$t('floorPage_2_3')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2_4')}}</p>
+                                    </div>
+                                </van-cell>
+                                <van-cell>
+                                    <div>{{$t('floorPage_3Title')}}</div>
+                                    <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-PHP'" v-html="$t('floorPage_3Html')"></div>
+                                    <div slot="default" class="huicolor maxheight" v-else>
+                                        <p> {{$t('floorPage_3_1')}} </p>
+                                        <p>{{$t('floorPage_3_2')}}</p>
+                                    </div>
+                                </van-cell>
+                                <van-cell>
+                                    <div slot="default" class="huicolor maxheight">
+                                      <img src="../../assets/images/ydzs.png" width="100px" style="float: left;margin-right: 10px;">
+                                       <p> {{$t('floorPage_4')}} </p>
+                                    </div>
+                                </van-cell>
+                              </van-cell-group>
+                        </van-collapse-item>
+                      </van-collapse>
                       <mainFooter></mainFooter>     
                    </div>
                 </van-tab>
-                <van-tab class="comment" :title="$t('aboutus')">
-                    <!-- <van-list
+                <!-- <van-tab class="comment" :title="$t('aboutus')">
+                    <van-list
                       v-model="loading"
                       :finished="true"
                      >
@@ -161,52 +244,15 @@
                             <van-button icon="comment" plain type="danger" @click="commentclick">{{$t('tocomment')}}</van-button>
                         </van-row>
 
-                    </van-list> -->
+                    </van-list>
                         <van-row type="flex" justify="space-around" style="background-color: #fff">
                             <van-button icon="comment" plain type="danger" @click="commentclick">{{$t('tocomment')}}</van-button>
                         </van-row>
-                      <van-cell-group>
-                        <van-cell>
-                            <div>{{$t('floorPage_1Title')}}</div>
-                            <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-PHP'" v-html="$t('floorPage_1Html')"></div>
-                            <div slot="default" class="huicolor maxheight" v-else>
-                                <p>{{$t('floorPage_1_1')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_1_2')}}</p>
-                                <div v-html="$t('floorPage_1_2_1_Html')"></div>
-                            </div>
-                        </van-cell>
-                        <van-cell>
-                            <div>{{$t('floorPage_2Title')}}</div>
-                            <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-PHP'">
-                               <p>{{$t('floorPage_2Flb_1')}} <van-icon name="service" color="#F8770E" size="20px"/></p>
-                               <p>{{$t('floorPage_2Flb_2')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> </p>
-                               <p>{{$t('floorPage_2Flb_3')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2Flb_4')}}</p>
-                            </div>
-                            <div slot="default" class="huicolor maxheight" v-else>
-                               <p>{{$t('floorPage_2_1')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2_2')}}</p>
-                               <p>{{$t('floorPage_2_3')}} <a :href="'mailto:'+ $store.state.email" style="color:#F8770E">{{$store.state.email}}</a> {{$t('floorPage_2_4')}}</p>
-                            </div>
-                        </van-cell>
-                        <van-cell>
-                            <div>{{$t('floorPage_3Title')}}</div>
-                            <div slot="default" class="huicolor maxheight" v-if="$store.state.lang==='en-PHP'" v-html="$t('floorPage_3Html')"></div>
-                            <div slot="default" class="huicolor maxheight" v-else>
-                                <p> {{$t('floorPage_3_1')}} </p>
-                                <p>{{$t('floorPage_3_2')}}</p>
-                            </div>
-                        </van-cell>
-                        <van-cell>
-                            <div slot="default" class="huicolor maxheight">
-                              <img src="../../assets/images/ydzs.png" width="100px" style="float: left;margin-right: 10px;">
-                               <p> {{$t('floorPage_4')}} </p>
-                            </div>
-                        </van-cell>
-
-                      </van-cell-group>
-                </van-tab>
+                </van-tab> -->
             </van-tabs>
 <!-- @load="onLoad" -->
         </div>
-        <van-popup
+        <!-- <van-popup
           v-model="popupshow"
           round
           position="bottom"
@@ -217,52 +263,8 @@
               @click-left="barClickLeft"
               left-arrow
             />
-            <van-cell-group>
-               <van-field
-                 v-model="name"
-                 required
-                 clearable
-                 :label="$t('name')"
-                 :placeholder="$t('nameholder')"
-                 :error-message="errName"
-               />
-               <van-field
-                 v-model="telephone"
-                 :label="$t('phoneNumber')"
-                 clearable
-                 clickable
-                 :placeholder="$t('phoneNumberholder')"
-                 type="number"
-                 required
-                 :error-message="errTelephone"
-               />
-               <van-cell>
-                 <span style="width:90px;display:inline-block">{{$t('score')}}</span>
-                  <van-rate
-                    style="display: inline-block"
-                    v-model="star_scores"
-                    :size="14"
-                    void-icon="star"
-                    color="#f44"
-                    void-color="#eee"
-                  />
-               </van-cell>
-               <van-field
-                 v-model="message"
-                 :label="$t('message')"
-                 clearable
-                 clickable
-                 type="textarea"
-                 maxlength="200"
-                 required
-                 :error-message="errMessage"
-                 :placeholder="$t('messageholder')"
-               />
-            </van-cell-group>
-            <van-row type="flex" justify="space-around">
-                <van-button icon="comment" type="danger" @click="commentSubmit">{{$t('tocomment')}}</van-button>
-            </van-row>
-        </van-popup>
+
+        </van-popup> -->
         <!-- <div class="notification">
           <van-card
             desc="描述信息描述信息描述信息描述信息"  
@@ -288,15 +290,15 @@
             :text="$t('store')"
             @click.native="tohome"
           /> -->
-          <van-goods-action-button
-            type="warning"
+          <van-goods-action-icon
+            icon="like"
             :text="$t('addCart')"
-            @click.native="showSkuCart" style="border-radius: 0;margin-right: 5px; background: linear-gradient(to right, #ffd01e, #ef3470)"
+            @click.native="showSkuCart" style="border-radius: 0;padding:0 5px;margin-right: 5px;"
           />
           <van-goods-action-button
             type="danger"
             :text="$t('buy')"
-            @click.native="showSkuBuy" style="border-radius: 0;background: linear-gradient(to right, #ef3470, #ef3470)"
+            @click.native="showSkuBuy" style="border-radius: 0;background: black"
           />
         </van-goods-action>
         <van-sku
@@ -345,8 +347,7 @@
         
           <img :src="skuSelectedImg" alt="" width="80" height="80" class="fadeimg" :class="{ 'animationCart': skuSelectedImg }">
           <div class="upgrade" @click="top">
-            <van-icon name="upgrade" color="#ef3470" size="30px"/>
-            <van-icon name="cart" color="#ef3470" size="30px" :info="cartNumCount" @click.native="tocart" :class="{ 'animationCartCount': skuSelectedImg }" style="margin-top: 5px"/>
+            <van-icon name="upgrade" size="30px"/>
           </div>
     </div>
 </template>
@@ -371,6 +372,7 @@
       },
         data() {
             return {
+                activeName: '',
                 dialogshow: false,
                 current: 0,
                 skuDatas: {},
@@ -981,7 +983,8 @@
   .fadeimg {
     position: fixed;
     right: -100px;
-    top: 35%
+    top: -10px;
+    z-index: 2
   }
   .animationCart {
     animation: bounce-in 2s ease 0.2s;
@@ -1014,27 +1017,12 @@
     transform: scale(0.5);
   } */
   100% {
-    transform: scale(0.2);
+    transform: scale(0.1);
     right:-20px;
-    top:35%;
+    top:-10px;
   }
 }
-@-webkit-keyframes bounce-in /*Safari and Chrome*/
-{
-  0% {
-    transform: scale(1);
-    left:60px;
-    bottom:320px;
-  }
-  50% {
-    transform: scale(0.5);
-  }
-  100% {
-    transform: scale(0);
-    left: 20px; 
-    bottom:0px;
-  }
-}
+
 .animationCartCount {
    animation: cartcount 0.2s linear 1.8s;
    -webkit-animation: cartcount 0.2s linear 1.8s;
@@ -1073,11 +1061,22 @@
     justify-content: center;
     width: 100%;
     background-color: white;
+    padding: 8px 0;
 }
 .active {
-  border: 2px solid #ef3470
+  border: 2px solid black
 }
 >>>.footer4 {
   padding: 0px
+}
+.padding30{
+  padding: 35px 0;
+  text-align: center;
+}
+.price{
+  font-size: 18px;
+}
+>>> .van-sku-actions .van-button--danger{
+  background:linear-gradient(to right,black,black);
 }
 </style>

@@ -16,7 +16,7 @@ export default {
     nomore: 'No more',
     shopCart: 'Shopping cart',
     store: 'Mall', //店铺
-    addCart: 'Add to shopping cart',
+    addCart: 'Add to cart',
     buy: 'Buy',//立即购买
     ok: 'CONFIRM',
     buyNum: 'Quantity', //购买数量
@@ -66,7 +66,7 @@ export default {
     confirm: 'Confirm',
     cancel: 'Cancel',
     score: 'Score',
-    tocomment: 'Comment',
+    tocomment: 'To comment',
     sendSucess: 'Send a success',
     errMessage: 'Comments cannot be empty',
     resgoods: 'You might like these',

@@ -16,7 +16,7 @@ export default {
     nomore: 'Tidak ada lagi',
     shopCart: 'Daftar belanja',
     store: 'Mall', //店铺
-    addCart: 'Tambahkan ke daftar belanja',
+    addCart: 'Tambah Ke Troli',
     buy: 'Segera pesan',//立即购买
     ok: 'Konfirm',
     buyNum: 'Jumlah pesanan', //购买数量

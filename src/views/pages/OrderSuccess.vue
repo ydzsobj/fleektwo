@@ -82,7 +82,7 @@ export default {
           this.$router.go(-2)
         },
         showDesc(item){
-            return item.skuAttrText.map(ele=>{return ele.name}).join('/')+'   '+item.messages.message_0
+            return item.skuAttrText.map(ele=>{return ele.name}).join('/')+'   '+(item.messages.message_0 || '')
         },
         showImage(skuAttrText) {
             let img=''
@@ -109,14 +109,14 @@ export default {
 </script>
 <style scoped>
 .nav{
-    background-color: #ef3470;
+    background-color: black;
     color: #fafafa;
     font-size: 16px;
     padding-left: 10px;
     padding-top: 5px;
 }
 .tu {
-    background-color: #ef3470;
+    background-color: black;
     color: #fafafa;
     height: 5rem
 }
