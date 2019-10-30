@@ -41,7 +41,7 @@
         </div>
         <van-cell-group>
           <van-cell :border="false">
-            <div class="goods-title padding30">{{ goodsInfo.title}}</div>
+            <div class="goods-title padding30"><h1 style="font-size: 24px;line-height: 1.5;">{{ goodsInfo.title}}</h1></div>
             <div class="huicolor padding30">{{ goodsInfo.about}}</div>
             <div v-if="$store.state.lang==='ind-BA'" class="goods-price padding30">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
             <div v-else class="price padding30"> {{goodsInfo.money_sign}}{{goodsInfo.price }} <s class="huicolor padding30">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s></div>
@@ -75,14 +75,15 @@
             <van-tabs v-model="activeTab" swipeable >
                 <van-tab :title="$t('goodsDetails')">
                    <div class="detail">
-                      <div v-for="(image, index) in goodsInfo.detail_list_images" :key="index">
+                      <!-- <div v-for="(image, index) in goodsInfo.detail_list_images" :key="index">
                         <video v-if="ifvido(image)" :src="image" controls="controls" width="100%" style="display: block"/>
                         <van-image v-else lazy-load show-error :src="image">
                           <template v-slot:loading>
                             <van-loading type="spinner" size="20" />
                           </template>
                         </van-image>   
-                      </div>
+                      </div> -->
+                      <div id="detailcontent" v-html="goodsInfo.detail_desc"></div>
                       <div class="padding30" style="font-size: 16px">
                           <p><van-icon name="location" v-if="$store.state.global_address"/> {{$store.state.global_address}}</p>
                           <p><van-icon name="phone" v-if="$store.state.phone"/> {{$store.state.phone}}</p>
@@ -1078,5 +1079,14 @@
 }
 >>> .van-sku-actions .van-button--danger{
   background:linear-gradient(to right,black,black);
+}
+#detailcontent >>> img {
+  width: 100%
+}
+#detailcontent >>> video {
+  width: 100%
+}
+#detailcontent >>> p {
+  word-wrap:break-word;
 }
 </style>
