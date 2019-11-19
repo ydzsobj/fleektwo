@@ -236,9 +236,9 @@
           
        }, 
        created(){
-           console.log('ddd',this.$store.state.fix, 'cc',JSON.parse(localStorage.fix))
+           console.log('ddd',this.$store.state.fix, 'cc',JSON.parse(localStorage.fix || "0"))
            let storefix = this.$store.state.fix
-           let locafix = JSON.parse(localStorage.fix)-0
+           let locafix = JSON.parse(localStorage.fix || "0")-0
            if(!storefix){
                console.log('cartinitfix')
              try {
@@ -357,7 +357,7 @@
                     }
                 }else{
                    if(localStorage.cartInfo){
-                    this.cartInfo=JSON.parse(localStorage.cartInfo)
+                    this.cartInfo=JSON.parse(localStorage.cartInfo || "[]")
                     this.checkedGoods = []
                     //默认全部选中
                     this.cartInfo.forEach(element => {
@@ -428,14 +428,14 @@
                         if(response.status== 200 && response.data.success){
                             //如果不是直接购买，下单成功后删除对应购物车商品
                             if(!this.isBuy){
-                            let cartInfo1=JSON.parse(localStorage.cartInfo)
+                            let cartInfo1=JSON.parse(localStorage.cartInfo || "[]")
                             //筛选购物车去掉已经买过的留下还没买的
                             let newCart = cartInfo1.filter(value => {
                                 if (this.checkedGoods.every(function(val){return val != value.selectedSkuComb.id})){ return value}
                                 })
                             localStorage.cartInfo =  JSON.stringify(newCart)       
                             }
-                            try{fbq('track', 'InitiateCheckout');console.log('initcheckout')}catch(e){};
+                            
                             try{ fbq('track', 'Purchase', {value: int(this.countPrice), currency:'USD'}) ;console.log('Purchase')}catch(e){}
                             this.$router.push({name:'order',params:{orderData: this.malldataOrder,orderResponse: response.data.data}})
                         }else{
@@ -470,7 +470,7 @@
                     }
                 }
                 // console.log(this.checkedGoods)
-                let cartIn = JSON.parse(localStorage.cartInfo)
+                let cartIn = JSON.parse(localStorage.cartInfo || "[]")
                 for(let i=0;i<cartIn.length;i++){
                     if(cartIn[i].selectedSkuComb.id === id){
                         cartIn.splice(i,1);break

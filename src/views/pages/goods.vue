@@ -527,7 +527,7 @@
             this.goodsId=this.$route.query.goodsId ?this.$route.query.goodsId-0: this.$route.params.goodsId-0
             console.log(this.goodsId)
             this.getInfo()
-            this.getNotice()
+            // this.getNotice()
             // this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
         },
         mounted(){
@@ -543,12 +543,12 @@
 
         },
         activated(){
-            this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
+            this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo || "[]").length===0?'':JSON.parse(localStorage.cartInfo || "[]").length) : ''
             let goodsId=this.$route.query.goodsId ?this.$route.query.goodsId-0: this.$route.params.goodsId-0
             if(this.goodsId != goodsId){
               this.goodsId = goodsId
               this.getInfo()
-              this.getNotice()
+              // this.getNotice()
             }
         },
         methods: {
@@ -629,7 +629,7 @@
             addGoodsToCart(skuData){
                 //取出本地购物车中的商品
                 //localStorage.removeItem('cartInfo')
-                let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) : []
+                let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo || "[]") : []
                 let  flag = false; //判断购物车同一商品选择同一属性时购物车+1
                     for(let i=0;i<cartInfo.length;i++){
                         if (cartInfo[i].goodsId === skuData.goodsId && cartInfo[i].selectedSkuComb.id === skuData.selectedSkuComb.id ){
@@ -638,7 +638,6 @@
                             flag=true 
                         }
                     }
-                
                  if (!flag) {
                      let newGoodsInfo = {
                          name:this.goodsInfo.name,
@@ -658,7 +657,7 @@
                 this.show = false
                 setTimeout(() => {
                    Toast.success(this.$t('successAdd'))
-                   this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
+                   this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo || "[]").length===0?'':JSON.parse(localStorage.cartInfo || "[]").length) : ''
                    this.skuSelectedImg = null
                 }, 2000);
 
@@ -684,7 +683,9 @@
                 }
               }, 500);
             },
-            showSkuBuy() {this.show = true ; this.isBuyCartAttr = 'buy';this.showAddCartBtn=false;this.buyText= this.$t('ok');setTimeout(()=>{ this.$refs.cart.getCartInfo() },200)},
+            showSkuBuy() {this.show = true ; this.isBuyCartAttr = 'buy';this.showAddCartBtn=false;this.buyText= this.$t('ok');
+                try{fbq('track', 'InitiateCheckout');console.log('initcheckout')}catch(e){};
+                setTimeout(()=>{ this.$refs.cart.getCartInfo() },200)},
             showSkuCart() {this.show = true ; this.isBuyCartAttr = 'cart';this.showAddCartBtn=false;this.buyText= this.$t('ok')},
             showSkuAttr() {this.show = true ; this.isBuyCartAttr = 'attr';this.showAddCartBtn=true;this.buyText= this.$t('buy')},
             onBuyClicked(skuData){
