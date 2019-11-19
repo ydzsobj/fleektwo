@@ -546,6 +546,7 @@
             this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo || "[]").length===0?'':JSON.parse(localStorage.cartInfo || "[]").length) : ''
             let goodsId=this.$route.query.goodsId ?this.$route.query.goodsId-0: this.$route.params.goodsId-0
             if(this.goodsId != goodsId){
+              this.goodsInfo = {} //缓存提前清空
               this.goodsId = goodsId
               this.getInfo()
               // this.getNotice()
@@ -1071,7 +1072,7 @@
   padding: 0px
 }
 .padding30{
-  padding: 35px 0;
+  padding: 30px 0;
   text-align: center;
 }
 .price{
