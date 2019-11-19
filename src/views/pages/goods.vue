@@ -90,6 +90,37 @@
                           <p><van-icon name="envelop-o"  v-if="$store.state.email"/> {{$store.state.email}}</p>
                       </div>
                       <van-collapse v-model="activeName" accordion>
+                        <van-collapse-item :title="$t('comment')" name="2" size="large" v-if="goodsInfo.comments && goodsInfo.comments.length > 0">
+                            <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:350px" vertical >
+                              <template v-for="item in goodsInfo.comments" >
+                              <van-swipe-item :key="item.id">
+                                  <van-cell>
+                                    <div>
+                                      {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
+                                      <van-rate
+                                         style="display: inline-block"
+                                         v-model="item.star_scores"
+                                         :size="14"
+                                         disabled
+                                         disabled-color="#f44"
+                                         void-icon="star"
+                                         void-color="#eee"
+                                       />
+                                      {{item.created_at}}
+                                    </div>
+                                    <div class="huicolor">
+                                       &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
+                                       <van-row gutter="20">
+                                         <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
+                                             <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
+                                         </van-col>
+                                       </van-row>
+                                    </div>
+                                  </van-cell>
+                              </van-swipe-item>
+                              </template>
+                            </van-swipe>
+                        </van-collapse-item>
                         <van-collapse-item :title="$t('tocomment')" name="1" size="large">
                             <van-cell-group :border="false">
                                <van-field
@@ -136,37 +167,6 @@
                             <van-row type="flex" justify="space-around">
                                 <van-button icon="comment" type="danger" @click="commentSubmit">{{$t('tocomment')}}</van-button>
                             </van-row>
-                        </van-collapse-item>
-                        <van-collapse-item :title="$t('comment')" name="2" size="large">
-                            <van-swipe :autoplay="2000" :duration="1500" :show-indicators="false" style="background-color: #fff;height:200px" vertical v-if="goodsInfo.comments && goodsInfo.comments.length > 0">
-                              <template v-for="item in goodsInfo.comments" >
-                              <van-swipe-item :key="item.id">
-                                  <van-cell>
-                                    <div>
-                                      {{item.name}}&nbsp;&nbsp;{{item.phone}}&nbsp;&nbsp;
-                                      <van-rate
-                                         style="display: inline-block"
-                                         v-model="item.star_scores"
-                                         :size="14"
-                                         disabled
-                                         disabled-color="#f44"
-                                         void-icon="star"
-                                         void-color="#eee"
-                                       />
-                                      {{item.created_at}}
-                                    </div>
-                                    <div class="huicolor">
-                                       &nbsp;&nbsp;&nbsp;&nbsp; {{item.comment}}
-                                       <van-row gutter="20">
-                                         <van-col span="8" v-for="elem in item.comment_images" :key="elem.id">
-                                             <van-image width="100%" height="100" fit="contain" lazy-load :src="elem.image_url" />
-                                         </van-col>
-                                       </van-row>
-                                    </div>
-                                  </van-cell>
-                              </van-swipe-item>
-                              </template>
-                            </van-swipe>
                         </van-collapse-item>
                         <van-collapse-item :title="$t('aboutus')" name="3" size="large">
                               <van-cell-group :border="false">
