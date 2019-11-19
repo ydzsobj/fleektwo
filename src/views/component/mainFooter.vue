@@ -47,14 +47,14 @@ export default {
 </script>
 
 <style scoped>
- .footer4{
+ /* .footer4{
         padding-bottom: 50px;
-    }
+    } */
     .baozhang {
         text-align: center;
         margin-bottom: 8px;
         padding-top: 10px;
-        margin-top: 15px;
+        /* margin-top: 15px; */
         border-top: 1px dashed #ddd;
     }
     .buy-logo {
@@ -104,9 +104,10 @@ export default {
     .f-list li:nth-child(1) a {
         color: #444;
         font-size: 12px;
-        display: block;
-        width: 20%;
+        display: inline-block;
+        /* width: 20%; */
+        padding: 0 20px;
         margin-bottom: 10px;
-        float: left;
+        /* float: left; */
     }
 </style>

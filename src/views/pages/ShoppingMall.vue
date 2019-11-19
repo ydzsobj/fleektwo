@@ -1,5 +1,5 @@
 <template>
-    <div style="background-color: #f0f0f0;">
+    <div style="background-color: #fff;">
         <!-- <div class="search-bar">
             <van-row>
                 <van-col span="3">
@@ -13,15 +13,25 @@
                 </van-col>
             </van-row>
         </div> -->
-        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" >
+        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" title="FleekFly" >
             <van-icon name="wap-nav" slot="left" />
-            <img src="../../assets/images/ydzs.png" slot="title" style="max-height:40px">
-            <van-icon name="search" slot="right" @click="onSeek" />
+            <!-- <img src="../../assets/images/ydzs.png" slot="title" style="max-height:40px"> -->
+            <!-- <van-icon name="search" slot="right" @click="onSeek" /> -->
+            <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" />
         </van-nav-bar>
-        <div style="height:46px"></div>
-        <van-sidebar v-model="activeKey" id="navLeft" v-show="navLeft_show">
+
+        <div style="height:100px"></div>
+        <!-- <div  style="padding: 8px 16px;background-color: #fff;" class="search">
+            <van-icon name="search" />
+            <input type="text" placeholder="123"/>
+        </div> -->
+        <van-search placeholder="请输入搜索关键词" v-model="value" shape="round" @search="onSearch" class='search left50'/>
+        <!-- <van-sidebar v-model="activeKey" id="navLeft" v-show="navLeft_show">
             <van-sidebar-item :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
-        </van-sidebar>
+        </van-sidebar> -->
+        <div id="navLeft" v-show="navLeft_show">
+            <van-cell size="large" is-link  :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
+        </div>
         <van-overlay
         :show="show"
         @click="show = false,navLeft_show=false"
@@ -36,8 +46,11 @@
                     {{ current + 1 }}/{{bannerPicArray.length}}
                 </div>
             </van-swipe>
-            <div class="swiper-span"></div>
+            <!-- <div class="swiper-span"></div> -->
         </div>  
+        <div>
+
+        </div>
         <!--type bar-->
         <div class="type-bar">
             <div v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)">
@@ -66,7 +79,7 @@
                 </swiper>
             </div>
         </div> -->
-        <floor-component v-for="(item, index) in floorData" :floorData="item.floor " :floorTitle="item.name" :key="index"></floor-component>
+        <!-- <floor-component v-for="(item, index) in floorData" :floorData="item.floor " :floorTitle="item.name" :key="index"></floor-component> -->
         <!-- <div class="STPRY">
             <div></div>
             <span>
@@ -76,21 +89,18 @@
         <div class="new-sale-big tu" style="margin-bottom:10px">
             <img src="../../assets/images/ourstory.jpg" style="width: 100%;">
         </div> -->
-        <div class="hot-area">
+        <!-- <div class="hot-area">
             <div class="hot-title">{{ $t('hotgoods') }}</div>
             <div class="hot-goods">
-            <!--这里需要一个list组件-->
                 <van-list>
-                    <!-- <van-row gutter="20"> -->
                         <van-col span="12" v-for="(item , index) in hotGoods" :key="index">
                                 <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price" :mallPrice="item.mallPrice">
 
                                 </goods-info>
                         </van-col>
-                    <!-- </van-row> -->
                 </van-list>
             </div>
-        </div>
+        </div> -->
         <mainFooter></mainFooter>
         
     </div>
@@ -110,6 +120,7 @@
     export default {
         data() {
             return {
+                value:'',
                 bar_fixed:true,
                 navLeft_show:false,
                 activeKey:9999999,
@@ -130,7 +141,7 @@
                 floorName:{},
                 hotGoods:[],  //热卖商品
                 nav_img:[require('../../assets/images/cartempty.png')],
-                current: 0
+                current: 0,
               
             }
         },
@@ -186,13 +197,26 @@
             },
             onSeek(){
                 this.$router.push({name:'seek'})
+            },
+            onSearch(v){
+                console.log(v)
+            },
+            tocart(){
+                this.$router.push({name:'Cart'})
             }
         },
         mounted(){
-            console.log(location.href)
             let winHeight = document.documentElement.clientHeight
             document.getElementById("navLeft").style.height=winHeight -46 +'px'
-        }
+        },
+        computed: {
+           cartNumCount() {
+             return this.$store.state.cartNum
+           }
+        },
+        activated(){
+            this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
+        },
        
     }
 </script>
@@ -205,7 +229,7 @@
     }
     .van-nav-bar .van-icon {
         font-size: 26px;
-        color:#ef3470
+        /* color:#ef3470 */
     }
     .hot-title{
         color:#ef3470
@@ -217,48 +241,12 @@
         z-index: 3;
         background: #f8f8f8;
         overflow-y: auto;
+        width:80%
     }
     .van-overlay{
         z-index: 2!important;
     }
-    .STPRY {
-        height: 20px;
-        margin-bottom: 6px;
-        margin-top: 6px;
-        line-height: 20px;
-        position: relative;
-        text-align: center;
-        color:#e2b2b2
-    }
-    .STPRY div {
-        position: absolute;
-        top: 9px;
-        border-top: 2px solid #e2b2b2;
-        width: 80%;
-        left: 10%;
-    }
-    .STPRY span {
-        background: #f9e7ea;
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-    }
-    .search-bar{
-        height:2.2rem;
-        background-color: #e5017d;
-        line-height: 2.2rem;
-        overflow: hidden;
-    }
-    .search-input{
-        width:100%;
-        height: 1.3rem;
-        border-top:0px;
-        border-left:0px;
-        border-right:0px;
-        border-bottom:1px solid #fff !important;
-        background-color: #e5017d;
-        color:#fff;
-    }
+
     .location-icon{
         padding-top:.2rem;
         padding-left:.3rem;
@@ -281,78 +269,40 @@
     .van-swipe{
         max-height:600px;
     }
-
-    .type-bar{
-        background-color: #fff;
-        /* margin:0 .3rem .3rem .3rem; */
-        /* border-radius: .3rem; */
-        font-size:14px;
-        display:flex;
-        flex-direction:row;
-        flex-wrap:nowrap;
-    }
-    .type-bar div{
-        padding:.3rem;
-        font-size:12px;
-        text-align: center;
-        flex:1;
-    }
-    .type-bar div span{
-        display: inline-block
-    }
-    .type-bar div img{
-        border-radius: 50%;
-    }
-    .recommend-area{
-        background-color: #fff;
-        margin-top:.3rem;
-    }
-    .recommend-title{
-        border-bottom:1px solid #eee;
-        font-size:14px;
-        padding:.2rem;
-        color:#e5017d;
-    }
-    .recommend-body{
-        border-bottom:1px solid #eee;
-    }
-    .recommend-item{
-        width:99%;
-        border-right:1px solid #eee;
-        font-size:12px;
-        text-align: center;
-    }
-    .hot-area{
-        text-align: center;
-        font-size:14px;
-        /* height: 1.8rem; */
-        line-height:1.8rem;
-        padding-bottom: 20px
-    }
-    .hot-goods{
-        /* height: 130rem; */
-        overflow: hidden;
-        /* background-color: #fff; */
-        padding: 0 8px;
-    }
-    .hot-goods>div>div:nth-child(2n) {
-        padding-left: 2px;
-        margin-bottom: 6px
-    }
-    .hot-goods>div>div:nth-child(odd) {
-        margin-bottom: 6px;
-        padding-right: 2px;
-    }
-    .swiper-span {
-    width: 100%;
-    height: 20px;
-    position: absolute;
-    bottom: -2px;
-    background-color: #fff;
-    z-index: 1;
-    border-radius: 50% 50% 0px 0px;
+/* .search{
+    padding: 8px 16px;
+    background-color: rgb(255, 255, 255);
+    position: relative;
 }
-
-
-
+.search i{
+    position: absolute;
+    top: 16px;
+    left: 24px;
+}
+.search input{
+    width: 100%;
+    border: none;
+    background-color: rgb(240, 240, 240);
+    padding: 6px;
+    padding-left: 31px;
+    border-radius: 12px;
+    box-sizing: border-box;
+    font-size: 1rem;
+} */
+.type-bar>div{
+    text-align: center;
+    border-bottom: 1px solid #eae8e4;
+    padding: 20px 0
+}
+.type-bar img{
+    margin: 0 auto;
+    display: block;
+    margin-bottom: 20px;
+}
+.search{
+    position: fixed;
+    top: 45px;
+    z-index: 2;
+    width: 100%;
+}
 </style>

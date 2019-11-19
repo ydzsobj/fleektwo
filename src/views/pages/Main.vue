@@ -5,12 +5,12 @@
                 <router-view />
             </keep-alive>
         </div>
-        <van-tabbar class="left50" v-model="active" @change="changeTabbar(active)" v-show="this.$route.name==='ShoppingMall' || this.$route.name==='CategoryList'">
+        <!-- <van-tabbar class="left50" v-model="active" @change="changeTabbar(active)" v-show="this.$route.name==='ShoppingMall' || this.$route.name==='CategoryList'">
             <van-tabbar-item icon="shop">{{ $t('home') }}</van-tabbar-item>
             <van-tabbar-item icon="records">{{ $t('list') }}</van-tabbar-item>
             <van-tabbar-item icon="cart" :info="cartNum">{{ $t('shopCart') }}</van-tabbar-item>
-            <!-- <van-tabbar-item icon="contact">会员中心</van-tabbar-item> -->
-        </van-tabbar>
+            <van-tabbar-item icon="contact">会员中心</van-tabbar-item>
+        </van-tabbar> -->
     </div>
 </template>
 
