@@ -600,7 +600,6 @@
                       .then(response=>{
                           if(response.status== 200 && response.data.good){
                               this.goodsInfo = response.data.good
-                              console.log(this.goodsInfo.comments.length)
                               // 商品属性基本信息赋值
                               this.goods.title = this.goodsInfo.title             //默认名
                               this.goods.picture = this.goodsInfo.main_image_url  //无属性规格，默认图片
