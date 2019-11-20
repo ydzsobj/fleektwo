@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div class="navbar-div">
+        <!-- <div class="navbar-div">
             <van-nav-bar :title="$t('classlist')"/>
-        </div>
-
+        </div> -->
+        <top-nav @nav_index="nav_index" @nav_Search="nav_Search" :keywords-val="keywords"></top-nav>
         <div>
           <van-row>
               <van-col>
@@ -14,12 +14,13 @@
                            </li>
                        </ul>
                   </div> -->
-                  <van-sidebar v-model="categoryIndex" id="leftNav">
+                  <!-- <van-sidebar v-model="categoryIndex" id="leftNav">
                     <van-sidebar-item :title="item.name" v-for="(item , index) in category" :key="index" @click.native="clickCategory(index,item.category_id)"/>
-                  </van-sidebar>
+                  </van-sidebar> -->
                  
               </van-col>
-              <van-col style="width: calc( 100% - 85px )">
+              <!-- <van-col style="width: calc( 100% - 85px )"> -->
+              <van-col style="width:100%">
 
                   <!-- <div class="tabCategorySub">
                       <van-tabs v-model="active" @click="onClickCategorySub">
@@ -69,6 +70,7 @@
 <script>
     import axios from 'axios'
     import url from '@/serviceAPI.config.js'
+    import topNav from '../component/topNav'
     import {toMoney ,toDivide, int,num} from '@/filter/moneyFilter.js'
     export default {
         data() {
@@ -84,9 +86,11 @@
                 goodList:[],   //商品列表信息
                 categorySubId:null, //商品子类ID
                 errorImg:'this.src="'+require('@/assets/images/errorimg.png')+'"',
-                thrott: true
+                thrott: true,
+                keywords:''
             }
         },
+        components:{topNav},
         filters:{
             moneyFilter(money){
                 return toMoney(money)
@@ -102,40 +106,37 @@
             }
         },
         created(){
+            console.log(this.$route.params.categorySubId)
             
             this.getCategory();
            
         },
         activated(){
-            if(this.categorySubId && this.$route.params.categorySubId && this.categorySubId != this.$route.params.categorySubId){
-                    this.page=1
-                    this.categoryIndex=this.$route.params.index
-                    this.categorySubId=this.$route.params.categorySubId
-                    this.finished = false
-                    this.isLoading= true
-                    this.loading = true
-                    this.goodList= [] 
-                    this.onLoad()
+            console.log(this.$route.params)
+            if( this.$route.params.categorySubId){
+                this.keywords=''
+                this.page=1
+                this.categoryIndex=this.$route.params.index
+                this.categorySubId=this.$route.params.categorySubId
+                this.finished = false
+                this.isLoading= true
+                this.loading = true
+                this.goodList= [] 
+                this.onLoad()
+            }
+            if(this.$route.params.keywords==''||this.$route.params.keywords){
+                this.keywords=this.$route.params.keywords
+                this.categorySubId=''
+                this.page=1
+                this.goodList= [] 
+                this.finished = false
+                this.isLoading = true
+                this.getGoodList()
             }
         },
-        // watch: {
-        //     '$route' () {
-        //         if(this.$route.query.categorySubId){
-        //             this.page=0
-        //             this.categoryIndex=this.$route.query.index
-        //             this.categorySubId=this.$route.query.categorySubId ?this.$route.query.categorySubId : this.$route.params.categorySubId
-        //             this.finished = false
-        //             this.isLoading= false
-        //             this.goodList= [] 
-        //             // this.categorySubId = this.categorySubId
-        //             this.onLoad()
-        //         }
-        //     }
-        // },
         mounted(){
             let winHeight = document.documentElement.clientHeight
-            document.getElementById("leftNav").style.height=winHeight -46-50 +'px'
-            document.getElementById("list-div").style.height=winHeight -96 +'px'
+            document.getElementById("list-div").style.height=winHeight -100 +'px'
         },
         methods: {
             onLoad(index) {      //上拉加载
@@ -170,29 +171,39 @@
                 })
                 
             },
-            clickCategory(index,categoryId){
+            nav_index(categoryId){
+                console.log(categoryId)
                 this.error = false
                     this.loading = true
                 if(this.thrott){
                     this.thrott= false
                     this.goodList= [] 
-                   this.categoryIndex=index
+                   this.categoryIndex=categoryId
                    this.page=1
                    this.finished = false
                    this.isLoading = true
                    this.categorySubId = categoryId
-                   this.onLoad(index)
+                   this.onLoad(categoryId)
                 }
             },
             getGoodList(index){
-              if(this.categorySubId){
-                  axios({
-                      url:url.getGoodsListByCategorySubID,
-                    method:'get',
-                    params:{
+                var data ={}
+                if(this.keywords==''&&this.categorySubId){
+                    data={
                         category_id:this.categorySubId,
                         page:this.page
                     }
+                }else{
+                    data={
+                        keywords:this.keywords,
+                        page:this.page
+                    }
+                }
+            //   if(this.categorySubId){
+                  axios({
+                      url:url.getGoodsListByCategorySubID,
+                    method:'get',
+                    params:data
                 })
                 .then(response=>{
                  this.page++
@@ -200,6 +211,7 @@
                         if(index > -1){this.goodList = [];this.categoryIndex=index}
                         this.goodList=this.goodList.concat(response.data.data.data)
                         console.log(index, this.categoryIndex)
+                        console.log(this.page)
                     }else{
                         this.finished = true
                     }
@@ -214,13 +226,22 @@
                     this.thrott= true
                     console.log(error)
                 })
-              }
+            //   }
             },
             //跳转到商品详细页
             goGoodsInfo(id){
                 this.$router.push({name:'Goods',query:{goodsId:id}})
+            },
+            nav_Search(a){
+                console.log(a)
+                this.keywords=a
+                this.categorySubId=''
+                this.page=1
+                this.goodList= [] 
+                this.finished = false
+                this.isLoading = true
+                this.onLoad()
             }
-
           
 
            

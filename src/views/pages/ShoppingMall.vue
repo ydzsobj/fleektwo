@@ -13,29 +13,22 @@
                 </van-col>
             </van-row>
         </div> -->
-        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" title="FleekFly" >
+        <!-- <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" title="FleekFly" >
             <van-icon name="wap-nav" slot="left" />
-            <!-- <img src="../../assets/images/ydzs.png" slot="title" style="max-height:40px"> -->
-            <!-- <van-icon name="search" slot="right" @click="onSeek" /> -->
             <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" />
         </van-nav-bar>
-
-        <div style="height:100px"></div>
-        <!-- <div  style="padding: 8px 16px;background-color: #fff;" class="search">
-            <van-icon name="search" />
-            <input type="text" placeholder="123"/>
-        </div> -->
-        <van-search placeholder="请输入搜索关键词" v-model="value" shape="round" @search="onSearch" class='search left50'/>
+        <van-search placeholder="请输入搜索关键词" v-model="value" shape="round" @search="onSearch" class='search left50'/> -->
         <!-- <van-sidebar v-model="activeKey" id="navLeft" v-show="navLeft_show">
             <van-sidebar-item :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
         </van-sidebar> -->
-        <div id="navLeft" v-show="navLeft_show">
+        <!-- <div id="navLeft" v-show="navLeft_show">
             <van-cell size="large" is-link  :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
         </div>
         <van-overlay
         :show="show"
         @click="show = false,navLeft_show=false"
-        />
+        /> -->
+        <top-nav :keywordsVal="keywords"></top-nav>
         <!--swiper area-->
         <div class="swiper-area">
             <van-swipe :autoplay="1000" @change="onChange">
@@ -115,11 +108,13 @@
     import mainFooter from '../component/mainFooter'
     import { toMoney , int,num} from '@/filter/moneyFilter.js'
     import goodsInfo from '../component/goodsInfoComponent'
+    import topNav from '../component/topNav'
     import url from '@/serviceAPI.config.js'
    
     export default {
         data() {
             return {
+                keywords:'',
                 value:'',
                 bar_fixed:true,
                 navLeft_show:false,
@@ -156,7 +151,7 @@
                 return num(money)
             }
         },
-        components:{swiper,swiperSlide,floorComponent,goodsInfo,mainFooter},
+        components:{swiper,swiperSlide,floorComponent,goodsInfo,mainFooter,topNav},
         created(){
             axios({
                 url:url.getShopingMallInfo,
@@ -299,10 +294,10 @@
     display: block;
     margin-bottom: 20px;
 }
-.search{
+/* .search{
     position: fixed;
     top: 45px;
     z-index: 2;
     width: 100%;
-}
+} */
 </style>
