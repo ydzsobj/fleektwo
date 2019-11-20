@@ -639,4 +639,7 @@
 .huicolor{
       color: #969799
     } 
+    >>> .van-field__error-message {
+        color: #f44
+    }
 </style>
