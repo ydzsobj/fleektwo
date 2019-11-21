@@ -116,7 +116,7 @@ export default {
     mainFooter_2:'. All rights reserved',
     buyNow:'Buy Now',
     seek:'seek',
-    searchProducts:'Search products',
+    searchProducts:'Search products',
     seekErr:'Didn\'t find product results',
     seekErr_1:'Please re-enter product requests!'
     }

@@ -111,7 +111,7 @@ export default {
     mainFooter_2:'. All rights reserved',
     buyNow:'Beli Sekarang',
     seek:'cari',
-    searchProducts:'cari produk',
+    searchProducts:'cari produk',
     seekErr:'Tidak menemukan hasil produk ',
     seekErr_1:'Harap masukkan kembali permintaan produk!'
     }

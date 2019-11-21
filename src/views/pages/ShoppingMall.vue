@@ -1,7 +1,7 @@
 <template>
     <div style="background-color: #fff;">
         <top-nav :keywordsVal="keywords"></top-nav>
-        <van-search placeholder="请输入搜索关键词" v-model="value" shape="round" @search="onSearch" class='search left50'/>
+        <van-search :placeholder="$t('searchProducts')" v-model="value" shape="round" @search="onSearch" class='search left50'/>
         <!--swiper area-->
         <div class="swiper-area">
             <van-swipe :autoplay="1000" @change="onChange">

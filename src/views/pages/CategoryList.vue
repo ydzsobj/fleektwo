@@ -4,7 +4,7 @@
             <van-nav-bar :title="$t('classlist')"/>
         </div> -->
         <top-nav @nav_index="nav_index"  :keywords-val="keywords"></top-nav>
-        <van-search placeholder="请输入搜索关键词" v-model="keywords" shape="round" @search="onSearch" class='search left50'/>
+        <van-search :placeholder="$t('searchProducts')" v-model="keywords" shape="round" @search="onSearch" class='search left50'/>
         <div>
           <van-row>
               <van-col>
@@ -77,7 +77,7 @@
         data() {
             return {
                 error: false,
-                loading: false,   //是否处于加载状态
+                loading: true,   //是否处于加载状态
                 finished: false,  //是否已加载完所有数据
                 isLoading: false,   //是否处于下拉刷新状态
                 category: [],
