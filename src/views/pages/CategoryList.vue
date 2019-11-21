@@ -77,7 +77,7 @@
         data() {
             return {
                 error: false,
-                loading: true,   //是否处于加载状态
+                loading: false,   //是否处于加载状态
                 finished: false,  //是否已加载完所有数据
                 isLoading: false,   //是否处于下拉刷新状态
                 category: [],
