@@ -831,6 +831,8 @@
                  .then(response=>{
                    console.log(response)
                      if(response.status== 200 && response.data.success){
+                       this.message=''
+                       this.activeName =''
                        this.popupshow = false
                       Toast(this.$t('sendSucess')) 
                      }else{
@@ -1090,4 +1092,7 @@
 #detailcontent >>> p {
   word-wrap:break-word;
 }
+    >>> .van-field__error-message {
+        color: #f44
+    }
 </style>
