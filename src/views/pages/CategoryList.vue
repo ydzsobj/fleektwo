@@ -3,7 +3,7 @@
         <!-- <div class="navbar-div">
             <van-nav-bar :title="$t('classlist')"/>
         </div> -->
-        <top-nav @nav_index="nav_index" @nav_Search="nav_Search" :keywords-val="keywords"></top-nav>
+        <top-nav :keywords-val="keywords"></top-nav>
         <van-search placeholder="请输入搜索关键词" v-model="keywords" shape="round" @search="onSearch" class='search left50'/>
         <div>
           <van-row>
@@ -110,7 +110,7 @@
         created(){
             console.log(this.$route.params.categorySubId)
             this.keywords=this.$route.params.keywords
-            this.getCategory();
+            // this.getCategory();
            
         },
         activated(){
