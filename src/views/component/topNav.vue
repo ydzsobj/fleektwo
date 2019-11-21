@@ -5,6 +5,7 @@
                 <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" />
         </van-nav-bar>
         <div id="navLeft" v-show="navLeft_show">
+            <van-cell size="large" is-link  :title="$t('home')" @click="golistPage('home')" />
             <van-cell size="large" is-link  :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
         </div>
         <van-overlay 
@@ -12,7 +13,7 @@
         :show="show"
         @click="show = false,navLeft_show=false"
         />
-        <van-search placeholder="请输入搜索关键词" v-model="value" shape="round" @search="onSearch" class='search left50'/>
+        <!-- <van-search placeholder="请输入搜索关键词" v-model="value" shape="round" @search="onSearch" class='search left50'/> -->
         <div style="height:100px"></div>
     </div>
 </template>
@@ -56,21 +57,23 @@ export default {
         tocart(){
             this.$router.push({name:'Cart'})
         },
-        onSearch(v){
-            // console.log(v)
-            if(this.$route.name !='CategoryList'&&v!=''){
-                this.$router.push({name:'CategoryList',params:{keywords:v}})
-                this.$emit('nav_Search',v)
-            }else{
-                this.$emit('nav_Search',v)
-            }
-        },
+        // onSearch(v){
+        //     // console.log(v)
+        //     if(this.$route.name !='CategoryList'&&v!=''){
+        //         this.$router.push({name:'CategoryList',params:{keywords:v}})
+        //         this.$emit('nav_Search',v)
+        //     }else{
+        //         this.$emit('nav_Search',v)
+        //     }
+        // },
         golistPage(id,index) {
             this.show=false
             this.navLeft_show=false
             console.log(this.$route.name)
-            if(this.$route.name !='CategoryList'){
+            if(this.$route.name !='CategoryList'&&id!='home'){
                 this.$router.push({name:'CategoryList',params:{categorySubId:id,index:index}})
+            }else if(id=='home'){
+                this.$router.push({name:'ShoppingMall'})
             }else{
                 this.$emit('nav_index',id)
             }
@@ -81,8 +84,8 @@ export default {
         },
     },
     created(){
-        console.log(this.keywordsVal,this.keywordsValue)
-        this.value=this.keywordsVal
+        // console.log(this.keywordsVal,this.keywordsValue)
+        // this.value=this.keywordsVal
         axios({
             url:url.getShopingMallInfo,
             method:'get',
@@ -101,13 +104,13 @@ export default {
         cartNumCount() {
             return this.$store.state.cartNum
         },
-                   keywordsValue() {
-             return this.keywordsVal
-           }
+        //            keywordsValue() {
+        //      return this.keywordsVal
+        //    }
         
     },
     mounted(){
-        console.log(this.keywordsVal,this.keywordsValue)
+        // console.log(this.keywordsVal,this.keywordsValue)
         let winHeight = document.documentElement.clientHeight
         document.getElementById("navLeft").style.height=winHeight -46 +'px'
     },
