@@ -1,34 +1,7 @@
 <template>
     <div style="background-color: #fff;">
-        <!-- <div class="search-bar">
-            <van-row>
-                <van-col span="3">
-                    <img :src="locationIcon" width="80%" class="location-icon"/>
-                </van-col>
-                <van-col span="16">
-                    <input type="text" class="search-input" />
-                </van-col>
-                <van-col span="5">
-                    <van-button size="mini">查找</van-button>
-                </van-col>
-            </van-row>
-        </div> -->
-        <!-- <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" title="FleekFly" >
-            <van-icon name="wap-nav" slot="left" />
-            <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" />
-        </van-nav-bar>
-        <van-search placeholder="请输入搜索关键词" v-model="value" shape="round" @search="onSearch" class='search left50'/> -->
-        <!-- <van-sidebar v-model="activeKey" id="navLeft" v-show="navLeft_show">
-            <van-sidebar-item :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
-        </van-sidebar> -->
-        <!-- <div id="navLeft" v-show="navLeft_show">
-            <van-cell size="large" is-link  :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
-        </div>
-        <van-overlay
-        :show="show"
-        @click="show = false,navLeft_show=false"
-        /> -->
         <top-nav :keywordsVal="keywords"></top-nav>
+        <van-search :placeholder="$t('searchProducts')" v-model="value" shape="round" @search="onSearch" class='search left50'/>
         <!--swiper area-->
         <div class="swiper-area">
             <van-swipe :autoplay="1000" @change="onChange">
@@ -50,50 +23,7 @@
                 <img :src="cate.image_url" width="90%">
                 <span>{{cate.mallCategoryName}}</span>
             </div>
-        </div>  
-        <!--adbanner area-->
-        <!-- <div>
-            <img v-lazy="adBanner" width="100%" />
-        </div> -->
-        <!--Recommend goods area-->
-        <!-- <div class="recommend-area">
-            <div class="recommend-title">
-                商品推荐
-            </div>
-            <div class="recommend-body">
-                <swiper :options="swiperOption">
-                   <swiper-slide v-for="(item,index) in recommendGoods " :key="index" >
-                       <div class="recommend-item">
-                           <img :src="item.image" width="80%">
-                           <div>{{item.goodsName}}</div>
-                           <div>￥{{item.price | moneyFilter}}(￥{{item.mallPrice  | moneyFilter}})</div>
-                       </div>
-                   </swiper-slide> 
-                </swiper>
-            </div>
-        </div> -->
-        <!-- <floor-component v-for="(item, index) in floorData" :floorData="item.floor " :floorTitle="item.name" :key="index"></floor-component> -->
-        <!-- <div class="STPRY">
-            <div></div>
-            <span>
-                OUR STORY
-            </span>
         </div>
-        <div class="new-sale-big tu" style="margin-bottom:10px">
-            <img src="../../assets/images/ourstory.jpg" style="width: 100%;">
-        </div> -->
-        <!-- <div class="hot-area">
-            <div class="hot-title">{{ $t('hotgoods') }}</div>
-            <div class="hot-goods">
-                <van-list>
-                        <van-col span="12" v-for="(item , index) in hotGoods" :key="index">
-                                <goods-info :goodsId="item.goodsId" :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price" :mallPrice="item.mallPrice">
-
-                                </goods-info>
-                        </van-col>
-                </van-list>
-            </div>
-        </div> -->
         <mainFooter></mainFooter>
         
     </div>
@@ -158,7 +88,7 @@
                 method:'get',
             })
             .then(response=>{
-                console.log(response)
+                // console.log(response)
                 if(response.status==200){
                     this.category=response.data.data.category;
                     // this.adBanner = response.data.data.advertesPicture.PICTURE_ADDRESS;
@@ -174,13 +104,22 @@
             })
         },
         methods:{
+            onSearch(v){
+            // console.log(v)
+            if(this.$route.name !='CategoryList'&&v!=''){
+                this.$router.push({name:'CategoryList',params:{keywords:v}})
+                this.$emit('nav_Search',v)
+            }else{
+                this.$emit('nav_Search',v)
+            }
+        },
             golistPage(id,index) {
                 this.show=false
                 this.navLeft_show=false
                 this.$router.push({name:'CategoryList',params:{categorySubId:id,index:index}})
             },
             goGoodsPage(id) {
-                console.log(id)
+                // console.log(id)
                 this.$router.push({name:'Goods',query:{goodsId:id}})
             },
             onClickNavLeft(){
@@ -192,9 +131,6 @@
             },
             onSeek(){
                 this.$router.push({name:'seek'})
-            },
-            onSearch(v){
-                console.log(v)
             },
             tocart(){
                 this.$router.push({name:'Cart'})
@@ -294,10 +230,11 @@
     display: block;
     margin-bottom: 20px;
 }
-/* .search{
+.search{
     position: fixed;
     top: 45px;
-    z-index: 2;
+    z-index: 1;
     width: 100%;
-} */
+}
+
 </style>

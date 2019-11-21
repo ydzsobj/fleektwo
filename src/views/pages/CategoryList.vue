@@ -3,7 +3,8 @@
         <!-- <div class="navbar-div">
             <van-nav-bar :title="$t('classlist')"/>
         </div> -->
-        <top-nav @nav_index="nav_index" @nav_Search="nav_Search" :keywords-val="keywords"></top-nav>
+        <top-nav @nav_index="nav_index"  :keywords-val="keywords"></top-nav>
+        <van-search :placeholder="$t('searchProducts')" v-model="keywords" shape="round" @search="onSearch" class='search left50'/>
         <div>
           <van-row>
               <van-col>
@@ -87,7 +88,8 @@
                 categorySubId:null, //商品子类ID
                 errorImg:'this.src="'+require('@/assets/images/errorimg.png')+'"',
                 thrott: true,
-                keywords:''
+                keywords:'',
+                value:''
             }
         },
         components:{topNav},
@@ -106,13 +108,13 @@
             }
         },
         created(){
-            console.log(this.$route.params.categorySubId)
-            
-            this.getCategory();
+            // console.log(this.$route.params.categorySubId)
+            this.keywords=this.$route.params.keywords
+            // this.getCategory();
            
         },
         activated(){
-            console.log(this.$route.params)
+            // console.log(this.$route.params)
             if( this.$route.params.categorySubId){
                 this.keywords=''
                 this.page=1
@@ -131,7 +133,6 @@
                 this.goodList= [] 
                 this.finished = false
                 this.isLoading = true
-                this.getGoodList()
             }
         },
         mounted(){
@@ -139,40 +140,16 @@
             document.getElementById("list-div").style.height=winHeight -100 +'px'
         },
         methods: {
-            onLoad(index) {      //上拉加载
-                    this.getGoodList(index)
-            },
-            onRefresh() {       //下拉刷新
-                    this.goodList = []
-                    this.finished = false;
-                    this.isLoading = true;
-                    this.loading = true
-                    this.page = 1
-                    this.onLoad()
-            },
-            
-            getCategory() {
-                axios({
-                    url:url.getCateGoryList,
-                    method:'get',
-                })
-                .then(response=>{
-                    if(response.data.success && response.data.data ){
-                      this.category = response.data.data
-                        this.categorySubId = this.$route.params.categorySubId || this.category[0].category_id
-                        this.categoryIndex = this.$route.params.index || 0
-                        this.onLoad()
-                    }else{
-                        Toast($t('serveError'))
-                    }
-                })
-                .catch(error=>{
-                    console.log(error)
-                })
-                
+            onSearch(v){
+                this.keywords=v
+                this.categorySubId=''
+                this.page=1
+                this.goodList= [] 
+                this.finished = false
+                this.isLoading = false
             },
             nav_index(categoryId){
-                console.log(categoryId)
+                // console.log(categoryId)
                 this.error = false
                     this.loading = true
                 if(this.thrott){
@@ -185,6 +162,17 @@
                    this.categorySubId = categoryId
                    this.onLoad(categoryId)
                 }
+            },
+            onLoad(index) {      //上拉加载
+                    this.getGoodList(index)
+            },
+            onRefresh() {       //下拉刷新
+                    this.goodList = []
+                    this.finished = false;
+                    this.isLoading = true;
+                    this.loading = true
+                    this.page = 1
+                    this.onLoad()
             },
             getGoodList(index){
                 var data ={}
@@ -199,7 +187,6 @@
                         page:this.page
                     }
                 }
-            //   if(this.categorySubId){
                   axios({
                       url:url.getGoodsListByCategorySubID,
                     method:'get',
@@ -210,8 +197,6 @@
                     if(response.data.success  && response.data.data.data.length > 0){
                         if(index > -1){this.goodList = [];this.categoryIndex=index}
                         this.goodList=this.goodList.concat(response.data.data.data)
-                        console.log(index, this.categoryIndex)
-                        console.log(this.page)
                     }else{
                         this.finished = true
                     }
@@ -226,25 +211,11 @@
                     this.thrott= true
                     console.log(error)
                 })
-            //   }
             },
             //跳转到商品详细页
             goGoodsInfo(id){
                 this.$router.push({name:'Goods',query:{goodsId:id}})
-            },
-            nav_Search(a){
-                console.log(a)
-                this.keywords=a
-                this.categorySubId=''
-                this.page=1
-                this.goodList= [] 
-                this.finished = false
-                this.isLoading = true
-                this.onLoad()
-            }
-          
-
-           
+            }, 
         }
     }
 </script>
@@ -296,6 +267,12 @@
     .van-list__finished-text{
         float: left;
     width: 100%;
+    }
+    .search{
+        position: fixed;
+        top: 45px;
+        z-index: 1;
+        width: 100%;
     }
    
 </style>
