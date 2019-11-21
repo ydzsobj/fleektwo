@@ -88,7 +88,7 @@
                 method:'get',
             })
             .then(response=>{
-                console.log(response)
+                // console.log(response)
                 if(response.status==200){
                     this.category=response.data.data.category;
                     // this.adBanner = response.data.data.advertesPicture.PICTURE_ADDRESS;
@@ -119,7 +119,7 @@
                 this.$router.push({name:'CategoryList',params:{categorySubId:id,index:index}})
             },
             goGoodsPage(id) {
-                console.log(id)
+                // console.log(id)
                 this.$router.push({name:'Goods',query:{goodsId:id}})
             },
             onClickNavLeft(){

@@ -3,7 +3,7 @@
         <!-- <div class="navbar-div">
             <van-nav-bar :title="$t('classlist')"/>
         </div> -->
-        <top-nav :keywords-val="keywords"></top-nav>
+        <top-nav @nav_index="nav_index"  :keywords-val="keywords"></top-nav>
         <van-search placeholder="请输入搜索关键词" v-model="keywords" shape="round" @search="onSearch" class='search left50'/>
         <div>
           <van-row>
@@ -108,13 +108,13 @@
             }
         },
         created(){
-            console.log(this.$route.params.categorySubId)
+            // console.log(this.$route.params.categorySubId)
             this.keywords=this.$route.params.keywords
             // this.getCategory();
            
         },
         activated(){
-            console.log(this.$route.params)
+            // console.log(this.$route.params)
             if( this.$route.params.categorySubId){
                 this.keywords=''
                 this.page=1
@@ -141,13 +141,28 @@
         },
         methods: {
             onSearch(v){
-            this.keywords=v
-            this.categorySubId=''
-            this.page=1
-            this.goodList= [] 
-            this.finished = false
-            this.isLoading = false
-        },
+                this.keywords=v
+                this.categorySubId=''
+                this.page=1
+                this.goodList= [] 
+                this.finished = false
+                this.isLoading = false
+            },
+            nav_index(categoryId){
+                // console.log(categoryId)
+                this.error = false
+                    this.loading = true
+                if(this.thrott){
+                    this.thrott= false
+                    this.goodList= [] 
+                   this.categoryIndex=categoryId
+                   this.page=1
+                   this.finished = false
+                   this.isLoading = true
+                   this.categorySubId = categoryId
+                   this.onLoad(categoryId)
+                }
+            },
             onLoad(index) {      //上拉加载
                     this.getGoodList(index)
             },

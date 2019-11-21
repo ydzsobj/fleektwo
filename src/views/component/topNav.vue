@@ -69,7 +69,7 @@ export default {
         golistPage(id,index) {
             this.show=false
             this.navLeft_show=false
-            console.log(this.$route.name)
+            // console.log(this.$route.name)
             if(this.$route.name !='CategoryList'&&id!='home'){
                 this.$router.push({name:'CategoryList',params:{categorySubId:id,index:index}})
             }else if(id=='home'){
@@ -91,7 +91,7 @@ export default {
             method:'get',
         })
         .then(response=>{
-            console.log(response)
+            // console.log(response)
             if(response.status==200){
                 this.category=response.data.data.category;
             }
