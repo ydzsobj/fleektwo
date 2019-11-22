@@ -17,9 +17,9 @@
                     <li>
                         <a href="javascript:void(0);" @click="go(1)">{{$t('mainFooter_About')}}</a>
                         <a href="javascript:void(0);" @click="go(2)">{{$t('mainFooter_shipping')}}</a>
+                        <a href="javascript:void(0);" @click="go(5)">{{$t('mainFooter_contact')}}</a>
                         <a href="javascript:void(0);" @click="go(3)">{{$t('mainFooter_return')}}</a>
                         <a href="javascript:void(0);" @click="go(4)">{{$t('mainFooter_privacy')}}</a>
-                        <a href="javascript:void(0);" @click="go(5)">{{$t('mainFooter_contact')}}</a>
                     </li>
                     <li>© 2019 <a href="/" title="">{{href}}</a>{{$t('mainFooter_2')}}</li>
                 </ul>
