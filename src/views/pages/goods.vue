@@ -299,7 +299,7 @@
           <van-goods-action-button
             type="danger"
             :text="$t('buy')"
-            @click.native="showSkuBuy" style="border-radius: 0;background: black"
+            @click.native="showSkuBuy" style="border-radius: 0;background: black;width: 50%"
           />
         </van-goods-action>
         <van-sku
@@ -1094,5 +1094,11 @@
 }
     >>> .van-field__error-message {
         color: #f44
+    }
+    >>> .van-goods-action-icon {
+      min-width: 85px;
+    }
+    >>> .van-goods-action-icon__icon{
+      font-size: 20px
     }
 </style>
