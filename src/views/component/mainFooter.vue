@@ -106,7 +106,7 @@ export default {
         font-size: 12px;
         display: inline-block;
         /* width: 20%; */
-        padding: 0 20px;
+        padding: 0 18px;
         margin-bottom: 10px;
         /* float: left; */
     }
