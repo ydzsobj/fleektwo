@@ -121,10 +121,10 @@
                 this.categoryIndex=this.$route.params.index
                 this.categorySubId=this.$route.params.categorySubId
                 this.finished = false
-                this.isLoading= true
-                this.loading = true
+                this.isLoading= false
+                this.loading = false
                 this.goodList= [] 
-                this.onLoad()
+                //this.onLoad()
             }
             if(this.$route.params.keywords==''||this.$route.params.keywords){
                 this.keywords=this.$route.params.keywords
