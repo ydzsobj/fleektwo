@@ -4,7 +4,7 @@
                 <van-icon name="wap-nav" slot="left" />
                 <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" />
         </van-nav-bar>
-        <div id="navLeft" v-show="navLeft_show">
+        <div id="navLeft" class="left50" v-show="navLeft_show">
             <van-cell size="large" is-link  :title="$t('home')" @click="golistPage('home')" />
             <van-cell size="large" is-link  :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
         </div>
@@ -137,7 +137,8 @@ export default {
         z-index: 3;
         background: #f8f8f8;
         overflow-y: auto;
-        width:80%
+        width:80%;
+        max-width: 480px
     }
     .search{
         position: fixed;
