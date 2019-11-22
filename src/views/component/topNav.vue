@@ -1,6 +1,6 @@
 <template>
     <div>
-        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" title="FleekFly" >
+        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" title="Letao Mall" >
                 <van-icon name="wap-nav" slot="left" />
                 <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" />
         </van-nav-bar>
