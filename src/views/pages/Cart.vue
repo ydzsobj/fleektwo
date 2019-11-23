@@ -177,7 +177,7 @@
             </div>
         </van-submit-bar>
         <van-overlay
-         z-index="101"
+         z-index="2003"
          :show="areaShow"
           @click="areaShow = false"
         />
@@ -551,7 +551,7 @@
   transform: translatey(300px);
 }
 .area{
-    z-index: 101;
+    z-index: 2003;
     position: fixed;
     width: 100%;
     bottom: 0;
@@ -641,5 +641,8 @@
     } 
     >>> .van-field__error-message {
         color: #f44
+    }
+   .left50 >>> .van-submit-bar__text span {
+        display: inline;
     }
 </style>

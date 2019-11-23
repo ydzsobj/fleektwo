@@ -27,7 +27,7 @@ export default {
     serveError: 'Server error, data retrieval failed',
     successAdd: 'Successfully added',
     account: 'Check out',
-    total: 'Total',
+    total: 'Total  ',
     back: 'Back',
     clearCart: 'Clear cart',
     clear: 'Clear',
