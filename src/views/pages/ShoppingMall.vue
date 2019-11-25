@@ -4,7 +4,7 @@
         <van-search :placeholder="$t('searchProducts')" v-model="value" shape="round" @search="onSearch" class='search left50'/>
         <!--swiper area-->
         <div class="swiper-area">
-            <van-swipe :autoplay="1000" @change="onChange">
+            <van-swipe :autoplay="3000" @change="onChange">
                 <van-swipe-item v-for="( banner ,index) in bannerPicArray" :key="index" >
                     <img v-lazy="banner.image" width="100%" @click="goGoodsPage(banner.good_id)"/>
                 </van-swipe-item>
