@@ -152,7 +152,8 @@
                 // console.log(categoryId)
                 this.error = false
                     this.loading = true
-                if(this.thrott){
+                    this.keywords=''
+                // if(this.thrott){
                     this.thrott= false
                     this.goodList= [] 
                    this.categoryIndex=categoryId
@@ -161,7 +162,7 @@
                    this.isLoading = true
                    this.categorySubId = categoryId
                    this.onLoad(categoryId)
-                }
+                // }
             },
             onLoad(index) {      //上拉加载
                     this.getGoodList(index)
