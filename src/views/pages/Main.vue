@@ -106,7 +106,7 @@
                }
            },
            changeTabbar(active) {
-               console.log(active)
+            //    console.log(active)
                switch(active){
                    case 0:
                         this.$router.push({name:'ShoppingMall'})

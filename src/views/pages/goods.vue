@@ -525,7 +525,7 @@
         },
         created(){
             this.goodsId=this.$route.query.goodsId ?this.$route.query.goodsId-0: this.$route.params.goodsId-0
-            console.log(this.goodsId)
+            // console.log(this.goodsId)
             this.getInfo()
             // this.getNotice()
             // this.$store.state.cartNum = localStorage.cartInfo ? (JSON.parse(localStorage.cartInfo).length===0?'':JSON.parse(localStorage.cartInfo).length) : ''
@@ -535,7 +535,7 @@
             var inte = setInterval(() => {
                 this.sku.messages[0].name = this.$t('message') //sku留言 语言包
                 this.sku.messages[0].placeholder = this.$t('messagePlaceholder') //sku留言 语言包
-                console.log('+++',this.sku.messages[0].name,this.$store.state.lang)
+                // console.log('+++',this.sku.messages[0].name,this.$store.state.lang)
               if(this.$store.state.lang){
                  clearInterval(inte)
               }
@@ -560,9 +560,9 @@
                           params:{}
                       })
                       .then(response=>{
-                        console.log(response.data)
+                        // console.log(response.data)
                           if(response.data.success == true){
-                            console.log(response.data)
+                            // console.log(response.data)
                               this.attrTextFun()  
                               this.index_1 = 0
                               this.notice(response.data.data)
@@ -618,7 +618,7 @@
                               Toast(this.$t('serveError'))
                               reject(err)
                           }
-                           console.log(this.goodsInfo)
+                          //  console.log(this.goodsInfo)
                       })
                       .catch(error=>{
                           Toast(this.$t('serveError'))
@@ -691,9 +691,9 @@
             showSkuCart() {this.show = true ; this.isBuyCartAttr = 'cart';this.showAddCartBtn=false;this.buyText= this.$t('ok')},
             showSkuAttr() {this.show = true ; this.isBuyCartAttr = 'attr';this.showAddCartBtn=true;this.buyText= this.$t('buy')},
             onBuyClicked(skuData){
-              console.log('onBuyClicked',skuData)
+              // console.log('onBuyClicked',skuData)
               if(this.isBuyCartAttr==="buy" || this.isBuyCartAttr==="attr"){
-                  console.log(this.isBuyCartAttr,'buy买')
+                  // console.log(this.isBuyCartAttr,'buy买')
                   let newGoodsInfo = {
                        name:this.goodsInfo.name,
                        title: this.goodsInfo.title,
@@ -709,7 +709,7 @@
               }
               },
             onAddCartClicked(skuData){
-              console.log('onAddCartClicked',skuData,this.isBuyCartAttr,'购物车')
+              // console.log('onAddCartClicked',skuData,this.isBuyCartAttr,'购物车')
               this.addGoodsToCart(skuData)
               },
             skuSelected(skuValue) {
@@ -729,7 +729,7 @@
                       try{fbq('track', 'AddToCart');console.log('addtocart')}catch(e){} 
                       try{fbq('track', 'Lead');console.log('Lead')}catch(e){} 
                       // this.skuDatas  = Object.assign(newGoodsInfo , skuData)
-                      console.log(this.fatherSkuData())
+                      // console.log(this.fatherSkuData())
                       this.$refs.cart.getCartInfo()
                   }else{
                     this.$refs.cart.getCartInfo()
@@ -744,7 +744,7 @@
                  if(data.selectedSkuComb){
                     data.selectedNum = this.skuSelectedNum
                     this.$refs.cart.getCartInfo(data)
-                    console.log(data)
+                    // console.log(data)
                  }else{
                    this.$refs.cart.getCartInfo()
                  }
@@ -831,7 +831,7 @@
                      }
                  })
                  .then(response=>{
-                   console.log(response)
+                  //  console.log(response)
                      if(response.status== 200 && response.data.success){
                        this.message=''
                        this.activeName =''

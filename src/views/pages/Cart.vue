@@ -237,11 +237,11 @@
           
        }, 
        created(){
-           console.log('ddd',this.$store.state.fix, 'cc',JSON.parse(localStorage.fix || "0"))
+        //    console.log('ddd',this.$store.state.fix, 'cc',JSON.parse(localStorage.fix || "0"))
            let storefix = this.$store.state.fix
            let locafix = JSON.parse(localStorage.fix || "0")-0
            if(!storefix){
-               console.log('cartinitfix')
+            //    console.log('cartinitfix')
              try {
                 fbq('init', locafix); 
                 fbq('track', 'PageView');
@@ -253,7 +253,7 @@
            this.getCartInfo() 
            this.submitloading= false //每次进来 防止有loading
        },
-       mounted() {console.log(this.cartInfo)},
+    //    mounted() {console.log(this.cartInfo)},
        computed:{
            totalMoney(){
                this.malldata = []
@@ -274,11 +274,11 @@
                        }
                    });
                });
-               console.log(this.malldata,this.countPrice)
+            //    console.log(this.malldata,this.countPrice)
                return this.countPrice
            },
            totalMoneyCoupon(){
-               console.log(this.totalMoney - this.total_off)
+            //    console.log(this.totalMoney - this.total_off)
                let num = this.totalMoney - this.total_off
                  if(this.$store.state.lang === 'ind-BA' && (num/100).toString().indexOf('.')>0){
                      this.decimalLength = 2
@@ -330,12 +330,12 @@
            },
             //得到购物车数据的方法
             getCartInfo(skuDatas) { 
-                console.log('laofan',skuDatas)
+                // console.log('laofan',skuDatas)
                 // let skuData = this.$route.params.skuData ? this.$route.params.skuData : this.$route.query.skuData
 
                 //  this.isBuy = skuData ? true : false //立即购买还是购物车
                 if(this.isBuyCartAttr === 'buy'){
-                    console.log(skuDatas)
+                    // console.log(skuDatas)
                     if(skuDatas){
                         this.cartInfo=[]
                         this.cartInfo.push(skuDatas)
@@ -343,7 +343,7 @@
                         this.checkedGoods.push(skuDatas.selectedSkuComb.id)
                     }else{
                         let datas = this.fatherSkuData()
-                        console.log(datas)
+                        // console.log(datas)
                         if(datas.selectedSkuComb){
                            this.cartInfo=[]
                            this.cartInfo.push(datas)
@@ -365,8 +365,8 @@
                        this.checkedGoods.push(element.selectedSkuComb.id)
                     });
                    } 
-                   console.log('checkedGoods',this.checkedGoods)
-                   console.log(this.cartInfo)
+                //    console.log('checkedGoods',this.checkedGoods)
+                //    console.log(this.cartInfo)
                    this.isEmpty=this.cartInfo.length>0 ?true : false
                 }
             
@@ -406,7 +406,7 @@
                }else if (this.email!='' && !reg.test(this.email)){
                   Toast(this.$t('errEmail'));Toast(this.$t('errEmail'));return
                }
-                console.log(this.malldata,this.countPrice)
+                // console.log(this.malldata,this.countPrice)
                 this.submitloading=true
                 let data = {}
                 data.cart_data = this.malldata
@@ -425,7 +425,7 @@
                         data: data
                     })
                     .then(response=>{
-                        console.log(response)
+                        // console.log(response)
                         if(response.status== 200 && response.data.success){
                             //如果不是直接购买，下单成功后删除对应购物车商品
                             if(!this.isBuy){
@@ -492,7 +492,7 @@
             },
             confirm(list){
                 this.areaShow = false
-                console.log(list)
+                // console.log(list)
                 this.short_address = list[0].name + '/' + list[1].name + '/' +list[2].name
                 this.optionsArrt = this.areaList.post[list[2].code] || []  //对应省市区的 邮政编码数组赋值
                 if( this.areaList.post[list[2].code] ){  this.zipCode= this.optionsArrt[0] }
@@ -525,7 +525,7 @@
                   .then(response=>{
                       
                       if(response.status== 200 && response.data.success){
-                         console.log(response.data.data)
+                        //  console.log(response.data.data)
                          if(response.data.data.total_off===0){
                             Toast(this.$t('couponUn'));Toast(this.$t('couponUn')) 
                          }else{
