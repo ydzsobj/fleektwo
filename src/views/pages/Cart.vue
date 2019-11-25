@@ -649,4 +649,8 @@
     >>> .van-submit-bar__price {
         color: #f44
     }
+   >>> .van-submit-bar button.van-button {
+           background-color: rgb(7, 193, 96);
+           border: 1px solid  rgb(7, 193, 96);
+   }
 </style>

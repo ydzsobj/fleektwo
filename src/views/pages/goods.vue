@@ -43,8 +43,8 @@
           <van-cell :border="false">
             <div class="goods-title padding30"><h1 style="font-size: 24px;line-height: 1.5;">{{ goodsInfo.title}}</h1></div>
             <div class="huicolor padding30">{{ goodsInfo.about}}</div>
-            <div v-if="$store.state.lang==='ind-BA'" class="goods-price padding30">{{goodsInfo.money_sign}}{{goodsInfo.price | num}}  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
-            <div v-else class="goods-price padding30"> {{goodsInfo.money_sign}}{{goodsInfo.price }} <s class="huicolor padding30">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s></div>
+            <div v-if="$store.state.lang==='ind-BA'" class="goods-price padding30"><strong>{{goodsInfo.money_sign}}{{goodsInfo.price | num}}</strong>  <s class="huicolor">{{goodsInfo.money_sign}}{{goodsInfo.original_price | num}}</s></div>
+            <div v-else class="goods-price padding30"> <strong>{{goodsInfo.money_sign}}{{goodsInfo.price }}</strong> <s class="huicolor padding30">{{goodsInfo.money_sign}}{{goodsInfo.original_price }}</s></div>
           </van-cell>
           <!-- <van-cell :border="false">
             <van-progress :percentage="78" :show-pivot="false" :stroke-width="12" color="#ef3470" style="width: 60%; display: inline-block;"/> <span style=" float: right;">{{$t('stock')}}{{(70+goodsInfo.category_id)+'%'}}</span>
@@ -1078,7 +1078,7 @@
   padding: 0px
 }
 .padding30{
-  padding: 30px 0;
+  padding: 15px 0;
   text-align: center;
 }
 .price{
