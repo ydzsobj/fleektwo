@@ -17,7 +17,7 @@
           @click-left="onClickLeft"
           @click-right="onClickRight"
         >
-          <img src="../../assets/images/ydzstou.png" height="46px" slot="title">
+          <img src="../../assets/images/ydzstou.png" height="30px" slot="title">
           <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" :class="{ 'animationCartCount': skuSelectedImg }"/>
         </van-nav-bar>
  
