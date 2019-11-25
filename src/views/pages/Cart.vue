@@ -646,4 +646,7 @@
    .left50 >>> .van-submit-bar__text span {
         display: inline;
     }
+    >>> .van-submit-bar__price {
+        color: #f44
+    }
 </style>
