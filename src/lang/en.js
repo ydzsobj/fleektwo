@@ -17,7 +17,7 @@ export default {
     shopCart: 'Shopping cart',
     store: 'Mall', //店铺
     addCart: 'Add to cart',
-    buy: 'Buy',//立即购买
+    buy: 'Buy (COD+Free shipping)',//立即购买
     ok: 'CONFIRM',
     buyNum: 'Quantity', //购买数量
     message: 'Leave word ', //留言

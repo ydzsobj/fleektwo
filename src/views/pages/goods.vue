@@ -292,14 +292,14 @@
             @click.native="tohome"
           /> -->
           <van-goods-action-icon
-            icon="like"
+            icon="cart"
             :text="$t('addCart')"
             @click.native="showSkuCart" style="border-radius: 0;padding:0 5px;margin-right: 5px;"
           />
           <van-goods-action-button
             type="danger"
             :text="$t('buy')"
-            @click.native="showSkuBuy" style="border-radius: 0;background: black;width: 50%"
+            @click.native="showSkuBuy" style="border-radius: 0;background: #07c160;width: 50%;font-weight: 800;"
           />
         </van-goods-action>
         <van-sku
@@ -1088,10 +1088,12 @@
   background:linear-gradient(to right,black,black);
 }
 #detailcontent >>> img {
-  width: 100%
+  width: 100%;
+  display: block
 }
 #detailcontent >>> video {
-  width: 100%
+  width: 100%;
+  display: block
 }
 #detailcontent >>> p {
   word-wrap:break-word;
