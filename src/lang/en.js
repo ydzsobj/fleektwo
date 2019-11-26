@@ -26,7 +26,7 @@ export default {
     messagePlaceholder: 'Please Enter Your Text',
     serveError: 'Server Error, Data Retrieval Failed',
     successAdd: 'Successfully Added',
-    account: 'Check Out',
+    account: 'Complete Order',
     total: 'Total  ',
     back: 'Back',
     clearCart: 'Clear Cart',
