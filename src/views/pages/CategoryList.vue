@@ -263,7 +263,12 @@
     .list-item-text .name{
         overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: 2.1rem;
+        color: #524e4e;
     }
     .van-list__finished-text{
         float: left;
