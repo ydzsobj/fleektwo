@@ -1,7 +1,8 @@
 <template>
     <div>
-        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50" title="Letao Mall" >
+        <van-nav-bar @click-left="onClickNavLeft" left-arrow :fixed="bar_fixed" :z-index=3 class="left50"  >
                 <van-icon name="wap-nav" slot="left" />
+                <img src="../../assets/images/ydzstou.png" slot="title" style="max-height:30px;margin-top:6px">
                 <van-icon name="cart" slot="right" size="20px" :info="cartNumCount" @click.native="tocart" />
         </van-nav-bar>
         <div id="navLeft" class="left50" v-show="navLeft_show">

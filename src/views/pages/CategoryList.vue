@@ -53,8 +53,8 @@
                                 <div class="list-item-text">
                                     <div class="name">{{item.name}}</div>                                                                        
                                     <!-- <div>{{$store.state.money_sign}}{{ $store.state.lang ==='ind-BA' ? item.price | int : item.price | toDivide}}</div> -->
-                                    <div v-if="$store.state.lang==='ind-BA'">{{$store.state.money_sign}}{{item.price |num}}</div>
-                                    <div v-else>{{$store.state.money_sign}}{{item.price}}</div>
+                                    <div v-if="$store.state.lang==='ind-BA'"><b>{{$store.state.money_sign}}{{item.price |num}}</b></div>
+                                    <div v-else><b>{{$store.state.money_sign}}{{item.price}}</b></div>
                                  </div>
                             </div>
         
@@ -242,7 +242,7 @@
         /* flex-direction: row; */
         width: 50%;
         float: left;    
-        font-size:0.8rem;
+        font-size:0.74rem;
         border-bottom: 1px solid #f0f0f0;
         background-color: #fff;
         padding:5px;
@@ -263,7 +263,12 @@
     .list-item-text .name{
         overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    /* white-space: nowrap; */
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        height: 2rem;
+        color: #524e4e;
     }
     .van-list__finished-text{
         float: left;
