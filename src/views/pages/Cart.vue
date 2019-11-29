@@ -220,13 +220,13 @@
         />
         <transition name="fade">
           <!-- <van-area class="area left50" :area-list="areaList" v-show="areaShow" @confirm="confirm" @cancel="cancel" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/> -->
-            <van-picker class="area left50" show-toolbar :columns="provinceList" v-show="pickShow1" @cancel="cancel1" @confirm="confirm1" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
+            <van-picker class="area left50" :visible-item-count="7" show-toolbar :columns="provinceList" v-show="pickShow1" @cancel="cancel1" @confirm="confirm1" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
         </transition>
         <transition name="fade">
-            <van-picker class="area left50" show-toolbar :columns="crityList" v-show="pickShow2" @cancel="cancel2" @confirm="confirm2" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
+            <van-picker class="area left50" :visible-item-count="7" show-toolbar :columns="crityList" v-show="pickShow2" @cancel="cancel2" @confirm="confirm2" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
         </transition>
         <transition name="fade">
-            <van-picker class="area left50" show-toolbar :columns="areasList" v-show="pickShow3" @cancel="cancel3" @confirm="confirm3" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
+            <van-picker class="area left50" :visible-item-count="7" show-toolbar :columns="areasList" v-show="pickShow3" @cancel="cancel3" @confirm="confirm3" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
         </transition>
         <transition name="fade">
             <van-picker class="area left50" show-toolbar :columns="postList" v-show="pickShow4" @cancel="cancel4" @confirm="confirm4" :confirm-button-text="$t('confirm')" :cancel-button-text="$t('cancel')"/>
