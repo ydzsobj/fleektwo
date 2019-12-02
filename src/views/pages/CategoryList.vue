@@ -53,7 +53,7 @@
                                 <div class="list-item-text">
                                     <div class="name">{{item.name}}</div>                                                                        
                                     <!-- <div>{{$store.state.money_sign}}{{ $store.state.lang ==='ind-BA' ? item.price | int : item.price | toDivide}}</div> -->
-                                    <div v-if="$store.state.lang==='ind-BA'"><b>{{$store.state.money_sign}}{{item.price |num}}</b></div>
+                                    <div v-if="$store.state.lang==='ind-BA'"><b>{{$store.state.money_sign}}{{item.price |num |toThousands}}</b></div>
                                     <div v-else><b>{{$store.state.money_sign}}{{item.price}}</b></div>
                                  </div>
                             </div>
@@ -72,7 +72,7 @@
     import axios from 'axios'
     import url from '@/serviceAPI.config.js'
     import topNav from '../component/topNav'
-    import {toMoney ,toDivide, int,num} from '@/filter/moneyFilter.js'
+    import {toMoney ,toDivide, int,num,toThousands} from '@/filter/moneyFilter.js'
     export default {
         data() {
             return {
@@ -105,7 +105,10 @@
             },
             num(money){
                 return num(money)
-            }
+            },
+            toThousands(money){
+              return toThousands(money)
+           },
         },
         created(){
             // console.log(this.$route.params.categorySubId)
