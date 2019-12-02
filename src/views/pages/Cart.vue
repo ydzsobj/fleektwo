@@ -362,7 +362,7 @@
                     return obj
                 }else if (this.$store.state.lang === 'en-PHP'){
                     this.decimalLength = 2
-                    return JSON.parse(JSON.stringify(objFlb).replace(/&#39;/,"'"))
+                    return JSON.parse(JSON.stringify(objFlb).replace(/&#39;/g,"'"))
                 }else{
                     this.decimalLength = 2
                     return obj
