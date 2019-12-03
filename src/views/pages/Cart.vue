@@ -311,6 +311,12 @@
        activated(){
            this.getCartInfo() 
            this.submitloading= false //每次进来 防止有loading
+           if(this.isBuyCartAttr === 'buy'){
+              this.couponid = null;  // 数量变化先把优惠码id清空
+              this.total_off = null; // 数量变化先把优惠清空了
+              this.coupoCode= ''
+           }
+
        },
        mounted() {
         //    console.log(this.cartInfo)
