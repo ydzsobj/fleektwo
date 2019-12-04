@@ -270,7 +270,7 @@
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        height: 2rem;
+        height: 1.9rem;
         color: #524e4e;
     }
     .van-list__finished-text{
