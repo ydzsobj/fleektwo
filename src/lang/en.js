@@ -31,7 +31,7 @@ export default {
     back: 'Back',
     clearCart: 'Clear Cart',
     clear: 'Clear',
-    payOnDelivery: 'Pay On Delivery', //货到付款
+    payOnDelivery: 'Cash On Delivery & Free Shipping', //货到付款
     name: 'Name',
     nameholder: 'Please Input Your Name',
     phoneNumber: 'Phone Number',
@@ -39,7 +39,7 @@ export default {
     email: 'Email',
     emailholder: 'Please Input Your Email',
     province: 'Province',
-    crity: 'Crity',
+    crity: 'City',
     area: 'Barangay',
     post: 'PostalCode',
     provinceholder: 'Please Input Your Province, City And District',
