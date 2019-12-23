@@ -7,7 +7,7 @@
         </van-nav-bar>
         <div id="navLeft" class="left50" v-show="navLeft_show">
             <van-cell size="large" is-link  :title="$t('home')" @click="golistPage('home')" />
-            <van-cell size="large" is-link  :title="cate.mallCategoryName" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.mallCategoryId,index)" />
+            <van-cell size="large" is-link  :title="cate.name" v-for="(cate,index) in category" :key="index"  @click="golistPage(cate.category_id,index)" />
         </div>
         <van-overlay 
         z-index="2"
@@ -88,13 +88,13 @@ export default {
         // console.log(this.keywordsVal,this.keywordsValue)
         // this.value=this.keywordsVal
         axios({
-            url:url.getShopingMallInfo,
+            url:url.getCateGoryList,
             method:'get',
         })
         .then(response=>{
             // console.log(response)
             if(response.status==200){
-                this.category=response.data.data.category;
+                this.category=response.data.data;
             }
         })
         .catch(error=>{
