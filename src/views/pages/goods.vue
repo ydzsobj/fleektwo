@@ -1104,6 +1104,9 @@
 #detailcontent >>> p {
   word-wrap:break-word;
 }
+#detailcontent >>> iframe {
+  width: 100%;
+}
     >>> .van-field__error-message {
         color: #f44
     }
